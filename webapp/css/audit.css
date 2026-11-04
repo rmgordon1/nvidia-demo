@@ -1,0 +1,8 @@
+/* Governance & Audit */
+.au-filters { margin-bottom: 12px; }
+.au-table { max-height: 640px; }
+.au-json { margin: 0; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); font: 12px/1.5 var(--mono); color: var(--text-2); overflow: auto; max-height: 340px; }
+.au-policies { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.au-policies li { display: grid; grid-template-columns: 100px 1fr; gap: 10px; align-items: start; }
+.au-policies .pill { justify-self: start; }
+.au-table td.au-reason { white-space: normal; min-width: 160px; max-width: 260px; color: var(--text-2); }

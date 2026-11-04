@@ -1,0 +1,206 @@
+{
+  "note": "Planted ground truth. Everything not listed here is ordinary noise. Quantities are the generator's true effects.",
+  "scenarios": [
+    {
+      "id": "S1",
+      "category": "root-cause",
+      "title": "Ink over-consumption on one press",
+      "where": "P02 \u00b7 INK-IG-01 \u00b7 week of 2026-10-26",
+      "driver": "usage-rate",
+      "item": "INK-IG-01",
+      "press": "P02",
+      "truth": "Usage rate +12% over standard for one week (dispenser drift; see the P02 calibration event on 2026-11-02).",
+      "excess_qty": 102.7,
+      "uom": "KG",
+      "excess_cost": 6366,
+      "runs": 15
+    },
+    {
+      "id": "S2",
+      "category": "root-cause",
+      "title": "Bad substrate lot",
+      "where": "L261006-SUB-A-0563 (VND-B, PO PO-261447)",
+      "driver": "lot",
+      "lot": "L261006-SUB-A-0563",
+      "item": "SUB-A",
+      "vendor": "VND-B",
+      "truth": "+5.5 pp spoilage on every run that drew from the lot, across presses (P01, P02, P03, P06); MES reason codes skew to SUB/JAM.",
+      "products": [
+        "PRD-01",
+        "PRD-02"
+      ],
+      "excess_sheets": 43450,
+      "excess_cost": 17010,
+      "runs": 34,
+      "first_run": "R261016P02C",
+      "last_run": "R261102P03A"
+    },
+    {
+      "id": "S3",
+      "category": "root-cause",
+      "title": "High-spoilage shift",
+      "where": "P03 \u00b7 shift C \u00b7 whole year",
+      "driver": "press-shift",
+      "press": "P03",
+      "shift": "C",
+      "truth": "+2.8 pp spoilage on every P03 shift-C run; reason codes skew to REG/WIP.",
+      "excess_sheets": 161435,
+      "excess_cost": 66208,
+      "runs": 242
+    },
+    {
+      "id": "S4",
+      "category": "root-cause",
+      "title": "Out-of-date usage standard",
+      "where": "PRD-05 \u00b7 INK-IB-01 \u00b7 since 2026-05-04",
+      "driver": "standard",
+      "item": "INK-IB-01",
+      "product": "PRD-05",
+      "truth": "Actual usage fell 14% (process change) but the BOM still carries the old rate, so the variance is favorable and the standard overstates need \u2014 a standards problem, not a floor problem.",
+      "favorable_qty": 1620.0,
+      "uom": "KG",
+      "favorable_cost": 77760,
+      "runs": 443,
+      "bom_rate_per_1000": 1.1,
+      "actual_rate_per_1000": 0.946
+    },
+    {
+      "id": "S5",
+      "category": "root-cause",
+      "title": "Seasonal humidity spoilage",
+      "where": "Hall 2 (P04\u2013P06) \u00b7 summer",
+      "driver": "environment",
+      "hall": "H2",
+      "truth": "Spoilage rises 0.12 pp per RH point above 56% in Hall 2 (mes_environment); peaks Jul\u2013Aug; reason codes SUB/REG.",
+      "excess_sheets": 62863,
+      "excess_cost": 32858,
+      "by_month": {
+        "2026-06": 4731,
+        "2026-07": 44208,
+        "2026-08": 13924
+      }
+    },
+    {
+      "id": "F1",
+      "category": "forecast",
+      "title": "Vendor lead-time slip",
+      "where": "VND-C (intaglio inks) \u00b7 POs placed since 2026-06-15",
+      "driver": "lead-time",
+      "vendor": "VND-C",
+      "truth": "Actual lead time \u2248 77 days vs 42 in the item master; vendor still promises 42. Safety stock has quietly eroded.",
+      "observed_slip_days": 33,
+      "items_short_only_with_observed_lead": [
+        "INK-IB-01",
+        "INK-IC-02",
+        "INK-IC-03",
+        "INK-IC-04",
+        "INK-IC-05",
+        "INK-IC-07",
+        "INK-IG-01"
+      ],
+      "first_short_week": {
+        "INK-IB-01": 5,
+        "INK-IC-02": 4,
+        "INK-IC-03": 6,
+        "INK-IC-04": 6,
+        "INK-IC-05": 1,
+        "INK-IC-07": 4,
+        "INK-IG-01": 4
+      },
+      "note": "Short = projected book stock below safety stock within the item's lead time, counting open POs only."
+    },
+    {
+      "id": "F2",
+      "category": "forecast",
+      "title": "Production-plan increase",
+      "where": "PRD-06 \u00b7 +60% from plan week 4",
+      "driver": "plan",
+      "product": "PRD-06",
+      "truth": "A plan-driven forecast shows the shortfall; a historical-average forecast does not.",
+      "items_short_only_with_plan": [
+        "INK-OF-15",
+        "INK-OF-16",
+        "INK-OV-02",
+        "SUB-D"
+      ],
+      "first_short_week": {
+        "INK-OF-15": 5,
+        "INK-OF-16": 5,
+        "INK-OV-02": 11,
+        "SUB-D": 8
+      }
+    },
+    {
+      "id": "D1",
+      "category": "data-quality",
+      "title": "Hidden over-use of a backflushed material",
+      "where": "WIP-SOL-01 \u00b7 Hall 2 \u00b7 since 2026-08-03",
+      "driver": "backflush",
+      "item": "WIP-SOL-01",
+      "truth": "Actual use +9% (recirculation leak). The ERP backflushes at standard, so run-level variance is invisible; it only surfaces as negative cycle-count adjustments.",
+      "hidden_excess_qty": 4312,
+      "uom": "L",
+      "hidden_excess_cost": 18110,
+      "cycle_count_adjust_total": -3874,
+      "unobservable_items": [
+        "ADD-01",
+        "ADD-02",
+        "CLN-SOL-01",
+        "FNT-SOL-01",
+        "PKG-01",
+        "PKG-02",
+        "VRN-01",
+        "VRN-02",
+        "WIP-PAP-01",
+        "WIP-SOL-01"
+      ]
+    },
+    {
+      "id": "D2",
+      "category": "data-quality",
+      "title": "Issues posted in the wrong period",
+      "where": "P05 \u00b7 ink issues for runs 2026-09-28\u20262026-09-30 \u00b7 posted 2026-10-05",
+      "driver": "late-posting",
+      "truth": "Issue transactions carry the posting date, not the run date, so September ERP consumption is understated and October overstated vs MES.",
+      "transactions": 81,
+      "cost_shifted": 83918,
+      "runs": [
+        "R260928P05A",
+        "R260928P05B",
+        "R260928P05C",
+        "R260929P05A",
+        "R260929P05B",
+        "R260929P05C",
+        "R260930P05A",
+        "R260930P05B",
+        "R260930P05C"
+      ]
+    },
+    {
+      "id": "D3",
+      "category": "data-quality",
+      "title": "Missing, duplicate and mis-keyed MES records",
+      "driver": "mes-records",
+      "truth": "ERP completions reference runs that MES lacks; some runs were keyed twice (ERP completed twice, backflush doubled); two manual entries have transposed printed counts that disagree with the ERP substrate issue.",
+      "missing_runs": [
+        "R251203P02B",
+        "R260330P04C",
+        "R260417P05C",
+        "R260529P01B",
+        "R260701P05B",
+        "R260819P06A"
+      ],
+      "duplicate_runs": [
+        "R260113P04A",
+        "R260612P04B",
+        "R260727P05A"
+      ],
+      "duplicate_sheets": 66100,
+      "mistyped_runs": [
+        "R260113P01B",
+        "R260610P01C"
+      ],
+      "manual_entries": 56
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+EVENT_ID,PRESS_ID,EVENT_TS,SHIFT,EVENT_TYPE,NOTE
+EV-000001,P01,2025-11-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000002,P02,2025-11-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000003,P03,2025-11-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000004,P04,2025-11-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000005,P05,2025-11-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000006,P06,2025-11-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000007,P05,2025-11-07T06:15,A,DOWNTIME,Power dip — shift lost
+EV-000008,P01,2025-11-10T22:15,C,DOWNTIME,Ink unit fault — shift lost
+EV-000009,P05,2025-11-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000010,P04,2025-11-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000011,P06,2025-11-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000012,P05,2025-11-14T14:15,B,DOWNTIME,Awaiting QA release — shift lost
+EV-000013,P01,2025-11-17T06:15,A,DOWNTIME,Ink unit fault — shift lost
+EV-000014,P01,2025-11-17T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000015,P03,2025-11-17T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000016,P02,2025-11-19T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000017,P05,2025-11-19T22:15,C,DOWNTIME,Power dip — shift lost
+EV-000018,P05,2025-11-28T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000019,P02,2025-11-28T14:15,B,DOWNTIME,Feeder fault — shift lost
+EV-000020,P03,2025-11-28T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000021,P03,2025-12-01T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000022,P06,2025-12-01T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000023,P02,2025-12-02T06:15,A,DOWNTIME,Ink unit fault — shift lost
+EV-000024,P04,2025-12-02T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000025,P01,2025-12-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000026,P02,2025-12-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000027,P03,2025-12-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000028,P04,2025-12-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000029,P05,2025-12-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000030,P06,2025-12-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000031,P02,2025-12-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000032,P01,2025-12-03T14:15,B,DOWNTIME,Power dip — shift lost
+EV-000033,P01,2025-12-04T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000034,P04,2025-12-04T22:15,C,DOWNTIME,Ink unit fault — shift lost
+EV-000035,P03,2025-12-10T22:15,C,DOWNTIME,Power dip — shift lost
+EV-000036,P03,2025-12-12T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000037,P05,2025-12-15T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000038,P01,2025-12-16T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000039,P06,2025-12-16T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000040,P04,2025-12-17T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000041,P02,2025-12-18T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000042,P03,2025-12-18T22:15,C,DOWNTIME,Awaiting QA release — shift lost
+EV-000043,P02,2025-12-19T14:15,B,DOWNTIME,Ink unit fault — shift lost
+EV-000044,P03,2025-12-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000045,P05,2025-12-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000046,P06,2025-12-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000047,P03,2025-12-30T14:15,B,DOWNTIME,Ink unit fault — shift lost
+EV-000048,P01,2025-12-31T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000049,P05,2026-01-05T06:15,A,DOWNTIME,Power dip — shift lost
+EV-000050,P04,2026-01-05T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000051,P02,2026-01-06T06:15,A,DOWNTIME,Ink unit fault — shift lost
+EV-000052,P02,2026-01-06T14:15,B,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000053,P01,2026-01-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000054,P02,2026-01-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000055,P03,2026-01-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000056,P04,2026-01-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000057,P05,2026-01-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000058,P06,2026-01-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000059,P02,2026-01-07T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000060,P05,2026-01-09T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000061,P06,2026-01-09T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000062,P01,2026-01-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000063,P03,2026-01-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000064,P04,2026-01-16T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000065,P02,2026-01-20T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000066,P02,2026-01-22T06:15,A,DOWNTIME,Awaiting QA release — shift lost
+EV-000067,P06,2026-01-22T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000068,P03,2026-01-23T06:15,A,DOWNTIME,Ink unit fault — shift lost
+EV-000069,P05,2026-01-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000070,P03,2026-01-27T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000071,P01,2026-01-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000072,P02,2026-01-30T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000073,P04,2026-02-02T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000074,P01,2026-02-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000075,P02,2026-02-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000076,P03,2026-02-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000077,P04,2026-02-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000078,P05,2026-02-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000079,P06,2026-02-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000080,P06,2026-02-04T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000081,P01,2026-02-10T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000082,P02,2026-02-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000083,P03,2026-02-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000084,P05,2026-02-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000085,P04,2026-02-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000086,P06,2026-02-17T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000087,P05,2026-02-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000088,P04,2026-02-25T14:15,B,DOWNTIME,Ink unit fault — shift lost
+EV-000089,P02,2026-02-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000090,P01,2026-02-27T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000091,P03,2026-03-02T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000092,P06,2026-03-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000093,P01,2026-03-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000094,P02,2026-03-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000095,P03,2026-03-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000096,P04,2026-03-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000097,P05,2026-03-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000098,P06,2026-03-04T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000099,P04,2026-03-04T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000100,P05,2026-03-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000101,P01,2026-03-12T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000102,P02,2026-03-12T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000103,P03,2026-03-13T22:15,C,DOWNTIME,Awaiting QA release — shift lost
+EV-000104,P02,2026-03-16T06:15,A,DOWNTIME,Power dip — shift lost
+EV-000105,P03,2026-03-17T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000106,P06,2026-03-18T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000107,P04,2026-03-19T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000108,P02,2026-03-25T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000109,P01,2026-03-27T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000110,P05,2026-03-27T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000111,P06,2026-03-31T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000112,P01,2026-04-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000113,P02,2026-04-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000114,P03,2026-04-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000115,P04,2026-04-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000116,P05,2026-04-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000117,P06,2026-04-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000118,P01,2026-04-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000119,P02,2026-04-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000120,P03,2026-04-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000121,P04,2026-04-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000122,P05,2026-04-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000123,P06,2026-04-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000124,P03,2026-04-02T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000125,P04,2026-04-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000126,P05,2026-04-03T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000127,P02,2026-04-06T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000128,P03,2026-04-09T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000129,P01,2026-04-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000130,P05,2026-04-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000131,P03,2026-04-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000132,P06,2026-04-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000133,P02,2026-04-16T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000134,P04,2026-04-20T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000135,P01,2026-04-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000136,P06,2026-04-28T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000137,P02,2026-04-28T22:15,C,DOWNTIME,Power dip — shift lost
+EV-000138,P03,2026-04-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000139,P05,2026-04-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000140,P02,2026-04-29T14:15,B,DOWNTIME,Power dip — shift lost
+EV-000141,P03,2026-04-29T14:15,B,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000142,P04,2026-04-30T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000143,P02,2026-05-01T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000144,P04,2026-05-01T22:15,C,DOWNTIME,Ink unit fault — shift lost
+EV-000145,P01,2026-05-06T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000146,P02,2026-05-06T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000147,P03,2026-05-06T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000148,P04,2026-05-06T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000149,P05,2026-05-06T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000150,P06,2026-05-06T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000151,P01,2026-05-07T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000152,P04,2026-05-12T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000153,P02,2026-05-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000154,P03,2026-05-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000155,P05,2026-05-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000156,P06,2026-05-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000157,P01,2026-05-13T14:15,B,DOWNTIME,Awaiting QA release — shift lost
+EV-000158,P04,2026-05-14T14:15,B,DOWNTIME,Feeder fault — shift lost
+EV-000159,P04,2026-05-15T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000160,P03,2026-05-22T22:15,C,DOWNTIME,Feeder fault — shift lost
+EV-000161,P01,2026-05-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000162,P02,2026-05-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000163,P05,2026-05-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000164,P04,2026-05-27T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000165,P03,2026-05-28T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000166,P06,2026-05-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000167,P01,2026-06-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000168,P02,2026-06-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000169,P03,2026-06-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000170,P04,2026-06-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000171,P05,2026-06-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000172,P06,2026-06-03T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000173,P06,2026-06-04T14:15,B,DOWNTIME,Power dip — shift lost
+EV-000174,P01,2026-06-08T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000175,P04,2026-06-09T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000176,P05,2026-06-10T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000177,P02,2026-06-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000178,P03,2026-06-15T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000179,P06,2026-06-15T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000180,P05,2026-06-23T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000181,P03,2026-06-23T14:15,B,DOWNTIME,Power dip — shift lost
+EV-000182,P06,2026-06-24T06:15,A,DOWNTIME,Awaiting QA release — shift lost
+EV-000183,P02,2026-06-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000184,P04,2026-06-24T13:00,A,HVAC_ALARM,Hall 2 RH high (63.0%)
+EV-000185,P01,2026-06-25T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000186,P04,2026-06-25T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000187,P06,2026-06-29T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000188,P04,2026-06-29T14:15,B,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000189,P03,2026-06-30T14:15,B,DOWNTIME,Ink unit fault — shift lost
+EV-000190,P06,2026-06-30T14:15,B,DOWNTIME,Feeder fault — shift lost
+EV-000191,P01,2026-07-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000192,P02,2026-07-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000193,P03,2026-07-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000194,P04,2026-07-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000195,P05,2026-07-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000196,P06,2026-07-01T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000197,P03,2026-07-01T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000198,P01,2026-07-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000199,P02,2026-07-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000200,P03,2026-07-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000201,P04,2026-07-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000202,P05,2026-07-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000203,P06,2026-07-02T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000204,P04,2026-07-02T13:00,A,HVAC_ALARM,Hall 2 RH high (63.6%)
+EV-000205,P01,2026-07-06T06:15,A,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000206,P05,2026-07-07T06:15,A,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000207,P01,2026-07-08T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000208,P02,2026-07-08T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000209,P05,2026-07-10T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000210,P04,2026-07-10T13:00,A,HVAC_ALARM,Hall 2 RH high (64.5%)
+EV-000211,P04,2026-07-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000212,P03,2026-07-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000213,P06,2026-07-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000214,P04,2026-07-14T13:00,A,HVAC_ALARM,Hall 2 RH high (65.2%)
+EV-000215,P04,2026-07-15T13:00,A,HVAC_ALARM,Hall 2 RH high (64.7%)
+EV-000216,P04,2026-07-16T13:00,A,HVAC_ALARM,Hall 2 RH high (65.1%)
+EV-000217,P06,2026-07-16T22:15,C,DOWNTIME,Awaiting QA release — shift lost
+EV-000218,P01,2026-07-21T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000219,P04,2026-07-21T13:00,A,HVAC_ALARM,Hall 2 RH high (67.1%)
+EV-000220,P04,2026-07-23T13:00,A,HVAC_ALARM,Hall 2 RH high (64.4%)
+EV-000221,P02,2026-07-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000222,P03,2026-07-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000223,P04,2026-07-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000224,P05,2026-07-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000225,P06,2026-07-24T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000226,P04,2026-07-24T13:00,A,HVAC_ALARM,Hall 2 RH high (68.3%)
+EV-000227,P06,2026-07-24T22:15,C,DOWNTIME,Awaiting QA release — shift lost
+EV-000228,P04,2026-07-27T13:00,A,HVAC_ALARM,Hall 2 RH high (64.8%)
+EV-000229,P04,2026-07-28T13:00,A,HVAC_ALARM,Hall 2 RH high (64.2%)
+EV-000230,P04,2026-07-29T13:00,A,HVAC_ALARM,Hall 2 RH high (68.6%)
+EV-000231,P04,2026-07-30T13:00,A,HVAC_ALARM,Hall 2 RH high (65.8%)
+EV-000232,P04,2026-07-31T13:00,A,HVAC_ALARM,Hall 2 RH high (65.3%)
+EV-000233,P01,2026-08-04T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000234,P01,2026-08-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000235,P02,2026-08-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000236,P03,2026-08-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000237,P04,2026-08-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000238,P05,2026-08-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000239,P06,2026-08-05T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000240,P03,2026-08-05T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000241,P04,2026-08-05T13:00,A,HVAC_ALARM,Hall 2 RH high (63.1%)
+EV-000242,P02,2026-08-07T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000243,P06,2026-08-07T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000244,P04,2026-08-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000245,P05,2026-08-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000246,P06,2026-08-18T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000247,P01,2026-08-19T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000248,P02,2026-08-19T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000249,P03,2026-08-21T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000250,P05,2026-08-21T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000251,P06,2026-08-25T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000252,P04,2026-08-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000253,P05,2026-08-27T06:15,A,DOWNTIME,Awaiting QA release — shift lost
+EV-000254,P01,2026-09-02T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000255,P02,2026-09-02T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000256,P03,2026-09-02T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000257,P04,2026-09-02T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000258,P05,2026-09-02T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000259,P06,2026-09-02T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000260,P03,2026-09-02T22:15,C,DOWNTIME,Awaiting QA release — shift lost
+EV-000261,P02,2026-09-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000262,P03,2026-09-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000263,P01,2026-09-04T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000264,P04,2026-09-08T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000265,P06,2026-09-08T14:15,B,DOWNTIME,Awaiting QA release — shift lost
+EV-000266,P05,2026-09-09T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000267,P06,2026-09-11T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000268,P03,2026-09-16T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000269,P02,2026-09-17T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000270,P01,2026-09-22T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000271,P04,2026-09-23T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000272,P04,2026-09-23T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000273,P05,2026-09-25T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000274,P06,2026-09-28T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000275,P02,2026-09-30T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000276,P01,2026-10-01T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000277,P02,2026-10-01T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000278,P03,2026-10-01T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000279,P04,2026-10-01T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000280,P05,2026-10-01T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000281,P06,2026-10-01T06:00,A,CALIBRATION,Quarterly ink-meter calibration — within tolerance
+EV-000282,P03,2026-10-01T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000283,P01,2026-10-01T22:15,C,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000284,P01,2026-10-06T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000285,P01,2026-10-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000286,P02,2026-10-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000287,P03,2026-10-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000288,P04,2026-10-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000289,P05,2026-10-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000290,P06,2026-10-07T06:00,A,MAINTENANCE,Monthly preventive maintenance
+EV-000291,P04,2026-10-07T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000292,P05,2026-10-07T22:15,C,DOWNTIME,Feeder fault — shift lost
+EV-000293,P05,2026-10-13T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000294,P06,2026-10-14T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000295,P03,2026-10-14T22:15,C,DOWNTIME,Power dip — shift lost
+EV-000296,P03,2026-10-16T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000297,P02,2026-10-19T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000298,P01,2026-10-21T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000299,P04,2026-10-22T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000300,P05,2026-10-22T14:15,B,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000301,P06,2026-10-22T14:15,B,DOWNTIME,"Sheet jam, long clear — shift lost"
+EV-000302,P06,2026-10-26T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000303,P06,2026-10-26T14:15,B,DOWNTIME,Awaiting QA release — shift lost
+EV-000304,P05,2026-10-28T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000305,P05,2026-10-28T14:15,B,DOWNTIME,Power dip — shift lost
+EV-000306,P02,2026-10-30T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000307,P02,2026-11-02T06:10,A,CALIBRATION,INK-IG-01 dispenser recalibrated after operator report — drift +11.6% found
+EV-000308,P01,2026-11-02T22:15,C,DOWNTIME,Feeder fault — shift lost
+EV-000309,P01,2026-11-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000310,P03,2026-11-03T06:30,A,BLANKET_CHANGE,Offset blankets replaced (2)
+EV-000311,P02,2026-11-03T22:15,C,DOWNTIME,Power dip — shift lost

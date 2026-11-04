@@ -1,0 +1,10 @@
+services:
+  webapp:
+    build: .
+    image: bcp-ops-ai:latest
+    container_name: bcp-ops-ai
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # model-server on the host at 172.17.0.1:8030 (../model-server/run.sh)

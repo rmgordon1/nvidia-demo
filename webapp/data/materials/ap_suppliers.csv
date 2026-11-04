@@ -1,0 +1,9 @@
+VENDOR_ID,SEGMENT1,VENDOR_NAME,ENABLED_FLAG
+5001,VND-A,Substrate supplier A,Y
+5002,VND-B,Substrate supplier B,Y
+5003,VND-C,Intaglio ink supplier C,Y
+5004,VND-D,Offset & numbering ink supplier D,Y
+5005,VND-E,Press consumables supplier E,Y
+5006,VND-F,Optically variable ink supplier F,Y
+5007,VND-G,Coatings & chemicals supplier G,Y
+5008,VND-H,Packaging supplier H,Y

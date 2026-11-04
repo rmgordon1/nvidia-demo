@@ -1,0 +1,20 @@
+/* Mission Overview */
+.ov-mission { display: flex; gap: 16px; align-items: flex-start; background: linear-gradient(120deg, rgba(57,135,229,0.12), rgba(25,158,112,0.06) 60%, transparent), var(--surface-1); border-color: var(--border-strong); }
+.ov-mission-mark { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); flex: none; }
+.ov-mission-mark svg { width: 22px; height: 22px; }
+.ov-quote { font-size: 16px; line-height: 1.55; color: var(--text); max-width: 980px; }
+.ov-uc { display: grid; gap: 12px; align-content: start; }
+.ov-uc-icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--surface-2); color: var(--accent-ink); }
+.ov-uc-icon svg { width: 17px; height: 17px; }
+.ov-uc .row { justify-content: space-between; }
+.ov-uc-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; border-top: 1px solid var(--border); padding-top: 12px; }
+.ov-uc-stats > div { display: grid; gap: 2px; }
+.ov-uc-stats b { font-size: 15px; }
+.ov-uc .btn { justify-self: start; }
+.ov-uc .small svg { width: 12px; height: 12px; vertical-align: -1px; }
+.ov-guard, .ov-activity { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ov-guard li { display: grid; grid-template-columns: 100px 1fr; gap: 10px; align-items: start; }
+.ov-guard li .pill { justify-self: start; margin-top: 1px; }
+.ov-activity li { display: flex; gap: 10px; align-items: flex-start; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.ov-activity li:last-child { border-bottom: 0; padding-bottom: 0; }
+.ov-activity .chip { min-width: 72px; text-align: center; }

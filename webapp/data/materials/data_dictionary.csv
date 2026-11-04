@@ -1,0 +1,20 @@
+table,column,description
+mtl_system_items,*,"ERP item master (raw materials, consumables and finished-sheet products)."
+mtl_system_items,WIP_SUPPLY_TYPE,1 = Push (issued from a measured/counted quantity); 3 = Operation Pull (backflushed at BOM standard on completion — actual use is not recorded).
+mtl_system_items,SHRINKAGE_RATE,Products only: spoilage allowance (spoiled ÷ good) built into the standard.
+mtl_system_items,FULL_LEAD_TIME,Quoted lead time in calendar days (as maintained in the master — may be stale).
+bom_components,COMPONENT_QUANTITY,Per one good sheet for BASIS_TYPE=Item; per job/campaign for BASIS_TYPE=Lot. Standard = qty × good × (1 + SHRINKAGE_RATE).
+po_lines,PROMISED_DATE,Vendor-promised delivery date. Actual receipt dates are the PO Receipt rows in mtl_material_transactions.
+mtl_material_transactions,TRANSACTION_QUANTITY,"Signed: receipts/returns/completions positive, issues negative (Oracle convention)."
+mtl_material_transactions,TRANSACTION_DATE,Posting date. Normally the run date; late postings carry the later date (CREATION_DATE shows when entered).
+mtl_material_transactions,TRANSACTION_REFERENCE,MES RUN_ID for issues/completions — the join key between ERP and MES.
+mtl_material_transactions,CREATED_BY,"MES_INTERFACE (metered/counted), WIP_BACKFLUSH (pull at standard), OPS_CLERK (manual), INV_CONTROL (cycle counts), INTERFACE (receipts)."
+mtl_onhand_quantities,*,Book on-hand by lot at the end of the extract.
+mrp_schedule_dates,*,"Master production schedule: planned good sheets per product per week, 12 weeks forward."
+wip_discrete_jobs,*,One job per press × product × week. ATTRIBUTE1_PRESS is the press.
+mes_production_runs,*,One record per press × shift run. ENTRY_METHOD = AUTO (sheet counters) or MANUAL (keyed). RUN_ID should be unique — duplicates are data-quality issues.
+mes_spoilage_reasons,REASON_CODE,REG registration · INK ink density/void · WIP wiping · SUB substrate defect/cockle · JAM feeder/sheet jam · MKR makeready · OTH other.
+mes_material_loads,*,"Lots loaded per run: substrate from sheet counters, inks from dispenser meters. Backflushed materials are not recorded."
+mes_press_events,*,"Downtime, maintenance, calibration, blanket changes and HVAC alarms."
+mes_environment,*,Daily average relative humidity and temperature per press hall.
+answer_key.json,*,"Planted scenarios and their true quantities, for checking the platform's findings. Not part of a real extract."

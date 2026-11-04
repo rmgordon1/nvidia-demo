@@ -1,0 +1,74 @@
+/* Material Accountability view (js/views/materials.js). Prefix: mat- */
+
+.mat-filters { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; padding: 12px 16px; }
+.mat-filter { display: grid; gap: 5px; font-size: 12px; color: var(--text-2); }
+.mat-filter select { min-width: 150px; }
+.mat-asof { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+.mat-asof svg { width: 14px; height: 14px; }
+
+.mat-kpis { display: grid; gap: 14px; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@media (max-width: 1280px) { .mat-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .mat-kpis { grid-template-columns: 1fr 1fr; } }
+.mat-kpis .card { padding: 14px; }
+.mat-kpis .k-value { font-size: 24px; }
+
+.mat-var-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+.mat-ftitle { font-weight: 600; color: var(--text); }
+.mat-findings td.wrap { min-width: 240px; max-width: 380px; }
+.mat-chev svg { width: 14px; height: 14px; color: var(--muted); display: block; }
+.mat-meter .bar-meter { min-width: 60px; }
+.mat-meter { display: grid; grid-template-columns: minmax(60px, 90px) auto; gap: 8px; align-items: center; }
+
+/* reconciliation ledger */
+.mat-ledger { display: grid; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.mat-lhead, .mat-lrow {
+  display: grid; grid-template-columns: minmax(180px, 1.4fr) minmax(60px, 1fr) minmax(110px, auto) minmax(90px, auto);
+  gap: 12px; align-items: center; padding: 7px 12px;
+}
+.mat-lhead { background: var(--surface-2); color: var(--text-2); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+.mat-lrow { border-top: 1px solid var(--border); font-size: 13px; }
+.mat-lrow > span:nth-child(3), .mat-lrow > span:nth-child(4) { text-align: right; }
+.mat-lrow.total { background: rgba(57, 135, 229, 0.06); font-weight: 600; }
+.mat-sign { display: inline-block; width: 16px; color: var(--muted); font-family: var(--mono); }
+.mat-wbar { height: 10px; background: var(--surface-3); border-radius: 4px; overflow: hidden; }
+.mat-wbar > i { display: block; height: 100%; border-radius: 4px; }
+
+/* ask the data */
+.mat-ask form input { flex: 1; }
+.mat-suggest { margin: 10px 0 12px; gap: 6px; }
+.mat-suggest .btn { white-space: normal; text-align: left; font-weight: 400; color: var(--text-2); }
+.mat-answers { display: grid; gap: 12px; max-height: 460px; overflow: auto; }
+.mat-answer { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: grid; gap: 8px; background: var(--surface-2); }
+.mat-q { display: flex; gap: 8px; align-items: flex-start; font-weight: 600; }
+.mat-q svg { width: 15px; height: 15px; margin-top: 3px; flex: none; color: var(--text-2); }
+.mat-a { display: grid; gap: 6px; color: var(--text); }
+.mat-a p { line-height: 1.55; }
+
+/* forecast recommendation */
+.mat-rec { border: 1px solid var(--border-strong); border-radius: var(--radius-sm); padding: 12px; display: grid; gap: 8px; background: var(--surface-2); }
+
+/* finding drawer */
+.mat-evidence { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.mat-evidence li { display: grid; grid-template-columns: auto auto 1fr; gap: 8px; align-items: center; }
+.mat-review { background: var(--surface-2); }
+.mat-hist { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; border-left: 2px solid var(--border-strong); padding-left: 10px; }
+
+/* records */
+.mat-records { max-height: 460px; }
+.mat-pager { margin-top: 10px; }
+
+/* scenario key */
+.mat-key > summary { list-style: none; cursor: pointer; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.mat-key > summary::-webkit-details-marker { display: none; }
+.mat-key > summary::before { content: "▸"; color: var(--muted); }
+.mat-key[open] > summary::before { content: "▾"; }
+.mat-key .sub { color: var(--muted); font-size: 12px; }
+.mat-scenarios { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 14px; }
+.mat-scn { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: grid; gap: 6px; }
+
+@media (max-width: 860px) {
+  .mat-asof { margin-left: 0; }
+  .mat-lhead, .mat-lrow { grid-template-columns: 1fr auto; }
+  .mat-lhead > span:nth-child(2), .mat-lrow > :nth-child(2), .mat-lhead > span:nth-child(4), .mat-lrow > :nth-child(4) { display: none; }
+}

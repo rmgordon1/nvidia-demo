@@ -1,0 +1,28 @@
+{
+  "generator": "tools/build_materials.py",
+  "seed": 20261104,
+  "period": [
+    "2025-11-04",
+    "2026-11-03"
+  ],
+  "extract_date": "2026-11-04",
+  "synthetic": true,
+  "files": {
+    "mtl_system_items.csv": 67,
+    "ap_suppliers.csv": 8,
+    "po_asl.csv": 58,
+    "bom_components.csv": 135,
+    "po_headers.csv": 612,
+    "po_lines.csv": 612,
+    "mtl_lot_numbers.csv": 612,
+    "wip_discrete_jobs.csv": 318,
+    "mtl_material_transactions.csv": 84334,
+    "mtl_onhand_quantities.csv": 96,
+    "mrp_schedule_dates.csv": 84,
+    "mes_production_runs.csv": 4441,
+    "mes_spoilage_reasons.csv": 31066,
+    "mes_material_loads.csv": 39412,
+    "mes_press_events.csv": 311,
+    "mes_environment.csv": 730
+  }
+}
