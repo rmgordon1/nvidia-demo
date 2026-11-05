@@ -49,7 +49,7 @@ node("sp",1,425,"synthetic_print",["fictional engraved banknotes,","8 defect cla
 node("cam",1,556,"Line cameras",["line stream + rules-based","reject logs (future)"],st="planned",lane="cv")
 node("sheets",2,425,"Press-sheet dataset",["sheets, masks, labels;","11.3k 640 px tiles"],lane="cv")
 node("fo",2,505,"FiftyOne :5151",["browse sheets, predictions,","false negatives"],lane="cv")
-node("train",3,425,"Training on the GB10 · MLflow tracked",[
+node("train",3,425,"Training on-prem · MLflow tracked",[
   "PatchCore    good sheets only → heatmap",
   "RF-DETR-Seg  boxes · 8 classes · masks",
   "Qwen3-VL-8B  LoRA on defect crops (TRL/PEFT)",
@@ -68,7 +68,7 @@ edge("rt","v_vis",st="planned",pts=[(647,631),(647,648),(953,648),(953,606),(975
 edge("v_vis","u_qa",arrow=False); edge("v_vis","u_qe",arrow=False)
 
 # ---- shared
-node("gb10",1,725,"Dell Pro Max GB10 · on-prem",["no external API calls; data stays inside","the agency boundary; a human makes","every final decision → scale-out: PowerEdge XE"],w=460,lane="shared",kind="platform")
+node("gb10",1,725,"On-prem infrastructure",["no external API calls; data stays inside","the agency boundary; a human makes","every final decision · prod: PowerEdge XE"],w=460,lane="shared",kind="platform")
 node("store",3,725,"js/store.js · browser storage",["roles, audit trail, provenance stamps,","accepted ServiceNow resolutions"],lane="shared")
 node("ov",4,722,"Mission Overview",["KPIs for both use cases"],lane="shared",kind="view")
 node("au",4,784,"Governance & Audit",["every AI output + review"],lane="shared",kind="view")
@@ -77,7 +77,7 @@ node("u_adm",5,784,"Administrator",["sees every view"],lane="shared",kind="user"
 edge("store","ov"); edge("store","au"); edge("ov","u_all",arrow=False); edge("au","u_adm",arrow=False)
 
 W, H = 1370, 870
-o = [f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BCP Operations AI lab: two use cases from data generation through models and web views to users</title>']
+o = [f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BEP Operations AI lab: two use cases from data generation through models and web views to users</title>']
 o.append('<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh"/></marker>'
          '<marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh-p"/></marker></defs>')
 heads = [(1,"Data generation"),(2,"Data & systems of record"),(3,"AI services & models"),(4,"Web UI · nginx :8080"),(5,"Users")]

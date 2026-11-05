@@ -1,4 +1,4 @@
-# GB10 lab: BCP Operations AI demo
+# GB10 lab: BEP Operations AI demo
 
 | Folder | What it is |
 |---|---|

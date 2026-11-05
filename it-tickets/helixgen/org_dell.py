@@ -1,4 +1,4 @@
-"""Dell profile: the same BCP agency, sites and people, with an all-Dell estate.
+"""Dell profile: the same BEP agency, sites and people, with an all-Dell estate.
 
 Client (Dell CSG): Latitude / OptiPlex / Precision bought before mid-2025, Dell Pro / Dell Pro Max after
 (mixed fleet), Dell monitors and docks. Infrastructure (Dell ISG): PowerEdge, PowerStore, PowerScale,
@@ -123,7 +123,7 @@ class DellOrg(Org):
             ("GlobalProtect VPN", "Remote Access (VPN)", "Palo Alto Networks"), ("ActivClient", "Identity & PIV Authentication", "HID Global"),
             ("Active Directory", "Identity & PIV Authentication", "Microsoft"), ("Ledgerline ERP", "Financial Management (ERP)", "Ledgerline Software"),
             ("TimeWeb", "HR, Payroll & Time", "TimeWeb Systems"), ("HR Connect Portal", "HR, Payroll & Time", "In-house"),
-            ("BCP Intranet", "Intranet & Business Apps", "In-house"), ("Contract Writing System", "Intranet & Business Apps", "In-house"),
+            ("BEP Intranet", "Intranet & Business Apps", "In-house"), ("Contract Writing System", "Intranet & Business Apps", "In-house"),
             ("CrowdStrike Falcon", "Security Operations", "CrowdStrike"), ("PlantTrack MES", "Manufacturing Execution (MES)", "PlantTrack Inc."),
             ("NoteScan Inspection", "Quality Inspection", "Opti-Verify Systems"), ("Process Historian", "Production Data & Historian", "AVEVA"),
             ("PaperCut Print Management", "Enterprise Printing", "PaperCut"),
@@ -142,7 +142,7 @@ class DellOrg(Org):
             self._rel("BMC_Dependency", "APPLICATIONSERVICE", svc[s].recon_id, a.recon_id)
 
         # ---- compute: PowerEdge rack servers hosting the apps, plus VxRail clusters
-        hosted = ["Exchange Online", "Active Directory", "Ledgerline ERP", "TimeWeb", "HR Connect Portal", "BCP Intranet",
+        hosted = ["Exchange Online", "Active Directory", "Ledgerline ERP", "TimeWeb", "HR Connect Portal", "BEP Intranet",
                   "Contract Writing System", "PaperCut Print Management", "OpenManage Enterprise",
                   "SupportAssist Enterprise", "PowerProtect Data Manager", "GlobalProtect VPN"]
         k = 1

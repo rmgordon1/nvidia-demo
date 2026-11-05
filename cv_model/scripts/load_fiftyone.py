@@ -1,4 +1,4 @@
-"""Load the synthetic sheets into FiftyOne (dataset "bcp-sheets") for review: boxes + instance masks per defect.
+"""Load the synthetic sheets into FiftyOne (dataset "bep-sheets") for review: boxes + instance masks per defect.
 
     source cv_model/env.sh && python cv_model/scripts/load_fiftyone.py           # build / rebuild
     source cv_model/env.sh && python cv_model/scripts/load_fiftyone.py --app     # then open http://localhost:5151
@@ -11,7 +11,7 @@ import fiftyone as fo
 import numpy as np
 
 DATASET = os.environ["DATASET_DIR"]
-NAME = "bcp-sheets"
+NAME = "bep-sheets"
 
 
 def main():

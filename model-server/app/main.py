@@ -1,4 +1,4 @@
-"""BCP Operations AI — model gateway.
+"""BEP Operations AI — model gateway.
 
 The web UI calls /api/* (nginx strips the prefix and proxies here). The gateway
 owns every model call: it talks to the NIM microservices and Milvus, validates
@@ -17,7 +17,7 @@ from .config import settings
 log = logging.getLogger("gateway")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
-app = FastAPI(title="BCP Operations AI gateway", version="0.1.0")
+app = FastAPI(title="BEP Operations AI gateway", version="0.1.0")
 app.include_router(itsm.router)
 state = {"ingest": "idle", "ingestError": None}
 

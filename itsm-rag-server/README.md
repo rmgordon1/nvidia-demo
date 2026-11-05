@@ -1,6 +1,6 @@
 # ITSM RAG server
 
-The local AI backend behind the **BCP Operations AI** webapp (`../webapp`). It answers IT tickets
+The local AI backend behind the **BEP Operations AI** webapp (`../webapp`). It answers IT tickets
 using the synthetic BMC Helix archive in `../it-tickets/out/full` (10,000 incidents). Everything
 runs on the GB10, and nothing calls out at runtime.
 

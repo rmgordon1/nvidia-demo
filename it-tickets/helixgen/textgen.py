@@ -78,7 +78,7 @@ def persona_style(rng, text, persona, field="desc"):
 def signature(rng, person, site_name):
     lines = [rng.choice(["Thanks,", "Thank you,", "Regards,", "v/r,", "Thanks!", "Respectfully,"]), person.full]
     if rng.random() < 0.8:
-        lines += [person.title, person.dept, "Bureau of Currency Production"]
+        lines += [person.title, person.dept, "Bureau of Engraving and Printing"]
     if rng.random() < 0.6:
         lines.append(f"Office: {person.phone}")
     if rng.random() < 0.15:

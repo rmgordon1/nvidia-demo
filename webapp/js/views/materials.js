@@ -515,14 +515,14 @@ export async function render(root) {
   function exportRecords() {
     const { rows, cols } = recordRows();
     if (!rows.length) return toast("Nothing to export.");
-    downloadFile(`bcp-${state.recTab}-${state.days}d.csv`, toCSV(rows, cols), "text/csv");
+    downloadFile(`bep-${state.recTab}-${state.days}d.csv`, toCSV(rows, cols), "text/csv");
   }
 
   function exportFindings() {
     const d = decisions();
     const rows = att.findings.map((f) => ({ id: f.id, title: f.title, driver: f.driver, material: f.material, line: f.line || (f.lines || []).join(" "), shift: f.shift || "", lot: f.lot || "",
       variance_cost: Math.round(f.varianceCost), share: +f.share.toFixed(3), confidence: +f.confidence.toFixed(2), review: d[f.id]?.decision || "pending", model: f.provenance.model, model_version: f.provenance.version }));
-    downloadFile(`bcp-variance-findings-${state.days}d.csv`, toCSV(rows), "text/csv");
+    downloadFile(`bep-variance-findings-${state.days}d.csv`, toCSV(rows), "text/csv");
     store.audit({ module: "materials", action: "findings.exported", subject: `${rows.length} findings`, detail: { filters: { ...state } } });
   }
 

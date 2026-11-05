@@ -113,8 +113,8 @@ export async function render(root) {
     const rows = filtered();
     if (!rows.length) return toast("Nothing to export.");
     const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-");
-    if (kind === "json") downloadFile(`bcp-audit-${stamp}.json`, JSON.stringify(rows, null, 2), "application/json");
-    else downloadFile(`bcp-audit-${stamp}.csv`, toCSV(rows.map((e) => ({ ...e, ts: new Date(e.ts).toISOString() })),
+    if (kind === "json") downloadFile(`bep-audit-${stamp}.json`, JSON.stringify(rows, null, 2), "application/json");
+    else downloadFile(`bep-audit-${stamp}.csv`, toCSV(rows.map((e) => ({ ...e, ts: new Date(e.ts).toISOString() })),
       ["id", "ts", "user", "role", "module", "action", "subject", "decision", "reason", "ai", "detail"]), "text/csv");
     toast(`Exported ${rows.length} events.`, "good");
   }

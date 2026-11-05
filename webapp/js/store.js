@@ -1,7 +1,7 @@
 // Persistence + audit trail. Everything is kept in browser localStorage for the
 // demo; swap the four functions in `backend` for API calls to make it durable.
 
-const NS = "bcp.";
+const NS = "bep.";
 const AUDIT_KEY = NS + "audit";
 const MAX_AUDIT = 5000;
 

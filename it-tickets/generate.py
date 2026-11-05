@@ -17,7 +17,7 @@ from helixgen.export import build, write_all
 from helixgen.simulate import Simulator
 
 PROFILES = {  # name -> (org class, scenario catalog module)
-    "bcp": ("helixgen.org:Org", "helixgen.scenarios"),
+    "bep": ("helixgen.org:Org", "helixgen.scenarios"),
     "dell": ("helixgen.org_dell:DellOrg", "helixgen.scenarios_dell"),
 }
 
@@ -40,8 +40,8 @@ def main():
     ap.add_argument("--llm-fraction", type=float, default=0.7,
                     help="share of incidents queued for LLM rewriting (rest keep template text)")
     ap.add_argument("--models", default=DEFAULT_MODELS, help="comma-separated Ollama models to rotate through, optional =weight")
-    ap.add_argument("--profile", choices=sorted(PROFILES), default="bcp",
-                    help="bcp = original mixed-vendor estate; dell = all-Dell estate, 40/40/20 client/infra/software")
+    ap.add_argument("--profile", choices=sorted(PROFILES), default="bep",
+                    help="bep = original mixed-vendor estate; dell = all-Dell estate, 40/40/20 client/infra/software")
     a = ap.parse_args()
 
     t0 = time.time()

@@ -2,7 +2,7 @@
 // Same-origin E2E driver (temporarily copied into the container, never part of the app build).
 const p = new URLSearchParams(location.search), v = p.get("v"), wait = +(p.get("wait") || 40);
 const f = document.getElementById("f");
-localStorage.setItem("bcp.role", JSON.stringify(p.get("role") || "admin"));
+localStorage.setItem("bep.role", JSON.stringify(p.get("role") || "admin"));
 f.src = `/#/${v}`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function until(fn, ms = 20000) { const t = Date.now(); while (Date.now() - t < ms) { const x = fn(); if (x) return x; await sleep(200); } }

@@ -1,4 +1,4 @@
-# BCP Operations AI — web UI
+# BEP Operations AI — web UI
 
 A static, dependency-free web console for the GB10 workshop's three use cases. It runs fully air-gapped: no CDNs, no external fonts or APIs, and no build step.
 
@@ -18,8 +18,8 @@ The **Viewing as** dropdown in the header is a demo role switcher. It filters th
 cd webapp
 docker compose up -d --build        # → http://<gb10-host>:8080
 # or, without compose:
-docker build -t bcp-ops-ai .
-docker run -d --name bcp-ops-ai -p 8080:80 bcp-ops-ai
+docker build -t bep-ops-ai .
+docker run -d --name bep-ops-ai -p 8080:80 bep-ops-ai
 ```
 
 For quick local iteration without Docker, run `python3 -m http.server 8080` from `webapp/`.

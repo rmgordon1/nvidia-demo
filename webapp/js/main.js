@@ -43,8 +43,8 @@ async function route() {
   const key = allowed().includes(want) ? want : allowed()[0];
   if (key !== want) { history.replaceState(null, "", "#/" + key); }
   nav.querySelectorAll("a").forEach((a) => a.classList.toggle("active", a.dataset.view === key));
-  crumbs.replaceChildren("BCP Operations AI  /  ", h("b", VIEWS[key].title));
-  document.title = `${VIEWS[key].title} · BCP Operations AI`;
+  crumbs.replaceChildren("BEP Operations AI  /  ", h("b", VIEWS[key].title));
+  document.title = `${VIEWS[key].title} · BEP Operations AI`;
   closeOverlays();
   if (typeof cleanup === "function") cleanup();
   cleanup = null;

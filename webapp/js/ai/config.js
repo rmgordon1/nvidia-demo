@@ -63,4 +63,4 @@ export async function streamApi(path, body, onEvent, signal) {
 }
 
 /** Currently selected chat model (Admin can switch it in the ITSM view); null = server default. */
-export const chatModel = () => { try { return JSON.parse(localStorage.getItem("bcp.ai.model")) || null; } catch { return null; } };
+export const chatModel = () => { try { return JSON.parse(localStorage.getItem("bep.ai.model")) || null; } catch { return null; } };

@@ -1,4 +1,4 @@
-# Model gateway for BCP Operations AI (multi-arch: arm64 GB10 / x86_64).
+# Model gateway for BEP Operations AI (multi-arch: arm64 GB10 / x86_64).
 FROM python:3.12-slim
 WORKDIR /srv
 COPY requirements.txt .

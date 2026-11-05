@@ -9,7 +9,7 @@ from .arschema import ASSOC_TYPE, IMPACT, PRIORITY, REPORTED_SOURCE, SERVICE_TYP
     TABLES, URGENCY, WORK_LOG_TYPE
 from .org import COMPANY, PERSONAS, SITES
 
-AGENCY_BLURB = ("The Bureau of Currency Production (BCP) is a fictional US federal agency that prints paper currency. "
+AGENCY_BLURB = ("The Bureau of Engraving and Printing (BEP) is a fictional US federal agency that prints paper currency. "
                 "It has a headquarters in Washington DC, the Capital Production Facility (Washington DC) and the Southwest "
                 "Production Facility (Fort Worth TX), plus teleworkers. Plants run offset and intaglio presses, overprint "
                 "and finishing lines with inline inspection, a MES called PlantTrack, and an OT network. Office IT uses "
@@ -255,7 +255,7 @@ def make_job(inc, model):
                 email_wrap=inc.get("email_wrap"), facts=facts, worklogs=wls)
 
 
-def write_all(out, rows, gt, jobs, style="view", profile="bcp"):
+def write_all(out, rows, gt, jobs, style="view", profile="bep"):
     os.makedirs(out, exist_ok=True)
     work = os.path.join(out, "_work")
     os.makedirs(work, exist_ok=True)

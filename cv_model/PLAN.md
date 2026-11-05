@@ -157,7 +157,7 @@ Each phase ends with something runnable and a checkpoint with you.
 - Weights: RF-DETR-Seg S/M, timm wide_resnet50_2 + resnet18 (offline load verified; RF-DETR-Seg-S ≈ 14 ms/tile).
 - Generator writes `instance_masks/`; 5,000-sheet set regenerated (images byte-identical to before).
 - `make data` (17 s) → `data/` 8.4 GB: detector 11.3k/2.5k/2.7k tiles (train/valid/test), anomaly 1,920 good
-  train tiles + val per design×side, VLM 3,740 defect crops + 5,000 negatives. `make fiftyone` → dataset `bcp-sheets`.
+  train tiles + val per design×side, VLM 3,740 defect crops + 5,000 negatives. `make fiftyone` → dataset `bep-sheets`.
 - Open: free RAM ≈ 23 GB while the ITSM vLLM servers run; VLM base choice (Qwen3-VL-8B download vs cached
   NVIDIA Cosmos-Reason2-8B, NVIDIA Open Model License).
 

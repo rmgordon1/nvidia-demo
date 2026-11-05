@@ -1,7 +1,7 @@
 # Synthetic BMC Helix incident archive
 
 Generates a realistic archive of BMC Helix ITSM **incidents**, as if pulled from the AR System database, for a
-fictional agency modeled on the BEP: the **Bureau of Currency Production (BCP)**. BCP prints paper currency
+fictional agency modeled on the BEP: the **Bureau of Engraving and Printing (BEP)**. BEP prints paper currency
 only. It has a headquarters, the Capital Production Facility (Washington DC), the Southwest Production Facility
 (Fort Worth TX), and teleworkers. All people, hosts and facility details are invented.
 

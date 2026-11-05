@@ -127,7 +127,7 @@ class Simulator:
         self._pools = {}
         # monitoring integration "customer"
         p = org._new_person("HQ", "Office of the CIO", "Office of the CIO", "System Account", False, support=True)
-        p.first, p.last, p.login, p.email, p.weight = "Event", "Management", SYS_MON, f"eventmgmt@bcp.example.gov", 0.0
+        p.first, p.last, p.login, p.email, p.weight = "Event", "Management", SYS_MON, f"eventmgmt@bep.example.gov", 0.0
         org.by_site["HQ"].remove(p)
         self.monperson = p
 

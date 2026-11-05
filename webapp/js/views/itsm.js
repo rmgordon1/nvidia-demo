@@ -184,7 +184,7 @@ export async function render(root) {
   chatLog.append(chatHint());
 
   // model picker (Admin): which local LLM answers steps, routing fallback and chat
-  const modelSel = h("select", { "aria-label": "Chat model", onchange: () => { localStorage.setItem("bcp.ai.model", JSON.stringify(modelSel.value || null)); toast(`Model: ${modelSel.value || "server default"}`); } },
+  const modelSel = h("select", { "aria-label": "Chat model", onchange: () => { localStorage.setItem("bep.ai.model", JSON.stringify(modelSel.value || null)); toast(`Model: ${modelSel.value || "server default"}`); } },
     h("option", { value: "" }, "Server default"));
   if (AI.MODE === "api" && store.role() === "admin") {
     head.querySelector(".actions").prepend(h("label.role-pick", "Model", modelSel));

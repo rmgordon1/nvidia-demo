@@ -1,6 +1,6 @@
 """Fictional BEP-like agency: sites, departments, support groups, people and CIs.
 
-The Bureau of Currency Production (BCP) prints paper currency only. All names,
+The Bureau of Engraving and Printing (BEP) prints paper currency only. All names,
 hosts and facility details are invented.
 """
 import hashlib
@@ -8,11 +8,11 @@ from dataclasses import dataclass, field
 
 from faker import Faker
 
-COMPANY = "Bureau of Currency Production"
-EMAIL_DOMAIN = "bcp.example.gov"
+COMPANY = "Bureau of Engraving and Printing"
+EMAIL_DOMAIN = "bep.example.gov"
 
 SITES = {
-    "HQ": dict(site="BCP Headquarters", city="Washington, DC", region="East",
+    "HQ": dict(site="BEP Headquarters", city="Washington, DC", region="East",
                tz="America/New_York", headcount=520),
     "CPF": dict(site="Capital Production Facility", city="Washington, DC", region="East",
                 tz="America/New_York", headcount=760),
@@ -317,7 +317,7 @@ class Org:
             ("Ledgerline ERP", "Financial Management (ERP)", "Ledgerline Software", "HQ"),
             ("TimeWeb", "HR, Payroll & Time", "TimeWeb Systems", "HQ"),
             ("HR Connect Portal", "HR, Payroll & Time", "In-house", "HQ"),
-            ("BCP Intranet", "Intranet & Business Apps", "In-house", "HQ"),
+            ("BEP Intranet", "Intranet & Business Apps", "In-house", "HQ"),
             ("Contract Writing System", "Intranet & Business Apps", "In-house", "HQ"),
             ("Records Management (RMS)", "Intranet & Business Apps", "In-house", "HQ"),
             ("CrowdStrike Falcon", "Security Operations", "CrowdStrike", None),

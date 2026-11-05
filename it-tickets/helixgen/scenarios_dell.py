@@ -546,7 +546,7 @@ MI_EVENTS = [
          title="Email outage - users unable to send/receive", cause="Upstream cloud provider service degradation"),
     dict(id="phish_wave", child="phishing_report", group="Cybersecurity Operations", service="Security Operations",
          ci=None, hours=(3, 8), children=(25, 60), sites="user",
-         title="Phishing campaign targeting BCP users", cause="Credential-harvesting campaign impersonating payroll provider"),
+         title="Phishing campaign targeting BEP users", cause="Credential-harvesting campaign impersonating payroll provider"),
     dict(id="timeweb_payroll", child="timeweb_issue", group="HR & Time Systems", service="HR, Payroll & Time",
          ci="app:TimeWeb", hours=(2, 6), children=(20, 50), sites="user",
          title="TimeWeb unavailable on timecard deadline", cause="Expired TLS certificate on load balancer"),

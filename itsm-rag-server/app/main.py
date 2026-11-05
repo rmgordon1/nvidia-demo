@@ -1,4 +1,4 @@
-"""BCP Operations AI ITSM RAG server (FastAPI). nginx in the webapp proxies /api/* here.
+"""BEP Operations AI ITSM RAG server (FastAPI). nginx in the webapp proxies /api/* here.
 
 Endpoints (all JSON):
   GET  /health                       models, index size
@@ -32,7 +32,7 @@ from .router import Router, route
 
 log = logging.getLogger("itsm-rag-server")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-app = FastAPI(title="BCP Operations AI ITSM RAG server", version="1.0")
+app = FastAPI(title="BEP Operations AI ITSM RAG server", version="1.0")
 S = {}  # runtime state
 _new_lock = threading.Lock()
 

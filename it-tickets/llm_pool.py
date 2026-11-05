@@ -43,10 +43,10 @@ def use_profile(out):
     """Load the scenario catalog the archive in `out` was generated with."""
     global SCENARIOS, MI_EVENTS
     meta = json.load(open(os.path.join(out, "_work", "meta.json")))
-    mod = {"bcp": "helixgen.scenarios", "dell": "helixgen.scenarios_dell"}[meta.get("profile", "bcp")]
+    mod = {"bep": "helixgen.scenarios", "dell": "helixgen.scenarios_dell"}[meta.get("profile", "bep")]
     cat = importlib.import_module(mod)
     SCENARIOS, MI_EVENTS = cat.SCENARIOS, cat.MI_EVENTS
-    return meta.get("profile", "bcp")
+    return meta.get("profile", "bep")
 
 OLLAMA = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 DEFAULT_MODELS = "gpt-oss:20b=3,gemma4:26b=3,granite4.2:latest=2,nemotron-3.5-lightning:30b=1"

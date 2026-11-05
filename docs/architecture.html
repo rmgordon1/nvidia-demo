@@ -1,4 +1,4 @@
-<title>BCP Operations AI Architecture</title>
+<title>BEP Operations AI Architecture</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
 <style>
@@ -74,9 +74,9 @@ code{font-family:var(--mono);font-size:12.5px}
 </style>
 <div class="wrap">
 <header>
-  <div class="eyebrow">gb10-lab · Bureau of Currency Production demo</div>
-  <h1>BCP Operations AI: use-case architecture</h1>
-  <p class="lede">Two use cases share one pattern: synthetic data generated on the GB10, local models served on-prem, and a role-filtered web UI where a person makes every final call. Read each lane left to right.</p>
+  <div class="eyebrow">Bureau of Engraving and Printing · demo build</div>
+  <h1>BEP Operations AI: use-case architecture</h1>
+  <p class="lede">Two use cases share one pattern: synthetic data, local models served on-prem, and a role-filtered web UI where a person makes every final call. Read each lane left to right.</p>
 </header>
 <div class="legend" aria-label="Legend">
   <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e"/></svg>Live, runs against local models</span>
@@ -85,7 +85,7 @@ code{font-family:var(--mono);font-size:12.5px}
   <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-plan"/></svg>Planned</span>
   <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-user"/></svg>Who uses the view</span>
 </div>
-<div class="diagram"><svg viewBox="0 0 1370 870" width="1370" height="870" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BCP Operations AI lab: two use cases from data generation through models and web views to users</title>
+<div class="diagram"><svg viewBox="0 0 1370 870" width="1370" height="870" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BEP Operations AI lab: two use cases from data generation through models and web views to users</title>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh"/></marker><marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh-p"/></marker></defs>
 <text x="40" y="30" class="colh">DATA GENERATION</text>
 <line x1="40" y1="40" x2="240" y2="40" class="colrule"/>
@@ -261,7 +261,7 @@ code{font-family:var(--mono);font-size:12.5px}
 </g>
 <g class="n n-box st-partial ln-cv">
 <rect x="560" y="425" width="360" height="98" rx="4" class="nb"/>
-<text x="570" y="445" class="nt">Training on the GB10 · MLflow tracked</text>
+<text x="570" y="445" class="nt">Training on-prem · MLflow tracked</text>
 <text x="570" y="463" class="nsm" xml:space="preserve">PatchCore    good sheets only → heatmap</text>
 <text x="570" y="478" class="nsm" xml:space="preserve">RF-DETR-Seg  boxes · 8 classes · masks</text>
 <text x="570" y="493" class="nsm" xml:space="preserve">Qwen3-VL-8B  LoRA on defect crops (TRL/PEFT)</text>
@@ -301,10 +301,10 @@ code{font-family:var(--mono);font-size:12.5px}
 </g>
 <g class="n n-platform st-live ln-shared">
 <rect x="40" y="725" width="460" height="83" rx="4" class="nb"/>
-<text x="50" y="745" class="nt">Dell Pro Max GB10 · on-prem</text>
+<text x="50" y="745" class="nt">On-prem infrastructure</text>
 <text x="50" y="763" class="ns" xml:space="preserve">no external API calls; data stays inside</text>
 <text x="50" y="778" class="ns" xml:space="preserve">the agency boundary; a human makes</text>
-<text x="50" y="793" class="ns" xml:space="preserve">every final decision → scale-out: PowerEdge XE</text>
+<text x="50" y="793" class="ns" xml:space="preserve">every final decision · prod: PowerEdge XE</text>
 </g>
 <g class="n n-box st-live ln-shared">
 <rect x="560" y="725" width="360" height="68" rx="4" class="nb"/>

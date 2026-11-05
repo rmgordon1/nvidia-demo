@@ -1,4 +1,4 @@
-# BCP Operations AI: the whole ITSM stack on one NVIDIA GPU host (arm64 GB10 / DGX Spark, or x86_64).
+# BEP Operations AI: the whole ITSM stack on one NVIDIA GPU host (arm64 GB10 / DGX Spark, or x86_64).
 #
 #   docker compose up -d --build        # UI on http://localhost:8080
 #
@@ -16,7 +16,7 @@
 #
 # Needs the NVIDIA Container Toolkit. Not for this GB10 while the host-run stack is up (ports 8080/8021).
 
-name: bcp-ops-ai
+name: bep-ops-ai
 
 x-gpu: &gpu
   deploy:
@@ -70,7 +70,7 @@ services:
   rag:
     <<: *gpu
     build: ./itsm-rag-server
-    image: bcp-ops-ai-rag:latest
+    image: bep-ops-ai-rag:latest
     environment:
       ITSM_LLMS: gpt-oss-20b=http://vllm:8000/v1,gemma4-e4b=ollama://ollama:11434|gemma4:latest
       HF_TOKEN: ${HF_TOKEN:-}
@@ -88,7 +88,7 @@ services:
 
   webapp:
     build: ./webapp
-    image: bcp-ops-ai:latest
+    image: bep-ops-ai:latest
     environment:
       API_UPSTREAM: rag:8030
     ports:

@@ -1,4 +1,4 @@
-# BCP Operations AI — static web UI served by nginx.
+# BEP Operations AI — static web UI served by nginx.
 # Multi-arch base: runs on the arm64 GB10 and on x86_64.
 FROM nginx:1.27-alpine
 

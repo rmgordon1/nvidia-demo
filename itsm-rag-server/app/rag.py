@@ -13,7 +13,7 @@ from .loaders import public
 
 CITE = re.compile(r"\bINC\d{12}\b")
 
-AGENCY = ("the Bureau of Currency Production (BCP), a US federal agency that prints paper currency: headquarters "
+AGENCY = ("the Bureau of Engraving and Printing (BEP), a US federal agency that prints paper currency: headquarters "
           "plus the Capital and Southwest production facilities, with office IT and production OT/SCADA systems "
           "(presses, inspection, PlantTrack MES)")
 

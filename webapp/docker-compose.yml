@@ -1,8 +1,8 @@
 services:
   webapp:
     build: .
-    image: bcp-ops-ai:latest
-    container_name: bcp-ops-ai
+    image: bep-ops-ai:latest
+    container_name: bep-ops-ai
     ports:
       - "8080:80"
     restart: unless-stopped
