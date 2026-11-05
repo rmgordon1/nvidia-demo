@@ -39,5 +39,5 @@ train-detector: ## phase 3: RF-DETR-Seg Small on all 11.3k tiles, up to 20 epoch
 	$(ENV) python scripts/train_detector.py --size small --epochs 20 --batch 8 --accum 2 2>&1 | tee logs/train_detector.log
 
 overnight:      ## full training sized to free memory, nothing else stopped (scripts/overnight.sh; ~8-12 h)
-	nohup scripts/overnight.sh > logs/overnight.log 2>&1 &
+	setsid nohup scripts/overnight.sh > logs/overnight.log 2>&1 < /dev/null &
 	@echo "started; follow with: tail -f cv_model/logs/overnight.log"
