@@ -2,29 +2,33 @@
 __pycache__/
 *.py[cod]
 .venv/
-.cache/
+.cache
 *.log
 .dev.log
 .ipynb_checkpoints/
 
 # --- Large or regenerable data ---------------------------------------------
 # synthetic sheets: regenerate with `python3 synthetic_print/generate.py --count 5000 --defect-rate 0.5 --overwrite`
-synthetic_print/dataset/
+synthetic_print/dataset
 # CV model work products: rebuilt by `make` targets in cv_model/ (see cv_model/PLAN.md)
-cv_model/data/
-cv_model/models/
-cv_model/weights/
-cv_model/mlruns/
+cv_model/data
+cv_model/models
+cv_model/weights
+cv_model/mlruns
 cv_model/mlflow.db
-cv_model/logs/
+cv_model/logs
 cv_model/docker/deepstream/build.log
-# external textile dataset (HDF5)
-imperfection_detection/textile/*.h5
+# external textile dataset (moved to ~/gb10-lab-data)
+imperfection_detection/
 # caches / generated outputs
-itsm-rag-server/.cache/
+itsm-rag-server/.cache
 model-server/tests/.devstore.pkl
-it-tickets/out/
+it-tickets/out
 
 # --- Backups / local ---------------------------------------------------------
 webapp.bak-*/
 .claude/
+example_prompts/
+
+# Training data, weights and caches live in ~/gb10-lab-data; the paths above are
+# symlinks into it on the dev box.

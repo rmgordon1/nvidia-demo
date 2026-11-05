@@ -1,0 +1,126 @@
+<title>BCP Operations AI Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+/* Layout: one wide swimlane diagram (scrolls sideways on its own), then a short reference grid per use case */
+:root{
+  --bg:#f3f5f7; --panel:#ffffff; --fg:#17202a; --muted:#5a6673; --rule:#cfd6de; --edge:#4a5866;
+  --itsm:#1f6f8b; --cv:#9a5b1e; --mat:#3f7a3c; --shared:#5e5a78;
+  --itsm-t:#e3eef3; --cv-t:#f5ece2; --mat-t:#e6f0e4; --shared-t:#ecebf2;
+  --live:#2b7a4b; --partial:#1f6f8b; --ph:#a8671a; --plan:#7b8591;
+  --sans:"IBM Plex Sans",system-ui,sans-serif; --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11161c; --panel:#1a2129; --fg:#e4e9ee; --muted:#98a4b0; --rule:#2f3a45; --edge:#9aa7b4;
+  --itsm:#5fb4d2; --cv:#e0a364; --mat:#86c27f; --shared:#a9a3cf;
+  --itsm-t:#152530; --cv-t:#261d14; --mat-t:#17241a; --shared-t:#1c1b28;
+  --live:#5cc487; --partial:#5fb4d2; --ph:#e0a364; --plan:#8792a0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161c; --panel:#1a2129; --fg:#e4e9ee; --muted:#98a4b0; --rule:#2f3a45; --edge:#9aa7b4;
+  --itsm:#5fb4d2; --cv:#e0a364; --mat:#86c27f; --shared:#a9a3cf;
+  --itsm-t:#152530; --cv-t:#261d14; --mat-t:#17241a; --shared-t:#1c1b28;
+  --live:#5cc487; --partial:#5fb4d2; --ph:#e0a364; --plan:#8792a0; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.5}
+.wrap{max-width:1420px;margin:0 auto;padding-inline:20px;padding-block:28px 48px;display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--cond);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,4vw,36px);line-height:1.15;margin:0;text-wrap:balance}
+.lede{margin:0;max-width:72ch;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend svg{flex:none}
+.diagram{background:var(--panel);border:1px solid var(--rule);border-radius:8px;overflow-x:auto;padding:8px}
+.diagram svg{display:block;max-width:none}
+/* svg */
+.colh{font-family:var(--cond);font-size:12px;font-weight:600;letter-spacing:.1em;fill:var(--muted)}
+.colsub{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.colrule{stroke:var(--rule);stroke-width:1}
+.lane-itsm{fill:var(--itsm-t)}.lane-cv{fill:var(--cv-t)}.lane-mat{fill:var(--mat-t)}.lane-shared{fill:var(--shared-t)}
+.lanebar-itsm{fill:var(--itsm)}.lanebar-cv{fill:var(--cv)}.lanebar-mat{fill:var(--mat)}.lanebar-shared{fill:var(--shared)}
+.lanet{font-family:var(--cond);font-size:16px;font-weight:600}
+.lanet-itsm{fill:var(--itsm)}.lanet-cv{fill:var(--cv)}.lanet-mat{fill:var(--mat)}.lanet-shared{fill:var(--shared)}
+.lanes{font-family:var(--sans);font-size:12px;font-weight:400;fill:var(--muted)}
+.nb{fill:var(--panel);stroke:var(--edge);stroke-width:1.2}
+.n-view .nb{stroke-width:1.2}
+.ln-itsm.n-view .nb{stroke:var(--itsm);stroke-width:2}.ln-cv.n-view .nb{stroke:var(--cv);stroke-width:2}
+.ln-mat.n-view .nb{stroke:var(--mat);stroke-width:2}.ln-shared.n-view .nb{stroke:var(--shared);stroke-width:2}
+.n-user .nb{fill:var(--bg)}
+.n-model .nb{fill:var(--bg)}
+.n-platform .nb{fill:var(--bg);stroke:var(--shared);stroke-width:1.6}
+.st-placeholder .nb{stroke:var(--ph);stroke-dasharray:6 4}
+.st-planned .nb{stroke:var(--plan);stroke-dasharray:2 4}
+.st-planned .nt,.st-planned .ns{fill:var(--muted)}
+.st-partial .nb{stroke:var(--partial);stroke-dasharray:10 3 2 3}
+.nt{font-family:var(--sans);font-size:13px;font-weight:600;fill:var(--fg)}
+.ns{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}
+.nsm{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.badge{font-family:var(--cond);font-size:10px;font-weight:600;letter-spacing:.08em}
+.b-placeholder{fill:var(--ph)}.b-planned{fill:var(--plan)}.b-partial{fill:var(--partial)}
+.e{fill:none;stroke:var(--edge);stroke-width:1.4}
+.e-part{stroke-dasharray:10 3 2 3}
+.e-ph{stroke:var(--ph);stroke-dasharray:6 4}
+.e-plan{stroke:var(--plan);stroke-dasharray:2 4}
+.e-user{stroke:var(--rule);stroke-width:2}
+.arh{fill:var(--edge)}.arh-p{fill:var(--plan)}
+.elab{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+/* reference */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.uc{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--c);border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.uc h2{font-family:var(--cond);font-size:19px;font-weight:600;margin:0;color:var(--c)}
+.uc dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px}
+.uc dt{color:var(--muted);font-family:var(--cond);text-transform:uppercase;letter-spacing:.06em;font-size:11.5px;padding-top:2px}
+.uc dd{margin:0;min-width:0}
+code{font-family:var(--mono);font-size:12.5px}
+.note{font-size:13px;color:var(--muted);max-width:90ch;margin:0}
+</style>
+<div class="wrap">
+<header>
+  <div class="eyebrow">gb10-lab · Bureau of Currency Production demo</div>
+  <h1>BCP Operations AI: use-case architecture</h1>
+  <p class="lede">Three use cases share one pattern: synthetic data generated on the GB10, local models served on-prem, and a role-filtered web UI where a person makes every final call. Read each lane left to right.</p>
+</header>
+<div class="legend" aria-label="Legend">
+  <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e"/></svg>Live, runs against local models</span>
+  <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-part"/></svg>Partial, in progress</span>
+  <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-ph"/></svg>Stand-in, deterministic code in the browser</span>
+  <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-plan"/></svg>Planned</span>
+  <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-user"/></svg>Who uses the view</span>
+</div>
+<div class="diagram"><!--SVG--></div>
+<div class="grid">
+  <section class="uc" style="--c:var(--itsm)">
+    <h2>ITSM Next Best Step</h2>
+    <dl>
+      <dt>Outcome</dt><dd>MTTR holds or drops through the BMC Helix → ServiceNow migration</dd>
+      <dt>Owner</dt><dd>IT service desk / operations manager</dd>
+      <dt>Views</dt><dd>ITSM Next Best Step, IT Self-Service, IT Insights</dd>
+      <dt>Code</dt><dd><code>it-tickets/</code>, <code>itsm-rag-server/</code>, <code>webapp/js/ai/itsm.js</code></dd>
+      <dt>Models</dt><dd>gemma4-e4b (small), gpt-oss-20b on vLLM (big), Nemotron embed + rerank</dd>
+      <dt>Status</dt><dd>Live. RAG, not fine-tuning; only the router is trained.</dd>
+    </dl>
+  </section>
+  <section class="uc" style="--c:var(--cv)">
+    <h2>CV defect detection</h2>
+    <dl>
+      <dt>Outcome</dt><dd>Higher defect recall, fewer escapes and false rejects than the rules baseline</dd>
+      <dt>Owner</dt><dd>Production QA / inspection manager</dd>
+      <dt>Views</dt><dd>Defect Inspection</dd>
+      <dt>Code</dt><dd><code>synthetic_print/</code>, <code>cv_model/</code>, <code>webapp/js/ai/vision.js</code></dd>
+      <dt>Models</dt><dd>PatchCore (anomalib), RF-DETR-Seg, Qwen3-VL-8B + LoRA</dd>
+      <dt>Status</dt><dd>UI runs a golden-template stand-in plus PoC detections; training underway; DeepStream runtime planned.</dd>
+    </dl>
+  </section>
+  <section class="uc" style="--c:var(--mat)">
+    <h2>Raw material to output</h2>
+    <dl>
+      <dt>Outcome</dt><dd>Share of material variance explained and attributed to material, lot, line or shift</dd>
+      <dt>Owner</dt><dd>Manufacturing operations + supply-chain lead</dd>
+      <dt>Views</dt><dd>Material Accountability</dd>
+      <dt>Code</dt><dd><code>webapp/tools/build_materials.py</code>, <code>webapp/js/data/materials.js</code>, <code>webapp/js/ai/materials.js</code></dd>
+      <dt>Models</dt><dd>Contribution analysis and forecasting in the browser; local LLM later</dd>
+      <dt>Status</dt><dd>Stand-in. Gateway endpoint returns 501.</dd>
+    </dl>
+  </section>
+</div>
+<p class="note">Out of scope for the pilot: write-back to ServiceNow, ERP or line systems; autonomous sheet disposition; external APIs; real currency imagery. <code>model-server/</code> is an earlier gateway (NIM + Milvus) that also binds :8030; the ITSM path above uses <code>itsm-rag-server</code>. <code>imperfection_detection/textile</code> holds a reference textile-defect dataset not wired into any lane.</p>
+</div>
