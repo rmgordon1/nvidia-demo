@@ -38,8 +38,6 @@ poc-revert:     ## restore the placeholder manifest
 train-detector: ## phase 3: RF-DETR-Seg Small on all 11.3k tiles, up to 20 epochs (early stopping)
 	$(ENV) python scripts/train_detector.py --size small --epochs 20 --batch 8 --accum 2 2>&1 | tee logs/train_detector.log
 
-overnight:      ## full detector, then all 8 PatchCore models, then refresh the webapp from the full detector
-	$(MAKE) train-detector
-	$(MAKE) train-anomaly
-	$(ENV) python scripts/poc_webapp.py --weights models/detector/small/checkpoint_best_ema.pth
-	cd ../webapp && sg docker -c "docker compose up -d --build webapp"
+overnight:      ## full training sized to free memory, nothing else stopped (scripts/overnight.sh; ~8-12 h)
+	nohup scripts/overnight.sh > logs/overnight.log 2>&1 &
+	@echo "started; follow with: tail -f cv_model/logs/overnight.log"
