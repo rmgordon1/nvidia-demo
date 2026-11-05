@@ -2,7 +2,9 @@
 # Multi-arch base: runs on the arm64 GB10 and on x86_64.
 FROM nginx:1.27-alpine
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# nginx.conf is a template: the entrypoint substitutes ${API_UPSTREAM} into conf.d/default.conf at start.
+COPY nginx.conf /etc/nginx/templates/default.conf.template
+ENV API_UPSTREAM=host.docker.internal:8030
 COPY index.html /usr/share/nginx/html/
 COPY css/  /usr/share/nginx/html/css/
 COPY js/   /usr/share/nginx/html/js/

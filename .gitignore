@@ -17,13 +17,17 @@ cv_model/weights
 cv_model/mlruns
 cv_model/mlflow.db
 cv_model/logs
+cv_model/dist/
 cv_model/docker/deepstream/build.log
 # external textile dataset (moved to ~/gb10-lab-data)
 imperfection_detection/
 # caches / generated outputs
 itsm-rag-server/.cache
 model-server/tests/.devstore.pkl
-it-tickets/out
+# it-tickets/out/dell (the archive the RAG server loads) is tracked; other runs and the LLM caches are not
+it-tickets/out/*
+!it-tickets/out/dell/
+it-tickets/out/dell/_work/
 
 # --- Backups / local ---------------------------------------------------------
 webapp.bak-*/

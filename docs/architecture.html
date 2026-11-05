@@ -5,20 +5,20 @@
 /* Layout: one wide swimlane diagram (scrolls sideways on its own), then a short reference grid per use case */
 :root{
   --bg:#f3f5f7; --panel:#ffffff; --fg:#17202a; --muted:#5a6673; --rule:#cfd6de; --edge:#4a5866;
-  --itsm:#1f6f8b; --cv:#9a5b1e; --mat:#3f7a3c; --shared:#5e5a78;
-  --itsm-t:#e3eef3; --cv-t:#f5ece2; --mat-t:#e6f0e4; --shared-t:#ecebf2;
+  --itsm:#1f6f8b; --cv:#9a5b1e; --shared:#5e5a78;
+  --itsm-t:#e3eef3; --cv-t:#f5ece2; --shared-t:#ecebf2;
   --live:#2b7a4b; --partial:#1f6f8b; --ph:#a8671a; --plan:#7b8591;
   --sans:"IBM Plex Sans",system-ui,sans-serif; --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#11161c; --panel:#1a2129; --fg:#e4e9ee; --muted:#98a4b0; --rule:#2f3a45; --edge:#9aa7b4;
-  --itsm:#5fb4d2; --cv:#e0a364; --mat:#86c27f; --shared:#a9a3cf;
-  --itsm-t:#152530; --cv-t:#261d14; --mat-t:#17241a; --shared-t:#1c1b28;
+  --itsm:#5fb4d2; --cv:#e0a364; --shared:#a9a3cf;
+  --itsm-t:#152530; --cv-t:#261d14; --shared-t:#1c1b28;
   --live:#5cc487; --partial:#5fb4d2; --ph:#e0a364; --plan:#8792a0; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#11161c; --panel:#1a2129; --fg:#e4e9ee; --muted:#98a4b0; --rule:#2f3a45; --edge:#9aa7b4;
-  --itsm:#5fb4d2; --cv:#e0a364; --mat:#86c27f; --shared:#a9a3cf;
-  --itsm-t:#152530; --cv-t:#261d14; --mat-t:#17241a; --shared-t:#1c1b28;
+  --itsm:#5fb4d2; --cv:#e0a364; --shared:#a9a3cf;
+  --itsm-t:#152530; --cv-t:#261d14; --shared-t:#1c1b28;
   --live:#5cc487; --partial:#5fb4d2; --ph:#e0a364; --plan:#8792a0; color-scheme:dark}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.5}
 .wrap{max-width:1420px;margin:0 auto;padding-inline:20px;padding-block:28px 48px;display:flex;flex-direction:column;gap:22px}
@@ -35,15 +35,14 @@ h1{font-family:var(--cond);font-weight:600;font-size:clamp(26px,4vw,36px);line-h
 .colh{font-family:var(--cond);font-size:12px;font-weight:600;letter-spacing:.1em;fill:var(--muted)}
 .colsub{font-family:var(--mono);font-size:11px;fill:var(--muted)}
 .colrule{stroke:var(--rule);stroke-width:1}
-.lane-itsm{fill:var(--itsm-t)}.lane-cv{fill:var(--cv-t)}.lane-mat{fill:var(--mat-t)}.lane-shared{fill:var(--shared-t)}
-.lanebar-itsm{fill:var(--itsm)}.lanebar-cv{fill:var(--cv)}.lanebar-mat{fill:var(--mat)}.lanebar-shared{fill:var(--shared)}
+.lane-itsm{fill:var(--itsm-t)}.lane-cv{fill:var(--cv-t)}.lane-shared{fill:var(--shared-t)}
+.lanebar-itsm{fill:var(--itsm)}.lanebar-cv{fill:var(--cv)}.lanebar-shared{fill:var(--shared)}
 .lanet{font-family:var(--cond);font-size:16px;font-weight:600}
-.lanet-itsm{fill:var(--itsm)}.lanet-cv{fill:var(--cv)}.lanet-mat{fill:var(--mat)}.lanet-shared{fill:var(--shared)}
+.lanet-itsm{fill:var(--itsm)}.lanet-cv{fill:var(--cv)}.lanet-shared{fill:var(--shared)}
 .lanes{font-family:var(--sans);font-size:12px;font-weight:400;fill:var(--muted)}
 .nb{fill:var(--panel);stroke:var(--edge);stroke-width:1.2}
 .n-view .nb{stroke-width:1.2}
-.ln-itsm.n-view .nb{stroke:var(--itsm);stroke-width:2}.ln-cv.n-view .nb{stroke:var(--cv);stroke-width:2}
-.ln-mat.n-view .nb{stroke:var(--mat);stroke-width:2}.ln-shared.n-view .nb{stroke:var(--shared);stroke-width:2}
+.ln-itsm.n-view .nb{stroke:var(--itsm);stroke-width:2}.ln-cv.n-view .nb{stroke:var(--cv);stroke-width:2}.ln-shared.n-view .nb{stroke:var(--shared);stroke-width:2}
 .n-user .nb{fill:var(--bg)}
 .n-model .nb{fill:var(--bg)}
 .n-platform .nb{fill:var(--bg);stroke:var(--shared);stroke-width:1.6}
@@ -77,7 +76,7 @@ code{font-family:var(--mono);font-size:12.5px}
 <header>
   <div class="eyebrow">gb10-lab · Bureau of Currency Production demo</div>
   <h1>BCP Operations AI: use-case architecture</h1>
-  <p class="lede">Three use cases share one pattern: synthetic data generated on the GB10, local models served on-prem, and a role-filtered web UI where a person makes every final call. Read each lane left to right.</p>
+  <p class="lede">Two use cases share one pattern: synthetic data generated on the GB10, local models served on-prem, and a role-filtered web UI where a person makes every final call. Read each lane left to right.</p>
 </header>
 <div class="legend" aria-label="Legend">
   <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e"/></svg>Live, runs against local models</span>
@@ -86,7 +85,7 @@ code{font-family:var(--mono);font-size:12.5px}
   <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-plan"/></svg>Planned</span>
   <span><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" class="e e-user"/></svg>Who uses the view</span>
 </div>
-<div class="diagram"><svg viewBox="0 0 1370 1170" width="1370" height="1170" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BCP Operations AI lab: three use cases from data generation through models and web views to users</title>
+<div class="diagram"><svg viewBox="0 0 1370 870" width="1370" height="870" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BCP Operations AI lab: two use cases from data generation through models and web views to users</title>
 <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh"/></marker><marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh-p"/></marker></defs>
 <text x="40" y="30" class="colh">DATA GENERATION</text>
 <line x1="40" y1="40" x2="240" y2="40" class="colrule"/>
@@ -105,12 +104,9 @@ code{font-family:var(--mono);font-size:12.5px}
 <rect x="20" y="385" width="1330" height="280" rx="6" class="lane lane-cv"/>
 <rect x="20" y="385" width="4" height="280" class="lanebar lanebar-cv"/>
 <text x="40" y="409" class="lanet lanet-cv">Computer-vision defect detection<tspan class="lanes" dx="12">Secondary · in-browser stand-in today, trained models in progress</tspan></text>
-<rect x="20" y="685" width="1330" height="280" rx="6" class="lane lane-mat"/>
-<rect x="20" y="685" width="4" height="280" class="lanebar lanebar-mat"/>
-<text x="40" y="709" class="lanet lanet-mat">Raw material to output<tspan class="lanes" dx="12">Secondary · next phase · browser stand-in</tspan></text>
-<rect x="20" y="985" width="1330" height="165" rx="6" class="lane lane-shared"/>
-<rect x="20" y="985" width="4" height="165" class="lanebar lanebar-shared"/>
-<text x="40" y="1009" class="lanet lanet-shared">Shared across all use cases<tspan class="lanes" dx="12"></tspan></text>
+<rect x="20" y="685" width="1330" height="165" rx="6" class="lane lane-shared"/>
+<rect x="20" y="685" width="4" height="165" class="lanebar lanebar-shared"/>
+<text x="40" y="709" class="lanet lanet-shared">Shared across both use cases<tspan class="lanes" dx="12"></tspan></text>
 <path d="M140,178 L140,192" class="e" marker-end="url(#ar)"/>
 <path d="M140,260 L140,274" class="e" marker-end="url(#ar)"/>
 <path d="M240,226 L268,226 L268,174 L290,174" class="e" marker-end="url(#ar)"/>
@@ -143,18 +139,10 @@ code{font-family:var(--mono);font-size:12.5px}
 <path d="M647,631 L647,648 L953,648 L953,606 L975,606" class="e e-plan" marker-end="url(#arp)"/>
 <path d="M1150,582 L1168,582 L1168,546 L1190,546" class="e e-user"/>
 <path d="M1150,582 L1168,582 L1168,614 L1190,614" class="e e-user"/>
-<path d="M240,789 L268,789 L268,759 L290,759" class="e" marker-end="url(#ar)"/>
-<path d="M240,789 L268,789 L268,839 L290,839" class="e" marker-end="url(#ar)"/>
-<path d="M500,759 L538,759 L538,766 L560,766" class="e" marker-end="url(#ar)"/>
-<path d="M500,839 L538,839 L538,766 L560,766" class="e" marker-end="url(#ar)"/>
-<path d="M500,926 L530,926 L530,790 L560,790" class="e" marker-end="url(#ar)"/>
-<path d="M920,766 L953,766 L953,782 L975,782" class="e" marker-end="url(#ar)"/>
-<path d="M920,874 L953,874 L953,782 L975,782" class="e e-plan" marker-end="url(#arp)"/>
-<path d="M1150,782 L1190,782" class="e e-user"/>
-<path d="M920,1059 L953,1059 L953,1048 L975,1048" class="e" marker-end="url(#ar)"/>
-<path d="M920,1059 L953,1059 L953,1110 L975,1110" class="e" marker-end="url(#ar)"/>
-<path d="M1150,1048 L1190,1048" class="e e-user"/>
-<path d="M1150,1110 L1190,1110" class="e e-user"/>
+<path d="M920,759 L953,759 L953,748 L975,748" class="e" marker-end="url(#ar)"/>
+<path d="M920,759 L953,759 L953,810 L975,810" class="e" marker-end="url(#ar)"/>
+<path d="M1150,748 L1190,748" class="e e-user"/>
+<path d="M1150,810 L1190,810" class="e e-user"/>
 <g class="n n-box st-live ln-itsm">
 <rect x="40" y="110" width="200" height="68" rx="4" class="nb"/>
 <text x="50" y="130" class="nt">it-tickets/generate.py</text>
@@ -311,91 +299,38 @@ code{font-family:var(--mono);font-size:12.5px}
 <text x="1200" y="608" class="nt">Quality Engineer</text>
 <text x="1200" y="626" class="ns" xml:space="preserve">tunes thresholds</text>
 </g>
-<g class="n n-box st-live ln-mat">
-<rect x="40" y="755" width="200" height="68" rx="4" class="nb"/>
-<text x="50" y="775" class="nt">tools/build_materials.py</text>
-<text x="50" y="793" class="ns" xml:space="preserve">12-month extract, seeded,</text>
-<text x="50" y="808" class="ns" xml:space="preserve">+ answer_key.json</text>
-</g>
-<g class="n n-box st-live ln-mat">
-<rect x="290" y="725" width="210" height="68" rx="4" class="nb"/>
-<text x="300" y="745" class="nt">Oracle EBS-style ERP</text>
-<text x="300" y="763" class="ns" xml:space="preserve">POs, lots, inventory txns,</text>
-<text x="300" y="778" class="ns" xml:space="preserve">BOM / standard usage</text>
-</g>
-<g class="n n-box st-live ln-mat">
-<rect x="290" y="805" width="210" height="68" rx="4" class="nb"/>
-<text x="300" y="825" class="nt">MES run log</text>
-<text x="300" y="843" class="ns" xml:space="preserve">output + spoilage per run,</text>
-<text x="300" y="858" class="ns" xml:space="preserve">joined to ERP issues</text>
-</g>
-<g class="n n-box st-placeholder ln-mat">
-<rect x="290" y="885" width="210" height="68" rx="4" class="nb"/>
-<text x="300" y="905" class="nt">In-browser dataset</text>
-<text x="300" y="923" class="ns" xml:space="preserve">js/data/materials.js,</text>
-<text x="300" y="938" class="ns" xml:space="preserve">3 known-answer scenarios</text>
-<text x="492" y="904" text-anchor="end" class="badge b-placeholder">STAND-IN</text>
-</g>
-<g class="n n-box st-placeholder ln-mat">
-<rect x="560" y="725" width="360" height="83" rx="4" class="nb"/>
-<text x="570" y="745" class="nt">Variance &amp; forecast · browser</text>
-<text x="570" y="763" class="nsm" xml:space="preserve">attributeVariance  contribution analysis</text>
-<text x="570" y="778" class="nsm" xml:space="preserve">forecast           procurement demand</text>
-<text x="570" y="793" class="nsm" xml:space="preserve">ask                keyword-routed answers</text>
-<text x="912" y="744" text-anchor="end" class="badge b-placeholder">STAND-IN</text>
-</g>
-<g class="n n-box st-planned ln-mat">
-<rect x="560" y="840" width="360" height="68" rx="4" class="nb"/>
-<text x="570" y="860" class="nt">model-server /materials, /vision</text>
-<text x="570" y="878" class="ns" xml:space="preserve">gateway stubs (HTTP 501) today;</text>
-<text x="570" y="893" class="ns" xml:space="preserve">local LLM + models later</text>
-<text x="912" y="859" text-anchor="end" class="badge b-planned">PLANNED</text>
-</g>
-<g class="n n-view st-live ln-mat">
-<rect x="975" y="740" width="175" height="83" rx="4" class="nb"/>
-<text x="985" y="760" class="nt">Material Accountability</text>
-<text x="985" y="778" class="ns" xml:space="preserve">yield, spoilage vs standard,</text>
-<text x="985" y="793" class="ns" xml:space="preserve">variance attribution,</text>
-<text x="985" y="808" class="ns" xml:space="preserve">reconciliation, forecast</text>
-</g>
-<g class="n n-user st-live ln-mat">
-<rect x="1190" y="748" width="140" height="68" rx="22" class="nb"/>
-<text x="1200" y="768" class="nt">Material Analyst</text>
-<text x="1200" y="786" class="ns" xml:space="preserve">planners, procurement,</text>
-<text x="1200" y="801" class="ns" xml:space="preserve">finance</text>
-</g>
 <g class="n n-platform st-live ln-shared">
-<rect x="40" y="1025" width="460" height="83" rx="4" class="nb"/>
-<text x="50" y="1045" class="nt">Dell Pro Max GB10 · on-prem</text>
-<text x="50" y="1063" class="ns" xml:space="preserve">no external API calls; data stays inside</text>
-<text x="50" y="1078" class="ns" xml:space="preserve">the agency boundary; a human makes</text>
-<text x="50" y="1093" class="ns" xml:space="preserve">every final decision → scale-out: PowerEdge XE</text>
+<rect x="40" y="725" width="460" height="83" rx="4" class="nb"/>
+<text x="50" y="745" class="nt">Dell Pro Max GB10 · on-prem</text>
+<text x="50" y="763" class="ns" xml:space="preserve">no external API calls; data stays inside</text>
+<text x="50" y="778" class="ns" xml:space="preserve">the agency boundary; a human makes</text>
+<text x="50" y="793" class="ns" xml:space="preserve">every final decision → scale-out: PowerEdge XE</text>
 </g>
 <g class="n n-box st-live ln-shared">
-<rect x="560" y="1025" width="360" height="68" rx="4" class="nb"/>
-<text x="570" y="1045" class="nt">js/store.js · browser storage</text>
-<text x="570" y="1063" class="ns" xml:space="preserve">roles, audit trail, provenance stamps,</text>
-<text x="570" y="1078" class="ns" xml:space="preserve">accepted ServiceNow resolutions</text>
+<rect x="560" y="725" width="360" height="68" rx="4" class="nb"/>
+<text x="570" y="745" class="nt">js/store.js · browser storage</text>
+<text x="570" y="763" class="ns" xml:space="preserve">roles, audit trail, provenance stamps,</text>
+<text x="570" y="778" class="ns" xml:space="preserve">accepted ServiceNow resolutions</text>
 </g>
 <g class="n n-view st-live ln-shared">
-<rect x="975" y="1022" width="175" height="53" rx="4" class="nb"/>
-<text x="985" y="1042" class="nt">Mission Overview</text>
-<text x="985" y="1060" class="ns" xml:space="preserve">KPIs for all three</text>
+<rect x="975" y="722" width="175" height="53" rx="4" class="nb"/>
+<text x="985" y="742" class="nt">Mission Overview</text>
+<text x="985" y="760" class="ns" xml:space="preserve">KPIs for both use cases</text>
 </g>
 <g class="n n-view st-live ln-shared">
-<rect x="975" y="1084" width="175" height="53" rx="4" class="nb"/>
-<text x="985" y="1104" class="nt">Governance &amp; Audit</text>
-<text x="985" y="1122" class="ns" xml:space="preserve">every AI output + review</text>
+<rect x="975" y="784" width="175" height="53" rx="4" class="nb"/>
+<text x="985" y="804" class="nt">Governance &amp; Audit</text>
+<text x="985" y="822" class="ns" xml:space="preserve">every AI output + review</text>
 </g>
 <g class="n n-user st-live ln-shared">
-<rect x="1190" y="1022" width="140" height="53" rx="22" class="nb"/>
-<text x="1200" y="1042" class="nt">Everyone</text>
-<text x="1200" y="1060" class="ns" xml:space="preserve">role-filtered nav</text>
+<rect x="1190" y="722" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="742" class="nt">Everyone</text>
+<text x="1200" y="760" class="ns" xml:space="preserve">role-filtered nav</text>
 </g>
 <g class="n n-user st-live ln-shared">
-<rect x="1190" y="1084" width="140" height="53" rx="22" class="nb"/>
-<text x="1200" y="1104" class="nt">Administrator</text>
-<text x="1200" y="1122" class="ns" xml:space="preserve">sees every view</text>
+<rect x="1190" y="784" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="804" class="nt">Administrator</text>
+<text x="1200" y="822" class="ns" xml:space="preserve">sees every view</text>
 </g>
 </svg></div>
 <div class="grid">
@@ -421,17 +356,6 @@ code{font-family:var(--mono);font-size:12.5px}
       <dt>Status</dt><dd>UI runs a golden-template stand-in plus PoC detections; training underway; DeepStream runtime planned.</dd>
     </dl>
   </section>
-  <section class="uc" style="--c:var(--mat)">
-    <h2>Raw material to output</h2>
-    <dl>
-      <dt>Outcome</dt><dd>Share of material variance explained and attributed to material, lot, line or shift</dd>
-      <dt>Owner</dt><dd>Manufacturing operations + supply-chain lead</dd>
-      <dt>Views</dt><dd>Material Accountability</dd>
-      <dt>Code</dt><dd><code>webapp/tools/build_materials.py</code>, <code>webapp/js/data/materials.js</code>, <code>webapp/js/ai/materials.js</code></dd>
-      <dt>Models</dt><dd>Contribution analysis and forecasting in the browser; local LLM later</dd>
-      <dt>Status</dt><dd>Stand-in. Gateway endpoint returns 501.</dd>
-    </dl>
-  </section>
 </div>
-<p class="note">Out of scope for the pilot: write-back to ServiceNow, ERP or line systems; autonomous sheet disposition; external APIs; real currency imagery. <code>model-server/</code> is an earlier gateway (NIM + Milvus) that also binds :8030; the ITSM path above uses <code>itsm-rag-server</code>. <code>imperfection_detection/textile</code> holds a reference textile-defect dataset not wired into any lane.</p>
+<p class="note">Out of scope for the pilot: write-back to ServiceNow or line systems; autonomous sheet disposition; external APIs; real currency imagery. <code>model-server/</code> is an earlier gateway (NIM + Milvus) that also binds :8030; the ITSM path above uses <code>itsm-rag-server</code>. <code>imperfection_detection/textile</code> holds a reference textile-defect dataset not wired into any lane.</p>
 </div>

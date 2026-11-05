@@ -1,0 +1,19 @@
+# Pinned to the versions the server runs with on the GB10 (/opt/workshop/venv, Python 3.12).
+# torch comes from the PyTorch CUDA 13.0 index, which has wheels for both aarch64 and x86_64:
+#   pip install --extra-index-url https://download.pytorch.org/whl/cu130 -r requirements.txt
+torch==2.14.1+cu130
+transformers==5.19.0
+sentence-transformers==6.1.0
+tokenizers==0.23.2
+safetensors==0.8.0
+huggingface_hub==1.33.0
+hf-xet==1.7.0
+numpy==2.4.6
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+fastapi==0.142.4
+starlette==1.7.0
+pydantic==2.13.5
+uvicorn==0.54.0
+requests==2.34.2

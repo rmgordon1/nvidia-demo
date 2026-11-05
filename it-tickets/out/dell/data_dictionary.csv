@@ -1,0 +1,138 @@
+table,form,column,field_id,label,type,enum_values,field_id_confidence
+HPD_Help_Desk,HPD:Help Desk,Entry_ID,1,Entry ID,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Submitter,2,Submitter,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Submit_Date,3,Submit Date,epoch,,documented
+HPD_Help_Desk,HPD:Help Desk,Assignee_Login_ID,4,Assignee Login ID,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Last_Modified_By,5,Last Modified By,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Last_Modified_Date,6,Last Modified Date,epoch,,documented
+HPD_Help_Desk,HPD:Help Desk,Status,7,Status,enum,0=New; 1=Assigned; 2=In Progress; 3=Pending; 4=Resolved; 5=Closed; 6=Cancelled,documented
+HPD_Help_Desk,HPD:Help Desk,Incident_Number,1000000161,Incident Number,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Description,1000000000,Description,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Detailed_Decription,1000000151,Detailed Decription,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Service_Type,1000000099,Service Type,enum,0=User Service Restoration; 1=User Service Request; 2=Infrastructure Restoration; 3=Infrastructure Event; 4=Security Incident,documented
+HPD_Help_Desk,HPD:Help Desk,Reported_Source,1000000215,Reported Source,enum,1000=Direct Input; 2000=Email; 3000=External Escalation; 4000=Fax; 4200=Self Service; 5000=Systems Management; 6000=Phone; 7000=Voice Mail; 8000=Walk In; 9000=Web; 10000=Other,documented
+HPD_Help_Desk,HPD:Help Desk,Impact,1000000163,Impact,enum,1000=1-Extensive/Widespread; 2000=2-Significant/Large; 3000=3-Moderate/Limited; 4000=4-Minor/Localized,documented
+HPD_Help_Desk,HPD:Help Desk,Urgency,1000000162,Urgency,enum,1000=1-Critical; 2000=2-High; 3000=3-Medium; 4000=4-Low,documented
+HPD_Help_Desk,HPD:Help Desk,Priority,1000000164,Priority,enum,0=Critical; 1=High; 2=Medium; 3=Low,documented
+HPD_Help_Desk,HPD:Help Desk,Status_Reason,1000000881,Status_Reason,enum,1000=Infrastructure Change; 2000=Local Site Action Required; 3000=Purchase Order Approval; 4000=Registration Approval; 5000=Supplier Delivery; 6000=Support Contact Hold; 7000=Third Party Vendor Action Reqd; 8000=Client Action Required; 9000=Infrastructure Change Request; 11000=Future Enhancement; 12000=Pending Original Incident; 13000=Client Hold; 14000=Monitoring Incident; 15000=Customer Follow-Up Required; 16000=Temporary Corrective Action; 17000=No Further Action Required; 18000=Resolved by Original Incident; 19000=Automated Resolution Reported,approximate
+HPD_Help_Desk,HPD:Help Desk,Person_ID,1000000080,Person ID,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,First_Name,1000000019,First Name,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Last_Name,1000000018,Last Name,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Internet_E_mail,1000000048,Internet E-mail,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Phone_Number,1000000056,Phone Number,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,VIP,1000000027,VIP,enum,0=No; 1=Yes,approximate
+HPD_Help_Desk,HPD:Help Desk,Company,1000000082,Company,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Organization,1000000010,Organization,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Department,200000006,Department,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Site,260000001,Site,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Region,200000012,Region,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Assigned_Support_Company,1000000251,Assigned Support Company,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Assigned_Support_Organization,1000000014,Assigned Support Organization,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Assigned_Group,1000000217,Assigned Group,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Assigned_Group_ID,1000000079,Assigned Group ID,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Assignee,1000000218,Assignee,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Categorization_Tier_1,1000000063,Categorization Tier 1,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Categorization_Tier_2,1000000064,Categorization Tier 2,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Categorization_Tier_3,1000000065,Categorization Tier 3,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Product_Categorization_Tier_1,200000003,Product Categorization Tier 1,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Product_Categorization_Tier_2,200000004,Product Categorization Tier 2,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Product_Categorization_Tier_3,200000005,Product Categorization Tier 3,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Product_Name,240001002,Product Name,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Manufacturer,240001003,Manufacturer,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,HPD_CI,303497300,HPD_CI,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,HPD_CI_ReconID,301541700,HPD_CI_ReconID,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,ServiceCI,303544300,ServiceCI,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,ServiceCI_ReconID,303544200,ServiceCI_ReconID,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Reported_Date,1000000560,Reported Date,epoch,,documented
+HPD_Help_Desk,HPD:Help Desk,Responded_Date,1000005178,Responded Date,epoch,,approximate
+HPD_Help_Desk,HPD:Help Desk,Last_Resolved_Date,1000000564,Last Resolved Date,epoch,,documented
+HPD_Help_Desk,HPD:Help Desk,Closed_Date,1000000563,Closed Date,epoch,,approximate
+HPD_Help_Desk,HPD:Help Desk,Re_Opened_Date,1000005261,Re-Opened Date,epoch,,approximate
+HPD_Help_Desk,HPD:Help Desk,Resolution,1000000156,Resolution,char,,documented
+HPD_Help_Desk,HPD:Help Desk,Resolution_Category,1000002488,Resolution Category,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Resolution_Category_Tier_2,1000003889,Resolution Category Tier 2,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Resolution_Category_Tier_3,1000003890,Resolution Category Tier 3,char,,approximate
+HPD_Help_Desk,HPD:Help Desk,Group_Transfers,1000002536,Group Transfers,int,,approximate
+HPD_Help_Desk,HPD:Help Desk,Total_Transfers,1000002537,Total Transfers,int,,approximate
+HPD_Help_Desk,HPD:Help Desk,Major_Incident,1000003680,Major Incident,enum,0=No; 1=Yes,approximate
+HPD_WorkLog,HPD:WorkLog,Work_Log_ID,1,Work Log ID,char,,documented
+HPD_WorkLog,HPD:WorkLog,Submitter,2,Submitter,char,,documented
+HPD_WorkLog,HPD:WorkLog,Submit_Date,3,Submit Date,epoch,,documented
+HPD_WorkLog,HPD:WorkLog,Incident_Number,1000000161,Incident Number,char,,documented
+HPD_WorkLog,HPD:WorkLog,Incident_Entry_ID,1000000182,Incident Entry ID,char,,approximate
+HPD_WorkLog,HPD:WorkLog,Work_Log_Type,1000000170,Work Log Type,enum,1000=Customer Inbound; 2000=Customer Outbound; 3000=General Information; 4000=Email System; 5000=Resolution Communications; 6000=Working Log; 7000=Status Update; 8000=Vendor Communication; 9000=Chat,approximate
+HPD_WorkLog,HPD:WorkLog,Description,1000000000,Description,char,,documented
+HPD_WorkLog,HPD:WorkLog,Detailed_Description,1000000151,Detailed Description,char,,approximate
+HPD_WorkLog,HPD:WorkLog,Work_Log_Submitter,1000000159,Work Log Submitter,char,,approximate
+HPD_WorkLog,HPD:WorkLog,Work_Log_Submit_Date,1000000157,Work Log Submit Date,epoch,,approximate
+HPD_WorkLog,HPD:WorkLog,View_Access,1000000761,View Access,enum,0=Internal; 1=Public,approximate
+HPD_WorkLog,HPD:WorkLog,Secure_Work_Log,1000000762,Secure Work Log,enum,0=No; 1=Yes,approximate
+HPD_WorkLog,HPD:WorkLog,Number_of_Attachments,1000000364,Number of Attachments,int,,approximate
+HPD_WorkLog,HPD:WorkLog,z2AF_Work_Log01,1000000351,Attachment 1,char,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Request_ID,1,Request ID,char,,documented
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Original_Request_ID,450,Original Request ID,char,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Incident_Number,1000000161,Incident Number,char,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Audit_Date,3,Audit Date,epoch,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,User,2,User,char,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Action,451,Action,char,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Fields_Changed,452,Fields Changed,char,,approximate
+HPD_HelpDesk_AuditLogSystem,HPD:HelpDesk_AuditLogSystem,Log,453,Log,char,,approximate
+HPD_Associations,HPD:Associations,Request_ID,1,Request ID,char,,documented
+HPD_Associations,HPD:Associations,Submit_Date,3,Submit Date,epoch,,documented
+HPD_Associations,HPD:Associations,Request_ID01,1000000205,Request ID01,char,,approximate
+HPD_Associations,HPD:Associations,Form_Name01,1000000206,Form Name01,char,,approximate
+HPD_Associations,HPD:Associations,Request_ID02,1000000210,Request ID02,char,,approximate
+HPD_Associations,HPD:Associations,Form_Name02,1000000211,Form Name02,char,,approximate
+HPD_Associations,HPD:Associations,Association_Type01,1000000213,Association Type01,enum,35000=Related to; 36000=Duplicate of; 37000=Original of; 38000=Caused; 39000=Caused by; 40000=Resolved by; 41000=Impacts; 42000=Restores,approximate
+HPD_Associations,HPD:Associations,Request_Description01,1000000214,Request Description01,char,,approximate
+CTM_People,CTM:People,Person_ID,1,Person ID,char,,documented
+CTM_People,CTM:People,Submit_Date,3,Submit Date,epoch,,documented
+CTM_People,CTM:People,Profile_Status,7,Profile Status,enum,0=Proposed; 1=Enabled; 2=Offline; 3=Obsolete; 4=Delete,documented
+CTM_People,CTM:People,First_Name,1000000019,First Name,char,,documented
+CTM_People,CTM:People,Last_Name,1000000018,Last Name,char,,documented
+CTM_People,CTM:People,Full_Name,1000000017,Full Name,char,,approximate
+CTM_People,CTM:People,Remedy_Login_ID,4,Remedy Login ID,char,,approximate
+CTM_People,CTM:People,Internet_E_mail,1000000048,Internet E-mail,char,,approximate
+CTM_People,CTM:People,Phone_Number_Business,1000000056,Phone Number Business,char,,approximate
+CTM_People,CTM:People,Company,1000000001,Company,char,,approximate
+CTM_People,CTM:People,Organization,1000000010,Organization,char,,approximate
+CTM_People,CTM:People,Department,200000006,Department,char,,approximate
+CTM_People,CTM:People,Site,260000001,Site,char,,approximate
+CTM_People,CTM:People,Job_Title,1000000044,Job Title,char,,approximate
+CTM_People,CTM:People,Support_Staff,1000000025,Support Staff,enum,0=No; 1=Yes,approximate
+CTM_People,CTM:People,VIP,1000000027,VIP,enum,0=No; 1=Yes,approximate
+CTM_Support_Group,CTM:Support Group,Support_Group_ID,1,Support Group ID,char,,documented
+CTM_Support_Group,CTM:Support Group,Status,7,Status,enum,0=Proposed; 1=Enabled; 2=Offline; 3=Obsolete,documented
+CTM_Support_Group,CTM:Support Group,Company,1000000001,Company,char,,approximate
+CTM_Support_Group,CTM:Support Group,Support_Organization,1000000014,Support Organization,char,,approximate
+CTM_Support_Group,CTM:Support Group,Support_Group_Name,1000000015,Support Group Name,char,,approximate
+CTM_Support_Group,CTM:Support Group,Support_Group_Role,1000000009,Support Group Role,char,,approximate
+CTM_Support_Group,CTM:Support Group,Business_Hours,1000000400,Business Hours,char,,approximate
+CTM_Support_Group_Association,CTM:Support Group Association,Request_ID,1,Request ID,char,,documented
+CTM_Support_Group_Association,CTM:Support Group Association,Person_ID,1000000080,Person ID,char,,approximate
+CTM_Support_Group_Association,CTM:Support Group Association,Login_ID,4,Login ID,char,,approximate
+CTM_Support_Group_Association,CTM:Support Group Association,Support_Group_ID,1000000079,Support Group ID,char,,approximate
+CTM_Support_Group_Association,CTM:Support Group Association,Support_Group_Name,1000000015,Support Group Name,char,,approximate
+CTM_Support_Group_Association,CTM:Support Group Association,Default,1000000075,Default,enum,0=No; 1=Yes,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,InstanceId,179,InstanceId,char,,documented
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,ReconciliationIdentity,400129200,ReconciliationIdentity,char,,documented
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,ClassId,400079600,ClassId,char,,documented
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Name,400127400,Name,char,,documented
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,ShortDescription,400130900,ShortDescription,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Category,200000003,Category,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Type,200000004,Type,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Item,200000005,Item,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Model,240001002,Model,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,ManufacturerName,240001003,ManufacturerName,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,SerialNumber,200000001,SerialNumber (Dell service tag),char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Site,260000001,Site,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,AssetLifecycleStatus,7,AssetLifecycleStatus,enum,0=Ordered; 1=Received; 2=Being Assembled; 3=Deployed; 4=In Repair; 5=Down; 6=End of Life; 7=Transferred; 8=Delete; 9=In Inventory; 10=On Loan; 11=Disposed; 12=Reserved; 13=Return to Vendor,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,OwnerName,260140111,OwnerName,char,,approximate
+BMC_BaseElement,BMC.CORE:BMC_BaseElement,Submit_Date,3,Submit Date,epoch,,documented
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,InstanceId,179,InstanceId,char,,documented
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,ClassId,400079600,ClassId,char,,documented
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,Name,400127400,Name,char,,documented
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,Source_ReconciliationIdentity,400128800,Source.ReconciliationIdentity,char,,approximate
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,Destination_ReconciliationIdentity,400128900,Destination.ReconciliationIdentity,char,,approximate
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,Source_ClassId,400128000,Source.ClassId,char,,approximate
+BMC_BaseRelationship,BMC.CORE:BMC_BaseRelationship,Destination_ClassId,400128100,Destination.ClassId,char,,approximate

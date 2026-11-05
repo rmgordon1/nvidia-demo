@@ -1,0 +1,104 @@
+# BCP Operations AI: the whole ITSM stack on one NVIDIA GPU host (arm64 GB10 / DGX Spark, or x86_64).
+#
+#   docker compose up -d --build        # UI on http://localhost:8080
+#
+# First start needs internet: vLLM downloads gpt-oss-20b (~13 GB), the RAG server the Nemotron embed +
+# rerank models (~7 GB), and Ollama gemma4 (~6.6 GB). Everything is cached in volumes, so later starts
+# run offline. The RAG server is healthy once its index is built (~5-10 min on first start).
+#
+# Settings (environment or a .env file next to this one):
+#   WEB_PORT      host port for the UI (default 8080)
+#   HF_CACHE      existing Hugging Face cache dir to reuse instead of downloading, i.e. the folder that holds
+#                 hub/ (on the GB10: /opt/workshop/models/hf). Default: the hf-cache volume.
+#   HF_TOKEN      only needed if you swap in a gated model
+#   VLLM_GPU_MEM  share of GPU memory vLLM reserves (default 0.25 = ~32 GB on the GB10's 128 GB). gpt-oss-20b
+#                 needs ~30 GB with its KV cache; leave room for the RAG server (~8 GB) and gemma4 (~5 GB).
+#
+# Needs the NVIDIA Container Toolkit. Not for this GB10 while the host-run stack is up (ports 8080/8021).
+
+name: bcp-ops-ai
+
+x-gpu: &gpu
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+
+services:
+  vllm:
+    <<: *gpu
+    image: vllm/vllm-openai:v0.29.0-ubuntu2404
+    command: >
+      openai/gpt-oss-20b --served-model-name gpt-oss-20b --host 0.0.0.0 --port 8000
+      --max-model-len 32768 --gpu-memory-utilization ${VLLM_GPU_MEM:-0.25} --max-num-seqs 8
+      --enable-prefix-caching --reasoning-parser openai_gptoss
+    ipc: host
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    environment:
+      HF_HOME: /root/.cache/huggingface
+      HF_TOKEN: ${HF_TOKEN:-}
+      # gpt-oss tokenizer vocab shipped in the repo, so it never fetches it from openaipublic
+      TIKTOKEN_ENCODINGS_BASE: /tiktoken
+      TIKTOKEN_RS_CACHE_DIR: /tiktoken
+    volumes:
+      - ${HF_CACHE:-hf-cache}:/root/.cache/huggingface
+      - vllm-cache:/root/.cache/vllm
+      - ./itsm-rag-server/assets/tiktoken:/tiktoken:ro
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      start_period: 1800s
+    restart: unless-stopped
+
+  ollama:
+    <<: *gpu
+    image: ollama/ollama:0.40.0
+    # serve, then pull the small-tier model once (a no-op when it is already in the volume)
+    entrypoint: ["/bin/sh", "-c", "ollama serve & until ollama list >/dev/null 2>&1; do sleep 1; done; ollama pull gemma4:latest; wait"]
+    environment:
+      OLLAMA_KEEP_ALIVE: 30m
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
+  rag:
+    <<: *gpu
+    build: ./itsm-rag-server
+    image: bcp-ops-ai-rag:latest
+    environment:
+      ITSM_LLMS: gpt-oss-20b=http://vllm:8000/v1,gemma4-e4b=ollama://ollama:11434|gemma4:latest
+      HF_TOKEN: ${HF_TOKEN:-}
+    volumes:
+      - ./it-tickets/out/dell:/data/tickets:ro
+      - ./webapp/data/servicenow.json:/data/servicenow.json:ro
+      - ${HF_CACHE:-hf-cache}:/cache/hf
+      - rag-cache:/cache/index
+    depends_on:
+      vllm:
+        condition: service_started
+      ollama:
+        condition: service_started
+    restart: unless-stopped
+
+  webapp:
+    build: ./webapp
+    image: bcp-ops-ai:latest
+    environment:
+      API_UPSTREAM: rag:8030
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - rag
+    restart: unless-stopped
+
+volumes:
+  hf-cache:
+  vllm-cache:
+  rag-cache:
+  ollama:

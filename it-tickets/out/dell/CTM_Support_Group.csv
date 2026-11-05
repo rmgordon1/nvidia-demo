@@ -1,0 +1,23 @@
+Support_Group_ID,Status,Company,Support_Organization,Support_Group_Name,Support_Group_Role,Business_Hours
+SGP000000000001,1,Bureau of Currency Production,IT Service Management,Service Desk,Help Desk,"Mon-Fri 06:00-20:00, Sat 08:00-16:00"
+SGP000000000002,1,Bureau of Currency Production,Client Services,Desktop Support - HQ,Tier 2,Mon-Fri 07:00-17:30
+SGP000000000003,1,Bureau of Currency Production,Client Services,Desktop Support - CPF,Tier 2,Mon-Fri 07:00-17:30
+SGP000000000004,1,Bureau of Currency Production,Client Services,Desktop Support - SPF,Tier 2,Mon-Fri 07:00-17:30
+SGP000000000005,1,Bureau of Currency Production,Client Services,Endpoint Engineering,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000006,1,Bureau of Currency Production,Client Services,Telecom & Mobility,Tier 2,Mon-Fri 07:00-17:30
+SGP000000000007,1,Bureau of Currency Production,Infrastructure Services,Compute,Tier 3,24x7
+SGP000000000008,1,Bureau of Currency Production,Infrastructure Services,Storage,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000009,1,Bureau of Currency Production,Infrastructure Services,Data Protection,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000010,1,Bureau of Currency Production,Infrastructure Services,Network Operations,Tier 3,24x7
+SGP000000000011,1,Bureau of Currency Production,Infrastructure Services,Virtualization & HCI,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000012,1,Bureau of Currency Production,Infrastructure Services,Database Administration,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000013,1,Bureau of Currency Production,Cybersecurity & Identity,Identity & Access Management,Tier 2,Mon-Fri 07:00-17:30
+SGP000000000014,1,Bureau of Currency Production,Cybersecurity & Identity,Cybersecurity Operations,Tier 3,24x7
+SGP000000000015,1,Bureau of Currency Production,Enterprise Applications,Messaging & Collaboration,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000016,1,Bureau of Currency Production,Enterprise Applications,ERP & Financial Systems,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000017,1,Bureau of Currency Production,Enterprise Applications,HR & Time Systems,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000018,1,Bureau of Currency Production,Enterprise Applications,Business Applications,Tier 3,Mon-Fri 07:00-17:30
+SGP000000000019,1,Bureau of Currency Production,Production Technology,OT Support - CPF,Tier 2,24x7
+SGP000000000020,1,Bureau of Currency Production,Production Technology,OT Support - SPF,Tier 2,24x7
+SGP000000000021,1,Bureau of Currency Production,Production Technology,MES Support,Tier 3,24x7
+SGP000000000022,1,Bureau of Currency Production,Production Technology,Edge Infrastructure,Tier 3,24x7

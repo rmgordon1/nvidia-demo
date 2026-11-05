@@ -13,8 +13,7 @@ def edge(a, b, st="live", label=None, how="h", pts=None, arrow=True, ax=None, bx
 
 LANES = [("itsm","ITSM Next Best Step","Primary use case · Day-3 build · live against local models",70,365),
          ("cv","Computer-vision defect detection","Secondary · in-browser stand-in today, trained models in progress",385,665),
-         ("mat","Raw material to output","Secondary · next phase · browser stand-in",685,965),
-         ("shared","Shared across all use cases","",985,1150)]
+         ("shared","Shared across both use cases","",685,850)]
 
 # ---- ITSM
 node("gen",1,110,"it-tickets/generate.py",["helixgen: org, scenarios,","AR System schema simulation"])
@@ -68,29 +67,17 @@ edge("now","v_vis")
 edge("rt","v_vis",st="planned",pts=[(647,631),(647,648),(953,648),(953,606),(975,606)])
 edge("v_vis","u_qa",arrow=False); edge("v_vis","u_qe",arrow=False)
 
-# ---- Materials
-node("bm",1,755,"tools/build_materials.py",["12-month extract, seeded,","+ answer_key.json"],lane="mat")
-node("erp",2,725,"Oracle EBS-style ERP",["POs, lots, inventory txns,","BOM / standard usage"],lane="mat")
-node("mes",2,805,"MES run log",["output + spoilage per run,","joined to ERP issues"],lane="mat")
-node("jsm",2,885,"In-browser dataset",["js/data/materials.js,","3 known-answer scenarios"],lane="mat",st="placeholder")
-node("var",3,725,"Variance & forecast · browser",["attributeVariance  contribution analysis","forecast           procurement demand","ask                keyword-routed answers"],mono=True,lane="mat",st="placeholder")
-node("gw",3,840,"model-server /materials, /vision",["gateway stubs (HTTP 501) today;","local LLM + models later"],lane="mat",st="planned")
-node("v_mat",4,740,"Material Accountability",["yield, spoilage vs standard,","variance attribution,","reconciliation, forecast"],lane="mat",kind="view")
-node("u_ma",5,748,"Material Analyst",["planners, procurement,","finance"],lane="mat",kind="user")
-edge("bm","erp"); edge("bm","mes"); edge("erp","var"); edge("mes","var"); edge("jsm","var",pts=[(500,926),(530,926),(530,790),(560,790)])
-edge("var","v_mat"); edge("gw","v_mat",st="planned"); edge("v_mat","u_ma",arrow=False)
-
 # ---- shared
-node("gb10",1,1025,"Dell Pro Max GB10 · on-prem",["no external API calls; data stays inside","the agency boundary; a human makes","every final decision → scale-out: PowerEdge XE"],w=460,lane="shared",kind="platform")
-node("store",3,1025,"js/store.js · browser storage",["roles, audit trail, provenance stamps,","accepted ServiceNow resolutions"],lane="shared")
-node("ov",4,1022,"Mission Overview",["KPIs for all three"],lane="shared",kind="view")
-node("au",4,1084,"Governance & Audit",["every AI output + review"],lane="shared",kind="view")
-node("u_all",5,1022,"Everyone",["role-filtered nav"],lane="shared",kind="user")
-node("u_adm",5,1084,"Administrator",["sees every view"],lane="shared",kind="user")
+node("gb10",1,725,"Dell Pro Max GB10 · on-prem",["no external API calls; data stays inside","the agency boundary; a human makes","every final decision → scale-out: PowerEdge XE"],w=460,lane="shared",kind="platform")
+node("store",3,725,"js/store.js · browser storage",["roles, audit trail, provenance stamps,","accepted ServiceNow resolutions"],lane="shared")
+node("ov",4,722,"Mission Overview",["KPIs for both use cases"],lane="shared",kind="view")
+node("au",4,784,"Governance & Audit",["every AI output + review"],lane="shared",kind="view")
+node("u_all",5,722,"Everyone",["role-filtered nav"],lane="shared",kind="user")
+node("u_adm",5,784,"Administrator",["sees every view"],lane="shared",kind="user")
 edge("store","ov"); edge("store","au"); edge("ov","u_all",arrow=False); edge("au","u_adm",arrow=False)
 
-W, H = 1370, 1170
-o = [f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BCP Operations AI lab: three use cases from data generation through models and web views to users</title>']
+W, H = 1370, 870
+o = [f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BCP Operations AI lab: two use cases from data generation through models and web views to users</title>']
 o.append('<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh"/></marker>'
          '<marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh-p"/></marker></defs>')
 heads = [(1,"Data generation"),(2,"Data & systems of record"),(3,"AI services & models"),(4,"Web UI · nginx :8080"),(5,"Users")]
