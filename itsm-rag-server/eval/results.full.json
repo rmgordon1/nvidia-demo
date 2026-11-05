@@ -1,0 +1,46 @@
+{
+ "n_test": 1332,
+ "n_unseen": 44,
+ "clf_group_acc_recorded": 0.853,
+ "clf_group_acc_recorded_unseen": 0.955,
+ "clf_category_acc_recorded": 0.828,
+ "clf_category_acc_recorded_unseen": 0.805,
+ "clf_priority_acc_recorded": 0.518,
+ "clf_priority_acc_recorded_unseen": 0.477,
+ "clf_group_acc_truth": 0.843,
+ "clf_category_acc_truth": 0.975,
+ "clf_group_truth_acc_conf>=0.4": 0.85,
+ "clf_group_coverage_conf>=0.4": 0.979,
+ "clf_group_truth_acc_conf>=0.55": 0.883,
+ "clf_group_coverage_conf>=0.55": 0.877,
+ "clf_group_truth_acc_conf>=0.7": 0.923,
+ "clf_group_coverage_conf>=0.7": 0.748,
+ "retrieval_queries": 400,
+ "recall_at_1": 1.0,
+ "recall_at_5": 1.0,
+ "mrr_at_10": 1.0,
+ "retrieval_p50_ms": 382,
+ "retrieval_p95_ms": 592,
+ "mrr_at_10_no_rerank": 1.0,
+ "tiers_easy_recommend_8_tickets": {
+  "note": "8 well-covered tickets (best match 1.0), same retrieved evidence for both models, 2026-11-04 ~14:20, light GPU load",
+  "gemma4-e4b_small": {
+   "usable": "8/8",
+   "grounded": "8/8",
+   "p50_s": 4.1,
+   "max_s": 7.0,
+   "gpu_gb": 5
+  },
+  "gpt-oss-20b_big": {
+   "usable": "8/8",
+   "grounded": "8/8",
+   "p50_s": 11.8,
+   "max_s": 15.4,
+   "gpu_gb": 31
+  },
+  "ruled_out": {
+   "granite4.2": "0/8, empty output",
+   "nemotron-3-nano-4b": "8/8 grounded but p50 31s"
+  }
+ }
+}

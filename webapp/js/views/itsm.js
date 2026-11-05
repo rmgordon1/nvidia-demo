@@ -7,12 +7,13 @@ import { loadTickets, loadServiceNow } from "../data/loaders.js";
 import { retrieveSimilar, recommendNextSteps, copilotChat, SOURCES, CUTOVER, tokenize } from "../ai/itsm.js";
 import { AI, callApi, chatModel } from "../ai/config.js";
 
-const EXAMPLE_SCENARIOS = ["press_hmi_frozen", "account_locked", "piv_cert_expired", "mes_sync", "printer_issue", "phishing_report"];
+// Dell-estate examples (scenario ids from it-tickets/out/dell): client, infrastructure, storage, security.
+const EXAMPLE_SCENARIOS = ["dock_display", "laptop_thermal", "pe_drive_fail", "powerscale_share", "vxrail_lcm", "phishing_report"];
 const EXAMPLE_TEXT = [
-  "Intaglio press HMI on line 3 is frozen, operator can't load the next job. Touchscreen not responding after shift change.",
-  "User keeps getting locked out of Windows every morning at the Southwest plant, has a new phone.",
-  "Cannot sign in with PIV card, says certificate is not valid. Laptop at HQ.",
-  "Got a suspicious email asking me to verify my payroll login, I clicked the link but didn't enter anything.",
+  ["Dock", "Latitude on the Dell dock stopped driving both external monitors after this morning's restart. No DisplayPort signal, and the dock isn't charging the laptop either."],
+  ["Server disk", "iDRAC alert on HQ-PE-FS02: predictive failure on Physical Disk 0:1:3 and the RAID virtual disk is degraded. File services are still up."],
+  ["File share", "S: drive maps but shows empty, and 'Access is denied' on HQ-PSCALE-01 since this morning. Several people in Finance are affected."],
+  ["Phishing", "Got an email that looked like a vendor invoice. I clicked the link and typed my username and password before I noticed. What should I do?"],
 ];
 const REJECT_REASONS = [
   "Not relevant to this ticket",
@@ -83,11 +84,11 @@ export async function render(root) {
   for (const [k, label] of MODES) modeGroup.append(h("button", { type: "button", "data-k": k, onclick: () => setMode(k) }, label));
 
   // free text
-  const ta = h("textarea", { rows: 7, placeholder: "e.g. Press HMI on Offset Press 2 frozen after shift change, operator can't load the next job…", "aria-label": "Ticket description" });
+  const ta = h("textarea", { rows: 7, placeholder: "e.g. OptiPlex XE4 HMI PC on Offset Press 1 froze and won't boot; the operator can't load the next job…", "aria-label": "Ticket description" });
   const textPane = h("div.stack",
     h("label.field", "Ticket description", ta),
     h("div.itsm-chips", h("span.small.muted", "Try:"),
-      ...EXAMPLE_TEXT.map((t, i) => h("button.btn.sm.ghost.itsm-chip", { type: "button", title: t, onclick: () => { ta.value = t; validate(); } }, ["Press HMI", "Lockouts", "PIV cert", "Phishing"][i]))));
+      ...EXAMPLE_TEXT.map(([label, t]) => h("button.btn.sm.ghost.itsm-chip", { type: "button", title: t, onclick: () => { ta.value = t; validate(); } }, label))));
 
   // structured
   const uniq = (f) => [...new Set(tickets.map(f).filter(Boolean))].sort();
@@ -121,7 +122,8 @@ export async function render(root) {
   const search = h("input", { type: "search", placeholder: "Helix incident number or keywords (e.g. INC000000873443, HMI frozen)", "aria-label": "Search archived tickets" });
   const results = h("div.itsm-picklist");
   const loadedBox = h("div");
-  const examples = EXAMPLE_SCENARIOS.map((sc) => tickets.filter((t) => t.scenario === sc).at(-1)).filter(Boolean);
+  // a resolved example per scenario, so the replay can be compared with the real fix
+  const examples = EXAMPLE_SCENARIOS.map((sc) => tickets.filter((t) => t.scenario === sc && t.resolution).at(-1)).filter(Boolean);
   const existingPane = h("div.stack",
     h("p.small.t2", "Replay a migrated Helix incident as if it had just arrived in ServiceNow, to compare the recommendation with how it was actually resolved."),
     h("label.field", "Find an archived Helix incident", search),

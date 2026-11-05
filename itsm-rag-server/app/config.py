@@ -4,7 +4,8 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-DATA_SOURCE = os.environ.get("ITSM_DATA", os.path.join(ROOT, "..", "it-tickets", "out", "full"))
+# out/dell = all-Dell estate (current); out/full = original mixed-vendor archive (rollback: ITSM_DATA=.../out/full)
+DATA_SOURCE = os.environ.get("ITSM_DATA", os.path.join(ROOT, "..", "it-tickets", "out", "dell"))
 DATA_LOADER = os.environ.get("ITSM_LOADER", "helix_csv")
 CACHE_DIR = os.environ.get("ITSM_CACHE", os.path.join(ROOT, ".cache", "index"))
 # ServiceNow incidents migrated open from Helix at cutover (webapp/tools/build_tickets.py writes it).

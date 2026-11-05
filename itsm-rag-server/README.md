@@ -104,6 +104,22 @@ shape (same as `webapp/data/tickets.json`), and register it in `LOADERS`. Possib
 ServiceNow Table API, Helix REST, or a database export. Only `ground_truth` is synthetic-only;
 evaluation needs it, the server doesn't.
 
+## Evaluation on the Dell archive (`out/dell`, `eval/results.dell.json`, 2026-11-04)
+
+The same time-based holdout as below: 8,500 training tickets and 1,029 resolved test tickets, 78 of them with
+unseen phrasing.
+
+| Metric | Dell data | Original mixed-vendor data |
+|---|---|---|
+| Group routing vs. true owner | **87.5%** (95.5% on the 65% of tickets with confidence ≥ 0.7) | 84.3% |
+| Category vs. true category | 97.6% | 97.5% |
+| Priority | 53% | 52% |
+| Retrieval recall@1 | 98.8% | 100% |
+| Retrieval latency p50 / p95 | 753 / 1265 ms (shared GPU) | 382 / 592 ms |
+
+The data source is set by `ITSM_DATA`: the default is `out/dell`, and `out/full` is the rollback. The original
+results below are kept for reference; their raw numbers are in `eval/results.full.json`.
+
 ## Evaluation (`eval/evaluate.py`, results in `eval/results.json`)
 
 Time-based holdout: train on the oldest 85% (8,500), test on the newest 15% (1,332 resolved).
