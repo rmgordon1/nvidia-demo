@@ -27,7 +27,7 @@ export const ROLES = {
   manager: { label: "IT Manager",         user: "it.manager (demo)", views: ["overview", "insights", "itsm"] },
   qa:      { label: "QA Inspector",       user: "qa.inspector (demo)", views: ["overview", "vision"] },
   analyst: { label: "Material Analyst",   user: "material.analyst (demo)", views: ["overview", "materials"] },
-  admin:   { label: "Administrator",      user: "admin (demo)",      views: ["overview", "itsm", "help", "insights", "vision", "materials", "audit"] },
+  admin:   { label: "Administrator",      user: "admin (demo)",      views: ["overview", "itsm", "help", "insights", "vision", "audit", "materials"] },
 };
 export function role() {
   const r = get("role", "admin");

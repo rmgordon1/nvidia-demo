@@ -11,6 +11,8 @@
 
 ## Run on another machine
 
+Step-by-step setup, a tour of the app and troubleshooting are in **[INSTALL.md](INSTALL.md)**. The short version:
+
 Needs an NVIDIA GPU host (arm64 GB10 / DGX Spark, or x86_64) with Docker, the NVIDIA Container
 Toolkit, ~60 GB free disk and internet on the first start.
 

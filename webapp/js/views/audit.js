@@ -25,7 +25,7 @@ export async function render(root) {
 
   root.append(
     h("div.view-head",
-      h("div.titles", h("div.row.wrap", h("h2", "Governance & Audit"), h("span.pill", icon("clock"), "WIP · later development")),
+      h("div.titles", h("h2", "Governance & Audit"),
         h("p.lede", "Trace every recommendation, defect flag and variance finding from the AI output to the human decision, with model provenance. Stored locally in this browser for the demo.")),
       h("div.actions",
         h("button.btn", { onclick: () => exportAs("csv") }, icon("download"), "Export CSV"),

@@ -9,8 +9,8 @@ const VIEWS = {
   help:      { title: "IT Self-Service",         icon: "chat",   section: "Use cases", load: () => import("./views/selfservice.js") },
   insights:  { title: "IT Insights",             icon: "db",     section: "Use cases", load: () => import("./views/insights.js") },
   vision:    { title: "Defect Inspection",       icon: "eye",    section: "Use cases", load: () => import("./views/vision.js") },
+  audit:     { title: "Governance & Audit",      icon: "shield", section: "Use cases", load: () => import("./views/audit.js") },
   materials: { title: "Material Accountability", icon: "layers", section: "Later development", tag: "WIP", load: () => import("./views/materials.js") },
-  audit:     { title: "Governance & Audit",      icon: "shield", section: "Later development", tag: "WIP", load: () => import("./views/audit.js") },
 };
 
 const nav = document.getElementById("nav");
