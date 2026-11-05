@@ -31,11 +31,26 @@ import requests
 from helixgen import textgen as tg
 from helixgen.export import AGENCY_BLURB, PERSONA_DESC, pick_model, write_csv
 from helixgen.org import PERSONAS
-from helixgen.scenarios import ALERT, MI_EVENTS, SCENARIOS
+import importlib
+
+from helixgen import scenarios as _base_catalog
+
+ALERT = _base_catalog.ALERT
+SCENARIOS, MI_EVENTS = _base_catalog.SCENARIOS, _base_catalog.MI_EVENTS
+
+
+def use_profile(out):
+    """Load the scenario catalog the archive in `out` was generated with."""
+    global SCENARIOS, MI_EVENTS
+    meta = json.load(open(os.path.join(out, "_work", "meta.json")))
+    mod = {"bcp": "helixgen.scenarios", "dell": "helixgen.scenarios_dell"}[meta.get("profile", "bcp")]
+    cat = importlib.import_module(mod)
+    SCENARIOS, MI_EVENTS = cat.SCENARIOS, cat.MI_EVENTS
+    return meta.get("profile", "bcp")
 
 OLLAMA = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 DEFAULT_MODELS = "gpt-oss:20b=3,gemma4:26b=3,granite4.2:latest=2,nemotron-3.5-lightning:30b=1"
-SLOTS = {"name", "ci", "line", "site", "product", "err", "host", "dept", "to_group", "from_group"}
+SLOTS = {"name", "ci", "line", "site", "product", "err", "host", "dept", "to_group", "from_group", "model", "tag"}
 SLOT_RE = re.compile(r"\{(\w+)\}")
 ID_RE = re.compile(r"\b(?:INC|CRQ|PBI|WLG)\d{12}\b")
 
@@ -46,7 +61,8 @@ detail and structure - as if written by different people on different days. Writ
 specific, uneven, sometimes terse, never marketing-like. Do not mention the data is synthetic.
 Use these placeholders (with braces) instead of concrete values wherever such a detail appears:
 {{name}} customer first name, {{ci}} affected device/host/CI name, {{line}} production line (e.g. a press),
-{{site}} facility name, {{product}} product/application, {{err}} exact error message text, {{dept}} customer's department.
+{{site}} facility name, {{product}} product/application, {{err}} exact error message text, {{dept}} customer's department,
+{{model}} the affected device or server model (e.g. a Dell laptop or PowerEdge model), {{tag}} its Dell service tag.
 Use only those placeholders; never invent other {{...}} tokens. Do not invent ticket numbers or people's names.
 Return only JSON matching the schema."""
 
@@ -59,7 +75,8 @@ SCHEMA_TEXT = {"type": "object", "properties": {"variants": {"type": "array", "i
 
 def scen_brief(sc):
     T = sc["text"]
-    return dict(product=sc["product"], manufacturer=sc["mfr"], category=" > ".join(sc["op"]),
+    product = sc["product"] if sc["product"] != "@ci" else "the affected Dell device/server - write {model}"
+    return dict(product=product, manufacturer=sc["mfr"], category=" > ".join(sc["op"]), line=sc.get("line"),
                 environment="production plant floor (OT)" if sc["domain"] == "OT" else "office IT",
                 example_summaries=T["summ"], example_descriptions=T["desc"], possible_errors=T["err"],
                 typical_fixes=T["res"], typical_tech_notes=T["notes"])
@@ -119,8 +136,21 @@ def build_keys(scale):
     return keys
 
 
+VLLM = None  # set by --vllm: OpenAI-compatible base URL (e.g. http://127.0.0.1:8021/v1)
+
+
 def call(model, key, spec, timeout=900):
     prompt = spec["prompt"].replace("{k}", str(spec["k"]))
+    if VLLM:
+        body = {"model": model, "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}],
+                "response_format": {"type": "json_schema", "json_schema": {"name": "variants", "schema": spec["schema"]}},
+                "temperature": 0.95, "top_p": 0.95, "max_tokens": 5000}
+        if model.startswith("gpt-oss"):
+            body["reasoning_effort"] = "low"
+        r = requests.post(f"{VLLM}/chat/completions", json=body, timeout=timeout)
+        r.raise_for_status()
+        js = r.json()
+        return json.loads(js["choices"][0]["message"]["content"]).get("variants") or [], js["usage"]["completion_tokens"]
     body = {"model": model, "stream": False, "format": spec["schema"],
             "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}],
             "options": {"temperature": 0.95, "top_p": 0.95, "num_ctx": 8192, "num_predict": 4000},
@@ -358,7 +388,12 @@ def main():
     ap.add_argument("--seed", type=int, default=20261104)
     ap.add_argument("--apply-only", action="store_true")
     ap.add_argument("--estimate", action="store_true")
+    ap.add_argument("--vllm", default=None, help="use an OpenAI-compatible server instead of Ollama, e.g. http://127.0.0.1:8021/v1")
     a = ap.parse_args()
+    global VLLM
+    VLLM = a.vllm
+    if os.path.exists(os.path.join(a.out, "_work", "meta.json")):
+        print("profile:", use_profile(a.out))
     if a.estimate:
         keys = build_keys(a.scale)
         nv = sum(k["k"] for k in keys.values())

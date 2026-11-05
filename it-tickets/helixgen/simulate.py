@@ -13,8 +13,8 @@ import numpy as np
 
 from . import textgen as tg
 from .arschema import PRIORITY_MATRIX
-from .org import COMPANY, GROUP_CAL, GROUP_ORG, SITES
-from .scenarios import MI_EVENTS, SCEN_BY_ID, SCENARIOS
+from .org import COMPANY, SITES
+from . import scenarios as default_catalog
 
 UTC = timezone.utc
 ET = ZoneInfo("America/New_York")
@@ -109,8 +109,13 @@ class Timeline:
 
 
 class Simulator:
-    def __init__(self, org, rng, n_target):
+    def __init__(self, org, rng, n_target, catalog=None):
         self.org, self.rng, self.N = org, rng, n_target
+        cat = catalog or default_catalog
+        self.SCENARIOS, self.SCEN_BY_ID, self.MI_EVENTS = cat.SCENARIOS, cat.SCEN_BY_ID, cat.MI_EVENTS
+        self.CONFUSERS = getattr(cat, "CONFUSERS", CONFUSERS)
+        self.LINE_SHARE = getattr(cat, "LINE_SHARE", None)
+        self.FIRMWARE_WAVES = getattr(cat, "FIRMWARE_WAVES", [])
         self.days = []
         d = START.date()
         while d <= END.date():
@@ -227,6 +232,10 @@ class Simulator:
                 elif tag == "payroll":
                     if (d - date(2024, 11, 11)).days % 14 in (0, 1):
                         base *= 3.0
+                elif tag == "firmware":
+                    for wd0 in self.FIRMWARE_WAVES:
+                        if 0 <= (d - wd0).days <= 4:
+                            base *= 2.2
                 elif tag == "openseason":
                     if (d.month == 11 and d.day >= 10) or (d.month == 12 and d.day <= 12):
                         base *= 2.5
@@ -258,21 +267,26 @@ class Simulator:
         N = self.N
         scale = N / 10000.0
         # major incidents
-        n_events = max(1, int(round(len(MI_EVENTS) * min(1.0, scale * 1.0)))) if N >= 150 else 0
-        events = list(self.rng.permutation(len(MI_EVENTS))[:n_events]) if n_events else []
+        n_events = max(1, int(round(len(self.MI_EVENTS) * min(1.0, scale * 1.0)))) if N >= 150 else 0
+        events = list(self.rng.permutation(len(self.MI_EVENTS))[:n_events]) if n_events else []
         n_mi_tickets = 0
         mi_plan = []
         for ei in events:
-            ev = MI_EVENTS[ei]
+            ev = self.MI_EVENTS[ei]
             lo, hi = ev["children"]
             nch = max(3, int(self.rng.integers(lo, hi + 1) * max(scale, 0.15)))
             mi_plan.append((ev, nch))
             n_mi_tickets += nch + 1
         n_dup = int(N * 0.015)
         n_reg = N - n_mi_tickets - n_dup
-        weights = np.array([s["w"] for s in SCENARIOS])
+        weights = np.array([s["w"] for s in self.SCENARIOS], float)
+        if self.LINE_SHARE:  # normalise so each line (client / infra / software) gets its target share
+            lines = [s["line"] for s in self.SCENARIOS]
+            for ln, share in self.LINE_SHARE.items():
+                m = np.array([x == ln for x in lines])
+                weights[m] *= share / weights[m].sum()
         counts = self.rng.multinomial(n_reg, weights / weights.sum())
-        for scen, c in zip(SCENARIOS, counts):
+        for scen, c in zip(self.SCENARIOS, counts):
             if not c:
                 continue
             dw = self.day_weights(scen)
@@ -297,12 +311,12 @@ class Simulator:
                 d = date(2025 if d < date(2025, 11, 1) else 2026, 9, 24)
             while d.weekday() >= 5 or d in HOLIDAYS:
                 d += timedelta(days=1)
-            hour = int(self.rng.integers(7, 15)) if ev["sites"] not in (["SPF"], ["CPF"]) or ev["child"] not in (
-                "press_hmi_frozen", "historian_gap") else int(self.rng.integers(0, 24))
+            anytime = ev.get("anytime", ev["child"] in ("press_hmi_frozen", "historian_gap"))
+            hour = int(self.rng.integers(0, 24)) if anytime else int(self.rng.integers(7, 15))
             start = datetime.combine(d, time(hour, int(self.rng.integers(60))), ET).astimezone(UTC)
             dur = self.lognorm(math.sqrt(ev["hours"][0] * ev["hours"][1]), 0.4)
             ev = dict(ev, start=start, end=start + timedelta(hours=dur))
-            child_scen = SCEN_BY_ID[ev["child"]]
+            child_scen = self.SCEN_BY_ID[ev["child"]]
             parent_cust = self.monperson
             parent = self.new_shell(child_scen, parent_cust, start + timedelta(minutes=self.lognorm(20, 0.6)),
                                     mi_event=ev, mi_role="parent",
@@ -339,7 +353,7 @@ class Simulator:
         ci = inc.get("ci")
         sk = inc["site_key"]
         line = ""
-        if ci is not None and len(ci.tags) >= 3:
+        if ci is not None and len(ci.tags) >= 3 and ci.tags[0] in ("plc", "hmi", "insp", "ink"):
             line = ci.tags[2].split(" ", 1)[1]
         elif sc["domain"] == "OT" and sk in self.org.lines:
             line = self.choice(self.org.lines[sk]).name.split(" ", 1)[1]
@@ -347,7 +361,15 @@ class Simulator:
         ci_name = ci.name if ci is not None and ci.class_id != "BMC_Application" else (cust.workstation or "my computer")
         if sc["id"] == "account_locked":
             host = cust.workstation or self.choice(self.org.find("meskiosk")).name
-        return dict(name=cust.first, ci=ci_name, line=line,
+        dev = ci if ci is not None and ci.class_id != "BMC_Application" else \
+            self.org.ci_by_name.get(cust.workstation) if cust.workstation else None
+        if sc.get("product") == "@ci":
+            if dev is not None and dev.manufacturer == "Dell" and dev.model:
+                inc["product_override"] = (dev.model, "Dell")
+            else:  # no Dell asset on record (e.g. shared plant-floor user): generic model for the line
+                inc["product_override"] = ("PowerEdge R760", "Dell") if sc.get("line") == "infra" else ("Latitude 7450", "Dell")
+        return dict(name=cust.first, ci=ci_name, line=line, tag=getattr(dev, "serial", "") or "",
+                    model=getattr(dev, "model", "") or "",
                     site=SITES[sk]["site"], site_short=sk, product=sc["product"],
                     err=self.choice(sc["text"]["err"]) if sc["text"]["err"] else "",
                     room=ci.name if ci else "", n=int(self.rng.integers(100000, 999999)), host=host or (ci.name if ci else ""),
@@ -410,7 +432,7 @@ class Simulator:
             pm = 0.03 if inc["mi_role"] == "child" else 0
         if r.random() >= pm:
             return [final], 0
-        conf = [self.resolve_group(g, site_key) for g in CONFUSERS[sc["domain"]]]
+        conf = [self.resolve_group(g, site_key) for g in self.CONFUSERS[sc["domain"]]]
         conf = [g for g in conf if g != final] or ["Service Desk"]
         u = r.random()
         if u < 0.55:
@@ -535,7 +557,7 @@ class Simulator:
         state = dict(group=first, t=t, tech=cur, prio=prio)
 
         def pickup(g):
-            cal = GROUP_CAL[g]
+            cal = self.org.groups[g]["cal"]
             if state["prio"] <= 1:
                 cal = "24x7"
             med = {0: .08, 1: .35, 2: 1.5, 3: 3.0}[state["prio"]]
@@ -549,7 +571,7 @@ class Simulator:
 
         def work(hours, g=None):
             g = g or state["group"]
-            cal = "24x7" if state["prio"] <= 1 else GROUP_CAL[g]
+            cal = "24x7" if state["prio"] <= 1 else self.org.groups[g]["cal"]
             state["t"] = add_work(state["t"], hours, cal, self.group_tz(g))
 
         def transfer(g, note_kind=None, note=None):
@@ -691,10 +713,24 @@ class Simulator:
             tl.set(state["t"], cust.login if reason in (8000, 13000, 4000) else state["tech"].login,
                    Status=2, Status_Reason=None)
         if r.random() < sc["vendor"]:
-            self.wlog(inc, state["t"], "vendor", state["tech"], 8000, 0,
-                      f"Opened support case {int(r.integers(10 ** 7, 10 ** 8))} with {sc['mfr']}.", ctx=dict(vendor=sc["mfr"]))
-            tl.set(state["t"], state["tech"].login, Status=3, Status_Reason=7000)
-            state["t"] = add_work(state["t"], self.lognorm(30, 0.8), "bus", self.group_tz(state["group"]))
+            mfr = (inc.get("product_override") or (None, sc["mfr"]))[1]
+            if mfr == "Dell":
+                part = self.choice(sc.get("parts") or ["replacement part"])
+                tag = ctx.get("tag") or "unknown"
+                self.wlog(inc, state["t"], "vendor", state["tech"], 8000, 0,
+                          f"Opened Dell ProSupport case {int(r.integers(10 ** 8, 10 ** 9))} for service tag {tag}. "
+                          f"Dispatch {int(r.integers(10 ** 8, 10 ** 9))} created for {part}, next-business-day onsite.",
+                          ctx=dict(vendor="Dell ProSupport", tag=tag, part=part))
+                tl.set(state["t"], state["tech"].login, Status=3, Status_Reason=5000)
+                state["t"] = add_work(state["t"], self.lognorm(14, 0.6), "bus", self.group_tz(state["group"]))
+                self.wlog(inc, state["t"], "vendor", state["tech"], 8000, 0,
+                          f"Dell onsite technician replaced {part} on {ctx.get('ci')}. Dispatch closed.",
+                          ctx=dict(vendor="Dell ProSupport", tag=tag, part=part))
+            else:
+                self.wlog(inc, state["t"], "vendor", state["tech"], 8000, 0,
+                          f"Opened support case {int(r.integers(10 ** 7, 10 ** 8))} with {mfr}.", ctx=dict(vendor=mfr))
+                tl.set(state["t"], state["tech"].login, Status=3, Status_Reason=7000)
+                state["t"] = add_work(state["t"], self.lognorm(30, 0.8), "bus", self.group_tz(state["group"]))
             tl.set(state["t"], state["tech"].login, Status=2, Status_Reason=None)
         if r.random() < sc["change"]:
             crq = f"CRQ{self.change_seq:012d}"
@@ -752,7 +788,7 @@ class Simulator:
             inc["reopened"] = True
             state["t"] = t2
             g = state["group"]
-            cal = GROUP_CAL[g] if state["prio"] > 1 else "24x7"
+            cal = self.org.groups[g]["cal"] if state["prio"] > 1 else "24x7"
             state["t"] = add_work(state["t"], self.lognorm(sc["ttr"][0] * 0.6, 0.8), cal, self.group_tz(g))
             res2 = tg.fill(self.choice(T["res"]), ctx)
             self.wlog(inc, state["t"], "work", tech, 6000, 0, "Follow-up after reopen: " + tg.fill(self.choice(T["notes"]), ctx), ctx={})
@@ -808,7 +844,8 @@ class Simulator:
         r = self.rng
         sc = inc["scen"]
         op, prod = list(sc["op"]), list(sc["prod"])
-        product, mfr = sc["product"], sc["mfr"]
+        product, mfr = inc.get("product_override") or (sc["product"], sc["mfr"])
+        inc["true_product"] = product
         kind = None
         mult = 1.6 if inc.get("vague_summary") else (0.4 if inc["mi_role"] else 1.0)
         u = r.random()
@@ -817,8 +854,10 @@ class Simulator:
         elif u < 0.13 * mult:
             op, kind = list(self.choice(LAZY_CATS)), "lazy"
         elif u < 0.19 * mult:
-            other = self.choice([s for s in SCENARIOS if s["domain"] == sc["domain"] and s["id"] != sc["id"]] or SCENARIOS)
+            other = self.choice([s for s in self.SCENARIOS if s["domain"] == sc["domain"] and s["id"] != sc["id"]] or self.SCENARIOS)
             op, prod, product, mfr, kind = list(other["op"]), list(other["prod"]), other["product"], other["mfr"], "wrong"
+            if product == "@ci":
+                product = self.choice(["Latitude 7450", "PowerEdge R760", "OptiPlex 7020", "PowerStore 1200T"])
         elif u < 0.25 * mult:
             op[2], kind = "", "partial"
         if r.random() < 0.08 * mult and kind != "wrong":

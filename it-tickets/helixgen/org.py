@@ -162,6 +162,7 @@ class CI:
     owner: str = ""
     status: int = 3
     tags: tuple = ()
+    serial: str = ""
 
 
 PERSONAS = [  # (name, weight, description used by the LLM prompt + noise level)
@@ -175,6 +176,8 @@ PERSONAS = [  # (name, weight, description used by the LLM prompt + noise level)
 
 
 class Org:
+    SUPPORT = SUPPORT
+
     def __init__(self, rng, seed):
         self.rng = rng
         self.fake = Faker("en_US")
@@ -239,7 +242,7 @@ class Org:
 
     def _build_groups(self):
         gidx = 1
-        for org, groups in SUPPORT.items():
+        for org, groups in self.SUPPORT.items():
             for g, (n, cal, home, role) in groups.items():
                 gid = f"SGP{gidx:012d}"
                 gidx += 1
@@ -261,7 +264,7 @@ class Org:
                 self.groups[g] = dict(id=gid, org=org, cal=cal, site=home, role=role, members=members)
         # a few people belong to two groups (cross-trained)
         sd = self.groups["Service Desk"]["members"]
-        for g in ("Desktop Support - HQ", "Identity & Access Management"):
+        for g in [g for g in ("Desktop Support - HQ", "Identity & Access Management") if g in self.groups]:
             p = sd[int(self.rng.integers(len(sd)))]
             p.groups.append(g)
             self.groups[g]["members"].append(p)

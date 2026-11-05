@@ -91,7 +91,7 @@ def helix_csv(src):
             "reopened": _num(r["Re_Opened_Date"]), "resolution": r["Resolution"],
             "resCat": [r["Resolution_Category"], r["Resolution_Category_Tier_2"], r["Resolution_Category_Tier_3"]],
             "transfers": _num(r["Total_Transfers"]) or 0, "major": r["Major_Incident"] == "1",
-            "domain": g.get("domain", ""), "scenario": g.get("scenario_id", ""),
+            "domain": g.get("domain", ""), "scenario": g.get("scenario_id", ""), "line": g.get("line", ""),
             "related": assoc.get(inc, []),
             "worklog": sorted(worklogs.get(inc, []), key=lambda w: w["t"] or 0),
             "origin": "helix",

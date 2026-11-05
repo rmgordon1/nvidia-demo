@@ -200,6 +200,7 @@ TABLES = {
         ("Item", 200000005, "Item", "char", None, A),
         ("Model", 240001002, "Model", "char", None, A),
         ("ManufacturerName", 240001003, "ManufacturerName", "char", None, A),
+        ("SerialNumber", 200000001, "SerialNumber (Dell service tag)", "char", None, A),
         ("Site", 260000001, "Site", "char", None, A),
         ("AssetLifecycleStatus", 7, "AssetLifecycleStatus", "enum", CI_STATUS, A),
         ("OwnerName", 260140111, "OwnerName", "char", None, A),

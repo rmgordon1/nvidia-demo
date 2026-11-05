@@ -11,9 +11,21 @@ import time
 
 import numpy as np
 
+import importlib
+
 from helixgen.export import build, write_all
-from helixgen.org import Org
 from helixgen.simulate import Simulator
+
+PROFILES = {  # name -> (org class, scenario catalog module)
+    "bcp": ("helixgen.org:Org", "helixgen.scenarios"),
+    "dell": ("helixgen.org_dell:DellOrg", "helixgen.scenarios_dell"),
+}
+
+
+def load_profile(name):
+    org_ref, cat_ref = PROFILES[name]
+    mod, cls = org_ref.split(":")
+    return getattr(importlib.import_module(mod), cls), importlib.import_module(cat_ref)
 
 DEFAULT_MODELS = "gpt-oss:20b=3,gemma4:26b=3,granite4.2:latest=2,nemotron-3.5-lightning:30b=1"
 
@@ -28,15 +40,18 @@ def main():
     ap.add_argument("--llm-fraction", type=float, default=0.7,
                     help="share of incidents queued for LLM rewriting (rest keep template text)")
     ap.add_argument("--models", default=DEFAULT_MODELS, help="comma-separated Ollama models to rotate through, optional =weight")
+    ap.add_argument("--profile", choices=sorted(PROFILES), default="bcp",
+                    help="bcp = original mixed-vendor estate; dell = all-Dell estate, 40/40/20 client/infra/software")
     a = ap.parse_args()
 
     t0 = time.time()
     rng = np.random.default_rng(a.seed)
-    org = Org(rng, a.seed)
-    sim = Simulator(org, rng, a.n)
+    org_cls, catalog = load_profile(a.profile)
+    org = org_cls(rng, a.seed)
+    sim = Simulator(org, rng, a.n, catalog=catalog)
     incidents = sim.run()
     rows, gt, jobs = build(org, incidents, a.seed, a.llm_fraction, a.models.split(","))
-    write_all(a.out, rows, gt, jobs, a.columns)
+    write_all(a.out, rows, gt, jobs, a.columns, profile=a.profile)
 
     st = collections.Counter(r["Status"] for r in rows["HPD_Help_Desk"])
     names = {0: "New", 1: "Assigned", 2: "In Progress", 3: "Pending", 4: "Resolved", 5: "Closed", 6: "Cancelled"}

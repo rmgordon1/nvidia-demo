@@ -7,7 +7,7 @@ import os
 
 from .arschema import ASSOC_TYPE, IMPACT, PRIORITY, REPORTED_SOURCE, SERVICE_TYPE, STATUS, STATUS_REASON, \
     TABLES, URGENCY, WORK_LOG_TYPE
-from .org import COMPANY, GROUP_ORG, PERSONAS, SITES
+from .org import COMPANY, PERSONAS, SITES
 
 AGENCY_BLURB = ("The Bureau of Currency Production (BCP) is a fictional US federal agency that prints paper currency. "
                 "It has a headquarters in Washington DC, the Capital Production Facility (Washington DC) and the Southwest "
@@ -76,7 +76,7 @@ def build(org, incidents, seed, llm_fraction, models):
             First_Name=cust.first, Last_Name=cust.last, Internet_E_mail=cust.email, Phone_Number=cust.phone,
             VIP=int(cust.vip), Company=COMPANY, Organization=cust.org, Department=cust.dept,
             Site=SITES[cust.site_key]["site"], Region=SITES[cust.site_key]["region"],
-            Assigned_Support_Company=COMPANY, Assigned_Support_Organization=GROUP_ORG.get(group),
+            Assigned_Support_Company=COMPANY, Assigned_Support_Organization=org.groups[group]["org"] if group else None,
             Assigned_Group=group, Assigned_Group_ID=org.groups[group]["id"] if group else None, Assignee=assignee,
             Categorization_Tier_1=inc["rec_op"][0] or None, Categorization_Tier_2=inc["rec_op"][1] or None,
             Categorization_Tier_3=inc["rec_op"][2] or None,
@@ -142,7 +142,8 @@ def build(org, incidents, seed, llm_fraction, models):
             true_Categorization_Tier_1=sc["op"][0], true_Categorization_Tier_2=sc["op"][1],
             true_Categorization_Tier_3=sc["op"][2], true_Product_Categorization_Tier_1=sc["prod"][0],
             true_Product_Categorization_Tier_2=sc["prod"][1], true_Product_Categorization_Tier_3=sc["prod"][2],
-            true_Product_Name=sc["product"], true_owner_group=inc["final_group"],
+            true_Product_Name=inc.get("true_product", sc["product"]), true_owner_group=inc["final_group"],
+            line=sc.get("line", ""),
             resolved_by_group=group if st.get("Status") in (4, 5) else "",
             miscategorization=inc["miscat"] or "", vague_summary=int(bool(inc.get("vague_summary"))),
             misroute_hops=inc["misroutes"], reopened=int(bool(inc.get("reopened"))),
@@ -196,7 +197,8 @@ def build(org, incidents, seed, llm_fraction, models):
         rows["BMC_BaseElement"].append(dict(
             InstanceId=c.instance_id, ReconciliationIdentity=c.recon_id, ClassId=c.class_id.upper(), Name=c.name,
             ShortDescription=c.desc, Category=c.category, Type=c.ctype, Item=c.item, Model=c.model,
-            ManufacturerName=c.manufacturer, Site=SITES[c.site_key]["site"], AssetLifecycleStatus=c.status,
+            ManufacturerName=c.manufacturer, SerialNumber=getattr(c, "serial", "") or None,
+            Site=SITES[c.site_key]["site"], AssetLifecycleStatus=c.status,
             OwnerName=c.owner, Submit_Date=1704067200))
     cls_by_rid = {c.recon_id: c.class_id.upper() for c in org.cis}
     for k, (cls, name, src, dst) in enumerate(org.rels, 1):
@@ -229,7 +231,8 @@ def make_job(inc, model):
         customer=dict(name=cust.full, first=cust.first, title=cust.title, dept=cust.dept,
                       site=SITES[cust.site_key]["site"], persona=PERSONA_DESC.get(cust.persona, "")),
         reported_source=REPORTED_SOURCE[inc["source"]], service_type=SERVICE_TYPE[inc["stype"]],
-        description_author=inc["text_author"], product=sc["product"], manufacturer=sc["mfr"],
+        description_author=inc["text_author"], product=inc.get("true_product", sc["product"]),
+        manufacturer=(inc.get("product_override") or (None, sc["mfr"]))[1],
         category=" > ".join(sc["op"]), ci=inc["ci"].name if inc.get("ci") else None,
         production_line=inc["ctx"].get("line") or None, site_of_issue=SITES[inc["site_key"]]["site"],
         error_text=inc["ctx"].get("err") or None, seed_summary=inc["summary"],
@@ -252,7 +255,7 @@ def make_job(inc, model):
                 email_wrap=inc.get("email_wrap"), facts=facts, worklogs=wls)
 
 
-def write_all(out, rows, gt, jobs, style="view"):
+def write_all(out, rows, gt, jobs, style="view", profile="bcp"):
     os.makedirs(out, exist_ok=True)
     work = os.path.join(out, "_work")
     os.makedirs(work, exist_ok=True)
@@ -271,4 +274,4 @@ def write_all(out, rows, gt, jobs, style="view"):
             f.write(json.dumps(j) + "\n")
     write_dictionary(os.path.join(out, "data_dictionary.csv"))
     with open(os.path.join(work, "meta.json"), "w") as f:
-        json.dump(dict(style=style), f)
+        json.dump(dict(style=style, profile=profile), f)

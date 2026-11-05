@@ -156,7 +156,7 @@ def build_db(tickets):
     db.execute("""CREATE TABLE incidents (id TEXT PRIMARY KEY, reported_at TEXT, resolved_at TEXT, closed_at TEXT,
         month TEXT, quarter TEXT, year INTEGER, status TEXT, priority TEXT, impact TEXT, urgency TEXT,
         service_type TEXT, source TEXT, site TEXT, department TEXT, assigned_group TEXT, category_tier1 TEXT,
-        category_tier2 TEXT, category_tier3 TEXT, product TEXT, ci TEXT, service TEXT, domain TEXT,
+        category_tier2 TEXT, category_tier3 TEXT, product TEXT, ci TEXT, service TEXT, domain TEXT, line TEXT,
         major_incident INTEGER, reopened INTEGER, group_transfers INTEGER, hours_to_resolve REAL, summary TEXT)""")
     iso = lambda x: time.strftime("%Y-%m-%d %H:%M", time.gmtime(x)) if x else None  # noqa: E731
     rows = []
@@ -170,12 +170,12 @@ def build_db(tickets):
                      t.get("status"), t.get("priority"), t.get("impact"), t.get("urgency"), t.get("serviceType"),
                      t.get("source"), t.get("site"), t.get("dept"), t.get("group"), c[0] or None, c[1] or None,
                      c[2] or None, t.get("product") or None, t.get("ci") or None, t.get("serviceCI") or None,
-                     t.get("domain") or None, int(bool(t.get("major"))), int(bool(t.get("reopened"))),
+                     t.get("domain") or None, t.get("line") or None, int(bool(t.get("major"))), int(bool(t.get("reopened"))),
                      t.get("_group_transfers", 0), round(ttr, 2) if ttr is not None else None, t.get("summary")))
-    db.executemany(f"INSERT INTO incidents VALUES ({','.join('?' * 28)})", rows)
+    db.executemany(f"INSERT INTO incidents VALUES ({','.join('?' * 29)})", rows)
     db.commit()
     values = {}
-    for col, n in (("site", 10), ("assigned_group", 30), ("service", 40), ("domain", 5), ("category_tier1", 10),
+    for col, n in (("site", 10), ("assigned_group", 30), ("service", 40), ("domain", 5), ("line", 4), ("category_tier1", 10),
                    ("category_tier2", 30), ("priority", 5), ("status", 8), ("source", 12), ("product", 40)):
         values[col] = [r[0] for r in db.execute(
             f"SELECT {col}, COUNT(*) c FROM incidents WHERE {col} IS NOT NULL GROUP BY {col} ORDER BY c DESC LIMIT {n}")]
@@ -203,7 +203,7 @@ SQL_SCHEMA_TEXT = """Table incidents (one row per incident, BMC Helix archive No
  id, reported_at TEXT 'YYYY-MM-DD HH:MM', resolved_at, closed_at, month TEXT 'YYYY-MM', quarter TEXT 'YYYY-Qn',
  year INTEGER, status, priority, impact, urgency, service_type, source (how it was reported), site, department
  (customer's department), assigned_group (support group that owns/resolved it), category_tier1/2/3 (often blank or
- wrong), product, ci (configuration item / device), service (business service), domain (IT|OT|INFRA),
+ wrong), product, ci (configuration item / device), service (business service), domain (IT|OT|INFRA), line (client = PCs/monitors/docks/peripherals, infra = servers/storage/network/backup/HCI/edge, software = apps),
  major_incident 0/1, reopened 0/1, group_transfers INTEGER (times reassigned between support groups),
  hours_to_resolve REAL (wall-clock hours, NULL if unresolved), summary TEXT."""
 
