@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BEP Operations AI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+/* Two US Letter pages, printed by twopager_build.py. Diagram tokens and styles come from architecture.html. */
+@page{size:Letter;margin:0}
+:root{/*ARCH_ROOT*/}
+:root{--nv:#76b900;--nv-d:#4e7a00;--nv-t:#eef6e0;--ink:#17202a}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:var(--sans);font-size:8.3pt;line-height:1.32;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:8.5in;height:11in;padding:.36in .42in .34in;position:relative;overflow:hidden;page-break-after:always;
+  display:flex;flex-direction:column;gap:.1in}
+.page:last-child{page-break-after:auto}
+.page::before{content:"";position:absolute;left:0;top:0;right:0;height:.12in;background:var(--nv)}
+.foot{position:absolute;left:.45in;right:.45in;bottom:.2in;display:flex;justify-content:space-between;
+  font-size:7pt;color:var(--muted);font-family:var(--cond);letter-spacing:.06em;text-transform:uppercase}
+h1{font-family:var(--cond);font-weight:600;font-size:23pt;line-height:1;margin:0}
+h2{font-family:var(--cond);font-weight:600;font-size:12.5pt;margin:0 0 .04in;display:flex;align-items:baseline;gap:8px}
+h2::before{content:"";width:.11in;height:.11in;background:var(--nv);flex:none;align-self:center}
+h2 .sub{font-family:var(--sans);font-weight:400;font-size:8pt;color:var(--muted)}
+h3{font-family:var(--cond);font-weight:600;font-size:10.5pt;margin:0 0 .03in;color:var(--nv-d)}
+p{margin:0}
+.muted{color:var(--muted)}
+code,.mono{font-family:var(--mono);font-size:.9em}
+
+/* header */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:.3in;border-bottom:1.5px solid var(--ink);padding-bottom:.08in}
+.eyebrow{font-family:var(--cond);font-size:8pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--nv-d);margin-bottom:3px}
+.tag{font-size:9pt;color:var(--muted);margin-top:4px}
+.meta{text-align:right;font-size:8pt;line-height:1.5;color:var(--muted);white-space:nowrap}
+.meta b{color:var(--ink);font-weight:600}
+.cls{display:inline-block;margin-top:3px;padding:1px 6px;border:1px solid var(--nv-d);color:var(--nv-d);font-family:var(--cond);
+  font-weight:600;font-size:7pt;letter-spacing:.1em}
+
+/* mission */
+.mission{background:var(--nv-t);border-left:3px solid var(--nv);padding:.06in .1in;font-size:8.5pt}
+.mission b{font-weight:600}
+
+/* use-case columns */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.16in}
+.col{border-top:2px solid var(--nv);padding-top:.05in}
+.col ul{margin:0;padding-left:1.05em}
+.col li{margin:0 0 1px}
+.col .who{font-size:7.6pt;color:var(--muted);margin-top:4px;font-family:var(--cond);letter-spacing:.04em}
+
+/* diagram */
+.legend{display:flex;flex-wrap:wrap;gap:3px 16px;font-size:7.4pt;color:var(--muted);align-items:center;margin-bottom:4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.diagram{border:1px solid var(--rule);border-radius:5px;padding:3px;background:var(--panel)}
+.diagram svg{display:block;width:100%;height:auto}
+/*ARCH_CSS*/
+
+/* page 2 */
+.shot{border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:#0f141a}
+.shot img{display:block;width:100%}
+.cap{font-size:7.8pt;color:var(--muted);margin-top:4px}
+.cap b{color:var(--ink);font-weight:600}
+table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:7.1pt;line-height:1.18}
+th{font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.07em;font-size:6.8pt;color:var(--muted);
+  text-align:left;border-bottom:1.5px solid var(--ink);padding:2px 5px}
+td{padding:1.6px 5px;border-bottom:1px solid #e3e7ec;vertical-align:top}
+td:nth-child(2){font-weight:500}
+td:nth-child(3){font-family:var(--mono);font-size:6.4pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td:nth-child(4){white-space:nowrap}
+tr.grp td{background:var(--nv-t);font-family:var(--cond);font-weight:600;font-size:7pt;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--nv-d);padding:2px 5px;border-bottom:none}
+.plan{color:var(--muted);font-style:italic}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:.16in;font-size:7.8pt}
+.notes p{margin:0}
+.notes b{font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- ============================== PAGE 1 ============================== -->
+<section class="page">
+  <header class="head">
+    <div>
+      <div class="eyebrow">Bureau of Engraving and Printing · Local AI on NVIDIA GB10</div>
+      <h1>BEP Operations AI</h1>
+      <div class="tag">Local AI for IT service and print inspection on one Dell Pro Max GB10</div>
+    </div>
+    <div class="meta">
+      <b>Robert Gordon</b><br>November 2026<br>
+      <span class="cls">UNCLASSIFIED · SYNTHETIC DATA ONLY</span>
+    </div>
+  </header>
+
+  <div class="mission">
+    <b>Mission.</b> The Bureau of Engraving and Printing (BEP) makes U.S. paper currency. BEP has two important operational problems.
+    The <b>IT systems in the plant must operate continuously</b>. <b>Inspectors must find press defects</b> before a sheet goes to the next step.
+    A small service desk finds solutions in many years of old tickets. At this time, the desk also moves from BMC Helix to ServiceNow.
+    The inspection cameras use fixed rules. These rules reject good sheets, and they do not find new types of defects.
+    BEP Operations AI gives agents and inspectors a second opinion that shows its sources. The system operates on one GB10.
+    It does not send data outside the agency. A person makes each final decision.
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <h3>ITSM Next Best Step</h3>
+      <ul>
+        <li><b>Retrieval:</b> The system finds similar tickets in a synthetic Helix archive. It uses Nemotron embed, BM25, RRF fusion and Nemotron rerank.</li>
+        <li><b>Next steps:</b> The system gives a ranked list of next steps. Each step shows its source tickets.</li>
+        <li><b>Routing:</b> A classifier selects the support group. If the confidence is low, an LLM makes the decision.</li>
+        <li><b>Two tiers:</b> gemma4 (Ollama) answers when the evidence is strong. gpt-oss-20b (vLLM) answers all other requests.</li>
+        <li><b>Other views:</b> IT Self-Service removes PII. IT Insights changes questions into SQL.</li>
+      </ul>
+      <div class="who">USERS · IT support agent · employee · IT manager</div>
+    </div>
+    <div class="col">
+      <h3>Defect Inspection (CV)</h3>
+      <ul>
+        <li><b>Data:</b> The press sheets are synthetic. They show fictional banknotes with 8 types of defects.</li>
+        <li><b>Stage 1:</b> PatchCore learns only from good sheets. It gives each sheet a score and a heatmap. It also finds new types of defects.</li>
+        <li><b>Stage 2:</b> RF-DETR-Seg identifies the defect type and shows its outline. Qwen3-VL-8B explanations are planned.</li>
+        <li><b>Human decision:</b> QA makes the disposition for each sheet. QA sets the threshold and compares the result with the legacy rules.</li>
+        <li><b>Platform:</b> MLflow records the training on site. A DeepStream and TensorRT line runtime is planned.</li>
+      </ul>
+      <div class="who">USERS · QA inspector · quality engineer</div>
+    </div>
+    <div class="col">
+      <h3>Governance &amp; Audit</h3>
+      <ul>
+        <li><b>Audit trail:</b> The system records each AI output and each human decision. Each record shows the user, action, decision and reason.</li>
+        <li><b>Provenance:</b> Each AI output records the model, version, confidence and sources. ITSM records also show <i>which tier answered and why</i>.</li>
+        <li><b>Audit view:</b> The administrator traces each decision to its input. The view exports the records to CSV.</li>
+        <li><b>Supply chain:</b> All models have open weights. All versions are fixed. The SBOM lists them.</li>
+        <li><b>Advisory only:</b> The system does not reject a sheet or close a ticket automatically.</li>
+      </ul>
+      <div class="who">USERS · administrator · all roles</div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Workflow <span class="sub">Data generation → systems of record → AI services on the GB10 → web views → users</span></h2>
+    <div class="legend">
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e"/></svg>Live: local models</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-part"/></svg>Partial: in progress</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-ph"/></svg>Stand-in: browser code</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-plan"/></svg>Planned</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-user"/></svg>Users of the view</span>
+    </div>
+    <div class="diagram"><!--ARCH_SVG--></div>
+  </div>
+
+  <div class="foot"><span>BEP Operations AI · Robert Gordon</span><span>Synthetic data only · no CUI · no PII</span><span>1 / 2</span></div>
+</section>
+
+<!-- ============================== PAGE 2 ============================== -->
+<section class="page">
+  <div>
+    <h2>Live demonstration <span class="sub">The Defect Inspection view on the GB10 (localhost:8080)</span></h2>
+    <div class="shot"><img src="twopager_cv.png" alt="Defect Inspection view: a flagged press sheet with anomaly heatmap, magnified peak region, stage-1 score, stage-2 explanation, human disposition buttons and review queue"></div>
+    <p class="cap"><b>A flagged sheet for review.</b> The stage-1 heatmap shows the anomaly on one note. Below the sheet, the peak region
+      shows at a larger size. Stage 2 identifies the defect type and recommends a disposition. This recommendation has the label
+      <i>Advisory, human decision required</i>. The inspector confirms the defect, overrides it, or sends the sheet to re-inspection.
+      The audit trail records this decision. The review queue on the right also shows sheets that the legacy rules rejected and the AI passed.
+      The inspector can examine these possible false rejects.</p>
+  </div>
+
+  <div>
+    <h2>Software bill of materials <span class="sub">This list shows the main components of the demo. Each version is the fixed version in the repository.</span></h2>
+    <table>
+      <colgroup><col style="width:10%"><col style="width:27%"><col style="width:21%"><col style="width:12%"><col></colgroup>
+      <thead><tr><th>Layer</th><th>Component</th><th>Version / tag</th><th>License</th><th>Role in the demo</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="5">AI models · open weights, local</td></tr>
+        <tr><td>LLM, big tier</td><td>OpenAI gpt-oss-20b</td><td>openai/gpt-oss-20b</td><td>Apache-2.0</td><td>Answers when the evidence is weak; chat, SQL</td></tr>
+        <tr><td>LLM, small tier</td><td>Google Gemma 4 E4B</td><td>ollama gemma4:latest</td><td>Apache-2.0</td><td>Answers when the evidence is strong</td></tr>
+        <tr><td>Embedding</td><td>NVIDIA llama-nemotron-embed-1b-v2</td><td>HF, cached</td><td>NVIDIA Open Model</td><td>Finds similar tickets; gives data to the router</td></tr>
+        <tr><td>Reranker</td><td>NVIDIA llama-nemotron-rerank-1b-v2</td><td>HF, cached</td><td>NVIDIA Open Model</td><td>Puts the fused results in a new order</td></tr>
+        <tr><td>Detector</td><td>RF-DETR-Seg, fine-tuned S / M</td><td>rfdetr 1.11.2</td><td>Apache-2.0</td><td>Finds 8 defect types; fixed SHA-256 weights</td></tr>
+        <tr><td>Anomaly</td><td>PatchCore, wide_resnet50_2 backbone</td><td>anomalib 2.7.0</td><td>Apache-2.0</td><td>Gives the stage-1 score and heatmap</td></tr>
+        <tr class="plan"><td>VLM</td><td>Qwen3-VL-8B-Instruct + LoRA</td><td>TRL / PEFT</td><td>Apache-2.0</td><td>Planned: explains flagged sheets</td></tr>
+        <tr class="grp"><td colspan="5">Serving and runtime · containers</td></tr>
+        <tr><td>LLM serving</td><td>vLLM, OpenAI-compatible server</td><td>vllm-openai:v0.29.0</td><td>Apache-2.0</td><td>Serves gpt-oss-20b with prefix caching</td></tr>
+        <tr><td>LLM serving</td><td>Ollama</td><td>ollama:0.40.0</td><td>MIT</td><td>Serves gemma4; loads it only when necessary</td></tr>
+        <tr><td>RAG API</td><td>FastAPI, Uvicorn, Pydantic</td><td>0.142.4 / 0.54.0 / 2.13.5</td><td>MIT / BSD-3</td><td>Operates itsm-rag-server on :8030</td></tr>
+        <tr><td>Web</td><td>nginx + first-party vanilla-JS UI</td><td>nginx:1.27-alpine</td><td>BSD-2</td><td>Serves the UI on :8080; no third-party JS</td></tr>
+        <tr class="plan"><td>Vision stream</td><td>NVIDIA DeepStream (Triton, TensorRT)</td><td>9.0 sbsa-dgx-spark</td><td>NVIDIA DeepStream</td><td>Planned: line runtime with TensorRT</td></tr>
+        <tr class="plan"><td>Messaging</td><td>Eclipse Mosquitto (MQTT)</td><td>eclipse-mosquitto:2</td><td>EPL-2.0</td><td>Planned: sends detections to the results API</td></tr>
+        <tr class="grp"><td colspan="5">Frameworks and MLOps · Python 3.12</td></tr>
+        <tr><td>ML core</td><td>PyTorch (CUDA 13.0), torchvision</td><td>2.14.1 / 0.29.1</td><td>BSD-3</td><td>Operates the models on the Blackwell GPU</td></tr>
+        <tr><td>NLP</td><td>Transformers, sentence-transf., tokenizers</td><td>5.19.0 / 6.1.0 / 0.23.2</td><td>Apache-2.0</td><td>Loads the Nemotron embed and rerank models</td></tr>
+        <tr><td>Classic ML</td><td>scikit-learn, NumPy, SciPy</td><td>1.9.1 / 2.4.6 / 1.18.1</td><td>BSD-3</td><td>Ticket router, retrieval calculations, metrics</td></tr>
+        <tr><td>Vision libs</td><td>timm, Lightning, OpenCV, SAHI</td><td>1.0.31 / 2.6.6 / 4.14 / 0.14</td><td>Apache-2.0 / MIT</td><td>Backbones, training, image operations, tiles</td></tr>
+        <tr><td>MLOps</td><td>MLflow, FiftyOne</td><td>3.18.0 / 1.22.1</td><td>Apache-2.0</td><td>Records runs, keeps models, shows errors</td></tr>
+        <tr class="grp"><td colspan="5">Data and platform</td></tr>
+        <tr><td>Data</td><td>it-tickets, synthetic_print generators</td><td>in repo</td><td>first-party</td><td>All data is synthetic: no CUI, PII or real currency</td></tr>
+        <tr><td>Host</td><td>Dell Pro Max GB10 (Grace Blackwell, 128 GB)</td><td>arm64 · DGX OS</td><td>n/a</td><td>Operates the full stack; also operates on x86_64</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    <p><b>Deploy.</b> The command <code>docker compose up -d --build</code> starts four containers: webapp, rag, vllm and ollama.
+      The first start downloads the open-weight models into Docker volumes. After the first start, the stack operates <b>offline</b>.
+      It does not call external APIs.</p>
+    <p><b>Supply chain.</b> The file <code>requirements.txt</code> fixes the version of each Python dependency. Each container image has a
+      fixed tag. The file <code>cv_model/artifacts.lock</code> also records the digest of each CV image and weight file. The repository
+      contains the gpt-oss tokenizer vocabulary. Thus, inference does not download files.</p>
+  </div>
+
+  <div class="foot"><span>BEP Operations AI · Robert Gordon</span><span>Synthetic data only · no CUI · no PII</span><span>2 / 2</span></div>
+</section>
+</body>
+</html>

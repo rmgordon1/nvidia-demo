@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BEP Operations AI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&display=swap">
+<style>
+/* Two US Letter pages, printed by twopager_build.py. Diagram tokens and styles come from architecture.html. */
+@page{size:Letter;margin:0}
+:root{
+  --bg:#f3f5f7; --panel:#ffffff; --fg:#17202a; --muted:#5a6673; --rule:#cfd6de; --edge:#4a5866;
+  --itsm:#1f6f8b; --cv:#9a5b1e; --shared:#5e5a78;
+  --itsm-t:#e3eef3; --cv-t:#f5ece2; --shared-t:#ecebf2;
+  --live:#2b7a4b; --partial:#1f6f8b; --ph:#a8671a; --plan:#7b8591;
+  --sans:"IBM Plex Sans",system-ui,sans-serif; --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+:root{--nv:#76b900;--nv-d:#4e7a00;--nv-t:#eef6e0;--ink:#17202a}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:var(--sans);font-size:8.3pt;line-height:1.32;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:8.5in;height:11in;padding:.36in .42in .34in;position:relative;overflow:hidden;page-break-after:always;
+  display:flex;flex-direction:column;gap:.1in}
+.page:last-child{page-break-after:auto}
+.page::before{content:"";position:absolute;left:0;top:0;right:0;height:.12in;background:var(--nv)}
+.foot{position:absolute;left:.45in;right:.45in;bottom:.2in;display:flex;justify-content:space-between;
+  font-size:7pt;color:var(--muted);font-family:var(--cond);letter-spacing:.06em;text-transform:uppercase}
+h1{font-family:var(--cond);font-weight:600;font-size:23pt;line-height:1;margin:0}
+h2{font-family:var(--cond);font-weight:600;font-size:12.5pt;margin:0 0 .04in;display:flex;align-items:baseline;gap:8px}
+h2::before{content:"";width:.11in;height:.11in;background:var(--nv);flex:none;align-self:center}
+h2 .sub{font-family:var(--sans);font-weight:400;font-size:8pt;color:var(--muted)}
+h3{font-family:var(--cond);font-weight:600;font-size:10.5pt;margin:0 0 .03in;color:var(--nv-d)}
+p{margin:0}
+.muted{color:var(--muted)}
+code,.mono{font-family:var(--mono);font-size:.9em}
+
+/* header */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:.3in;border-bottom:1.5px solid var(--ink);padding-bottom:.08in}
+.eyebrow{font-family:var(--cond);font-size:8pt;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--nv-d);margin-bottom:3px}
+.tag{font-size:9pt;color:var(--muted);margin-top:4px}
+.meta{text-align:right;font-size:8pt;line-height:1.5;color:var(--muted);white-space:nowrap}
+.meta b{color:var(--ink);font-weight:600}
+.cls{display:inline-block;margin-top:3px;padding:1px 6px;border:1px solid var(--nv-d);color:var(--nv-d);font-family:var(--cond);
+  font-weight:600;font-size:7pt;letter-spacing:.1em}
+
+/* mission */
+.mission{background:var(--nv-t);border-left:3px solid var(--nv);padding:.06in .1in;font-size:8.5pt}
+.mission b{font-weight:600}
+
+/* use-case columns */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.16in}
+.col{border-top:2px solid var(--nv);padding-top:.05in}
+.col ul{margin:0;padding-left:1.05em}
+.col li{margin:0 0 1px}
+.col .who{font-size:7.6pt;color:var(--muted);margin-top:4px;font-family:var(--cond);letter-spacing:.04em}
+
+/* diagram */
+.legend{display:flex;flex-wrap:wrap;gap:3px 16px;font-size:7.4pt;color:var(--muted);align-items:center;margin-bottom:4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.diagram{border:1px solid var(--rule);border-radius:5px;padding:3px;background:var(--panel)}
+.diagram svg{display:block;width:100%;height:auto}
+
+.colh{font-family:var(--cond);font-size:12px;font-weight:600;letter-spacing:.1em;fill:var(--muted)}
+.colsub{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.colrule{stroke:var(--rule);stroke-width:1}
+.lane-itsm{fill:var(--itsm-t)}.lane-cv{fill:var(--cv-t)}.lane-shared{fill:var(--shared-t)}
+.lanebar-itsm{fill:var(--itsm)}.lanebar-cv{fill:var(--cv)}.lanebar-shared{fill:var(--shared)}
+.lanet{font-family:var(--cond);font-size:16px;font-weight:600}
+.lanet-itsm{fill:var(--itsm)}.lanet-cv{fill:var(--cv)}.lanet-shared{fill:var(--shared)}
+.lanes{font-family:var(--sans);font-size:12px;font-weight:400;fill:var(--muted)}
+.nb{fill:var(--panel);stroke:var(--edge);stroke-width:1.2}
+.n-view .nb{stroke-width:1.2}
+.ln-itsm.n-view .nb{stroke:var(--itsm);stroke-width:2}.ln-cv.n-view .nb{stroke:var(--cv);stroke-width:2}.ln-shared.n-view .nb{stroke:var(--shared);stroke-width:2}
+.n-user .nb{fill:var(--bg)}
+.n-model .nb{fill:var(--bg)}
+.n-platform .nb{fill:var(--bg);stroke:var(--shared);stroke-width:1.6}
+.st-placeholder .nb{stroke:var(--ph);stroke-dasharray:6 4}
+.st-planned .nb{stroke:var(--plan);stroke-dasharray:2 4}
+.st-planned .nt,.st-planned .ns{fill:var(--muted)}
+.st-partial .nb{stroke:var(--partial);stroke-dasharray:10 3 2 3}
+.nt{font-family:var(--sans);font-size:13px;font-weight:600;fill:var(--fg)}
+.ns{font-family:var(--sans);font-size:11.5px;fill:var(--muted)}
+.nsm{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.badge{font-family:var(--cond);font-size:10px;font-weight:600;letter-spacing:.08em}
+.b-placeholder{fill:var(--ph)}.b-planned{fill:var(--plan)}.b-partial{fill:var(--partial)}
+.e{fill:none;stroke:var(--edge);stroke-width:1.4}
+.e-part{stroke-dasharray:10 3 2 3}
+.e-ph{stroke:var(--ph);stroke-dasharray:6 4}
+.e-plan{stroke:var(--plan);stroke-dasharray:2 4}
+.e-user{stroke:var(--rule);stroke-width:2}
+.arh{fill:var(--edge)}.arh-p{fill:var(--plan)}
+.elab{font-family:var(--mono);font-size:10.5px;fill:var(--muted)}
+
+
+/* page 2 */
+.shot{border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:#0f141a}
+.shot img{display:block;width:100%}
+.cap{font-size:7.8pt;color:var(--muted);margin-top:4px}
+.cap b{color:var(--ink);font-weight:600}
+table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:7.1pt;line-height:1.18}
+th{font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:.07em;font-size:6.8pt;color:var(--muted);
+  text-align:left;border-bottom:1.5px solid var(--ink);padding:2px 5px}
+td{padding:1.6px 5px;border-bottom:1px solid #e3e7ec;vertical-align:top}
+td:nth-child(2){font-weight:500}
+td:nth-child(3){font-family:var(--mono);font-size:6.4pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td:nth-child(4){white-space:nowrap}
+tr.grp td{background:var(--nv-t);font-family:var(--cond);font-weight:600;font-size:7pt;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--nv-d);padding:2px 5px;border-bottom:none}
+.plan{color:var(--muted);font-style:italic}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:.16in;font-size:7.8pt}
+.notes p{margin:0}
+.notes b{font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- ============================== PAGE 1 ============================== -->
+<section class="page">
+  <header class="head">
+    <div>
+      <div class="eyebrow">Bureau of Engraving and Printing · Local AI on NVIDIA GB10</div>
+      <h1>BEP Operations AI</h1>
+      <div class="tag">Local AI for IT service and print inspection on one Dell Pro Max GB10</div>
+    </div>
+    <div class="meta">
+      <b>Robert Gordon</b><br>November 2026<br>
+      <span class="cls">UNCLASSIFIED · SYNTHETIC DATA ONLY</span>
+    </div>
+  </header>
+
+  <div class="mission">
+    <b>Mission.</b> The Bureau of Engraving and Printing (BEP) makes U.S. paper currency. BEP has two important operational problems.
+    The <b>IT systems in the plant must operate continuously</b>. <b>Inspectors must find press defects</b> before a sheet goes to the next step.
+    A small service desk finds solutions in many years of old tickets. At this time, the desk also moves from BMC Helix to ServiceNow.
+    The inspection cameras use fixed rules. These rules reject good sheets, and they do not find new types of defects.
+    BEP Operations AI gives agents and inspectors a second opinion that shows its sources. The system operates on one GB10.
+    It does not send data outside the agency. A person makes each final decision.
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <h3>ITSM Next Best Step</h3>
+      <ul>
+        <li><b>Retrieval:</b> The system finds similar tickets in a synthetic Helix archive. It uses Nemotron embed, BM25, RRF fusion and Nemotron rerank.</li>
+        <li><b>Next steps:</b> The system gives a ranked list of next steps. Each step shows its source tickets.</li>
+        <li><b>Routing:</b> A classifier selects the support group. If the confidence is low, an LLM makes the decision.</li>
+        <li><b>Two tiers:</b> gemma4 (Ollama) answers when the evidence is strong. gpt-oss-20b (vLLM) answers all other requests.</li>
+        <li><b>Other views:</b> IT Self-Service removes PII. IT Insights changes questions into SQL.</li>
+      </ul>
+      <div class="who">USERS · IT support agent · employee · IT manager</div>
+    </div>
+    <div class="col">
+      <h3>Defect Inspection (CV)</h3>
+      <ul>
+        <li><b>Data:</b> The press sheets are synthetic. They show fictional banknotes with 8 types of defects.</li>
+        <li><b>Stage 1:</b> PatchCore learns only from good sheets. It gives each sheet a score and a heatmap. It also finds new types of defects.</li>
+        <li><b>Stage 2:</b> RF-DETR-Seg identifies the defect type and shows its outline. Qwen3-VL-8B explanations are planned.</li>
+        <li><b>Human decision:</b> QA makes the disposition for each sheet. QA sets the threshold and compares the result with the legacy rules.</li>
+        <li><b>Platform:</b> MLflow records the training on site. A DeepStream and TensorRT line runtime is planned.</li>
+      </ul>
+      <div class="who">USERS · QA inspector · quality engineer</div>
+    </div>
+    <div class="col">
+      <h3>Governance &amp; Audit</h3>
+      <ul>
+        <li><b>Audit trail:</b> The system records each AI output and each human decision. Each record shows the user, action, decision and reason.</li>
+        <li><b>Provenance:</b> Each AI output records the model, version, confidence and sources. ITSM records also show <i>which tier answered and why</i>.</li>
+        <li><b>Audit view:</b> The administrator traces each decision to its input. The view exports the records to CSV.</li>
+        <li><b>Supply chain:</b> All models have open weights. All versions are fixed. The SBOM lists them.</li>
+        <li><b>Advisory only:</b> The system does not reject a sheet or close a ticket automatically.</li>
+      </ul>
+      <div class="who">USERS · administrator · all roles</div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Workflow <span class="sub">Data generation → systems of record → AI services on the GB10 → web views → users</span></h2>
+    <div class="legend">
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e"/></svg>Live: local models</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-part"/></svg>Partial: in progress</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-ph"/></svg>Stand-in: browser code</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-plan"/></svg>Planned</span>
+      <span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" class="e e-user"/></svg>Users of the view</span>
+    </div>
+    <div class="diagram"><svg viewBox="0 0 1370 870" width="100%" role="img" aria-labelledby="dgt"><title id="dgt">Architecture of the BEP Operations AI lab: two use cases from data generation through models and web views to users</title>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh"/></marker><marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arh-p"/></marker></defs>
+<text x="40" y="30" class="colh">DATA GENERATION</text>
+<line x1="40" y1="40" x2="240" y2="40" class="colrule"/>
+<text x="290" y="30" class="colh">DATA &amp; SYSTEMS OF RECORD</text>
+<line x1="290" y1="40" x2="500" y2="40" class="colrule"/>
+<text x="560" y="30" class="colh">AI SERVICES &amp; MODELS</text>
+<line x1="560" y1="40" x2="920" y2="40" class="colrule"/>
+<text x="975" y="30" class="colh">WEB UI · NGINX :8080</text>
+<line x1="975" y1="40" x2="1150" y2="40" class="colrule"/>
+<text x="1190" y="30" class="colh">USERS</text>
+<line x1="1190" y1="40" x2="1330" y2="40" class="colrule"/>
+<text x="975" y="55" class="colsub">/api → :8030</text>
+<rect x="20" y="70" width="1330" height="295" rx="6" class="lane lane-itsm"/>
+<rect x="20" y="70" width="4" height="295" class="lanebar lanebar-itsm"/>
+<text x="40" y="94" class="lanet lanet-itsm">ITSM Next Best Step<tspan class="lanes" dx="12">Primary use case · Day-3 build · live against local models</tspan></text>
+<rect x="20" y="385" width="1330" height="280" rx="6" class="lane lane-cv"/>
+<rect x="20" y="385" width="4" height="280" class="lanebar lanebar-cv"/>
+<text x="40" y="409" class="lanet lanet-cv">Computer-vision defect detection<tspan class="lanes" dx="12">Secondary · in-browser stand-in today, trained models in progress</tspan></text>
+<rect x="20" y="685" width="1330" height="165" rx="6" class="lane lane-shared"/>
+<rect x="20" y="685" width="4" height="165" class="lanebar lanebar-shared"/>
+<text x="40" y="709" class="lanet lanet-shared">Shared across both use cases<tspan class="lanes" dx="12"></tspan></text>
+<path d="M140,178 L140,192" class="e" marker-end="url(#ar)"/>
+<path d="M140,260 L140,274" class="e" marker-end="url(#ar)"/>
+<path d="M240,226 L268,226 L268,174 L290,174" class="e" marker-end="url(#ar)"/>
+<text x="264" y="169" text-anchor="end" class="elab">CSV</text>
+<path d="M240,308 L268,308 L268,284 L290,284" class="e" marker-end="url(#ar)"/>
+<text x="264" y="279" text-anchor="end" class="elab">JSON</text>
+<path d="M500,174 L538,174 L538,166 L560,166" class="e" marker-end="url(#ar)"/>
+<path d="M500,284 L538,284 L538,166 L560,166" class="e e-part" marker-end="url(#ar)"/>
+<path d="M616,223 L616,250" class="e" marker-end="url(#ar)"/>
+<path d="M740,223 L740,250" class="e" marker-end="url(#ar)"/>
+<path d="M864,223 L864,250" class="e" marker-end="url(#ar)"/>
+<path d="M920,166 L953,166 L953,144 L975,144" class="e" marker-end="url(#ar)"/>
+<text x="949" y="139" text-anchor="end" class="elab">/itsm/*</text>
+<path d="M920,166 L953,166 L953,226 L975,226" class="e" marker-end="url(#ar)"/>
+<text x="949" y="221" text-anchor="end" class="elab">/selfservice/*</text>
+<path d="M920,166 L953,166 L953,308 L975,308" class="e" marker-end="url(#ar)"/>
+<text x="949" y="303" text-anchor="end" class="elab">/analytics/ask</text>
+<path d="M1150,144 L1190,144" class="e e-user"/>
+<path d="M1150,226 L1190,226" class="e e-user"/>
+<path d="M1150,308 L1190,308" class="e e-user"/>
+<path d="M240,459 L290,459" class="e" marker-end="url(#ar)"/>
+<path d="M500,459 L538,459 L538,474 L560,474" class="e" marker-end="url(#ar)"/>
+<path d="M395,493 L395,505" class="e e-user"/>
+<path d="M833,523 L833,548" class="e" marker-end="url(#ar)"/>
+<text x="839" y="540" text-anchor="start" class="elab">detections</text>
+<path d="M647,523 L647,548" class="e e-plan" marker-end="url(#arp)"/>
+<text x="653" y="540" text-anchor="start" class="elab">TensorRT</text>
+<path d="M240,590 L560,590" class="e e-plan" marker-end="url(#arp)"/>
+<path d="M920,590 L953,590 L953,582 L975,582" class="e" marker-end="url(#ar)"/>
+<path d="M647,631 L647,648 L953,648 L953,606 L975,606" class="e e-plan" marker-end="url(#arp)"/>
+<path d="M1150,582 L1168,582 L1168,546 L1190,546" class="e e-user"/>
+<path d="M1150,582 L1168,582 L1168,614 L1190,614" class="e e-user"/>
+<path d="M920,759 L953,759 L953,748 L975,748" class="e" marker-end="url(#ar)"/>
+<path d="M920,759 L953,759 L953,810 L975,810" class="e" marker-end="url(#ar)"/>
+<path d="M1150,748 L1190,748" class="e e-user"/>
+<path d="M1150,810 L1190,810" class="e e-user"/>
+<g class="n n-box st-live ln-itsm">
+<rect x="40" y="110" width="200" height="68" rx="4" class="nb"/>
+<text x="50" y="130" class="nt">it-tickets/generate.py</text>
+<text x="50" y="148" class="ns" xml:space="preserve">helixgen: org, scenarios,</text>
+<text x="50" y="163" class="ns" xml:space="preserve">AR System schema simulation</text>
+</g>
+<g class="n n-box st-live ln-itsm">
+<rect x="40" y="192" width="200" height="68" rx="4" class="nb"/>
+<text x="50" y="212" class="nt">llm_pool / llm_pass</text>
+<text x="50" y="230" class="ns" xml:space="preserve">rewrites ticket text with</text>
+<text x="50" y="245" class="ns" xml:space="preserve">local Ollama models</text>
+</g>
+<g class="n n-box st-live ln-itsm">
+<rect x="40" y="274" width="200" height="68" rx="4" class="nb"/>
+<text x="50" y="294" class="nt">tools/build_tickets.py</text>
+<text x="50" y="312" class="ns" xml:space="preserve">cutover: open Helix incidents</text>
+<text x="50" y="327" class="ns" xml:space="preserve">copied to ServiceNow</text>
+</g>
+<g class="n n-box st-live ln-itsm">
+<rect x="290" y="140" width="210" height="68" rx="4" class="nb"/>
+<text x="300" y="160" class="nt">BMC Helix archive</text>
+<text x="300" y="178" class="ns" xml:space="preserve">10k synthetic incidents (CSV)</text>
+<text x="300" y="193" class="ns" xml:space="preserve">migrated read-only at cutover</text>
+</g>
+<g class="n n-box st-partial ln-itsm">
+<rect x="290" y="250" width="210" height="68" rx="4" class="nb"/>
+<text x="300" y="270" class="nt">ServiceNow</text>
+<text x="300" y="288" class="ns" xml:space="preserve">62 migrated INC00100xx</text>
+<text x="300" y="303" class="ns" xml:space="preserve">live feed: future</text>
+<text x="492" y="269" text-anchor="end" class="badge b-partial">PARTIAL</text>
+</g>
+<g class="n n-box st-live ln-itsm">
+<rect x="560" y="110" width="360" height="113" rx="4" class="nb"/>
+<text x="570" y="130" class="nt">itsm-rag-server · FastAPI :8030</text>
+<text x="570" y="148" class="nsm" xml:space="preserve">loaders  helix_csv, re-pointable</text>
+<text x="570" y="163" class="nsm" xml:space="preserve">index    Nemotron embed + BM25 → RRF → rerank</text>
+<text x="570" y="178" class="nsm" xml:space="preserve">router   logistic regression; LLM if conf &lt; 0.7</text>
+<text x="570" y="193" class="nsm" xml:space="preserve">rag      recommend · copilot · self-service · SQL</text>
+<text x="570" y="208" class="nsm" xml:space="preserve">tiers    small model when evidence is strong</text>
+</g>
+<g class="n n-model st-live ln-itsm">
+<rect x="560" y="250" width="112" height="68" rx="4" class="nb"/>
+<text x="570" y="270" class="nt">Small tier</text>
+<text x="570" y="288" class="ns" xml:space="preserve">gemma4-e4b</text>
+<text x="570" y="303" class="ns" xml:space="preserve">Ollama · ~5 GB</text>
+</g>
+<g class="n n-model st-live ln-itsm">
+<rect x="684" y="250" width="112" height="68" rx="4" class="nb"/>
+<text x="694" y="270" class="nt">Big tier</text>
+<text x="694" y="288" class="ns" xml:space="preserve">gpt-oss-20b</text>
+<text x="694" y="303" class="ns" xml:space="preserve">vLLM · 31 GB</text>
+</g>
+<g class="n n-model st-live ln-itsm">
+<rect x="808" y="250" width="112" height="68" rx="4" class="nb"/>
+<text x="818" y="270" class="nt">Retrieval</text>
+<text x="818" y="288" class="ns" xml:space="preserve">Nemotron embed</text>
+<text x="818" y="303" class="ns" xml:space="preserve">+ rerank 1b-v2</text>
+</g>
+<g class="n n-view st-live ln-itsm">
+<rect x="975" y="110" width="175" height="68" rx="4" class="nb"/>
+<text x="985" y="130" class="nt">ITSM Next Best Step</text>
+<text x="985" y="148" class="ns" xml:space="preserve">ranked steps, citations,</text>
+<text x="985" y="163" class="ns" xml:space="preserve">routing, copilot chat</text>
+</g>
+<g class="n n-view st-live ln-itsm">
+<rect x="975" y="192" width="175" height="68" rx="4" class="nb"/>
+<text x="985" y="212" class="nt">IT Self-Service</text>
+<text x="985" y="230" class="ns" xml:space="preserve">PII-scrubbed self-help,</text>
+<text x="985" y="245" class="ns" xml:space="preserve">opens pre-routed ticket</text>
+</g>
+<g class="n n-view st-live ln-itsm">
+<rect x="975" y="274" width="175" height="68" rx="4" class="nb"/>
+<text x="985" y="294" class="nt">IT Insights</text>
+<text x="985" y="312" class="ns" xml:space="preserve">plain-English questions</text>
+<text x="985" y="327" class="ns" xml:space="preserve">over the archive</text>
+</g>
+<g class="n n-user st-live ln-itsm">
+<rect x="1190" y="117" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="137" class="nt">IT Support Agent</text>
+<text x="1200" y="155" class="ns" xml:space="preserve">&lt; 20 agents</text>
+</g>
+<g class="n n-user st-live ln-itsm">
+<rect x="1190" y="199" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="219" class="nt">Employee</text>
+<text x="1200" y="237" class="ns" xml:space="preserve">self-help first</text>
+</g>
+<g class="n n-user st-live ln-itsm">
+<rect x="1190" y="281" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="301" class="nt">IT Manager</text>
+<text x="1200" y="319" class="ns" xml:space="preserve">MTTR, trends</text>
+</g>
+<g class="n n-box st-live ln-cv">
+<rect x="40" y="425" width="200" height="68" rx="4" class="nb"/>
+<text x="50" y="445" class="nt">synthetic_print</text>
+<text x="50" y="463" class="ns" xml:space="preserve">fictional engraved banknotes,</text>
+<text x="50" y="478" class="ns" xml:space="preserve">8 defect classes, seeded</text>
+</g>
+<g class="n n-box st-planned ln-cv">
+<rect x="40" y="556" width="200" height="68" rx="4" class="nb"/>
+<text x="50" y="576" class="nt">Line cameras</text>
+<text x="50" y="594" class="ns" xml:space="preserve">line stream + rules-based</text>
+<text x="50" y="609" class="ns" xml:space="preserve">reject logs (future)</text>
+<text x="232" y="575" text-anchor="end" class="badge b-planned">PLANNED</text>
+</g>
+<g class="n n-box st-live ln-cv">
+<rect x="290" y="425" width="210" height="68" rx="4" class="nb"/>
+<text x="300" y="445" class="nt">Press-sheet dataset</text>
+<text x="300" y="463" class="ns" xml:space="preserve">sheets, masks, labels;</text>
+<text x="300" y="478" class="ns" xml:space="preserve">11.3k 640 px tiles</text>
+</g>
+<g class="n n-box st-live ln-cv">
+<rect x="290" y="505" width="210" height="68" rx="4" class="nb"/>
+<text x="300" y="525" class="nt">FiftyOne :5151</text>
+<text x="300" y="543" class="ns" xml:space="preserve">browse sheets, predictions,</text>
+<text x="300" y="558" class="ns" xml:space="preserve">false negatives</text>
+</g>
+<g class="n n-box st-partial ln-cv">
+<rect x="560" y="425" width="360" height="98" rx="4" class="nb"/>
+<text x="570" y="445" class="nt">Training on-prem · MLflow tracked</text>
+<text x="570" y="463" class="nsm" xml:space="preserve">PatchCore    good sheets only → heatmap</text>
+<text x="570" y="478" class="nsm" xml:space="preserve">RF-DETR-Seg  boxes · 8 classes · masks</text>
+<text x="570" y="493" class="nsm" xml:space="preserve">Qwen3-VL-8B  LoRA on defect crops (TRL/PEFT)</text>
+<text x="570" y="508" class="nsm" xml:space="preserve">overnight.sh sized to free GPU memory</text>
+<text x="912" y="444" text-anchor="end" class="badge b-partial">PARTIAL</text>
+</g>
+<g class="n n-box st-placeholder ln-cv">
+<rect x="746" y="548" width="174" height="83" rx="4" class="nb"/>
+<text x="756" y="568" class="nt">Today: in the browser</text>
+<text x="756" y="586" class="ns" xml:space="preserve">golden template (PaDiM)</text>
+<text x="756" y="601" class="ns" xml:space="preserve">+ PoC RF-DETR detections</text>
+<text x="756" y="616" class="ns" xml:space="preserve">160 sheets · manifest.json</text>
+</g>
+<g class="n n-box st-planned ln-cv">
+<rect x="560" y="548" width="174" height="83" rx="4" class="nb"/>
+<text x="570" y="568" class="nt">Planned: line runtime</text>
+<text x="570" y="586" class="ns" xml:space="preserve">DeepStream 9.2, TensorRT</text>
+<text x="570" y="601" class="ns" xml:space="preserve">MQTT → results API (SSE)</text>
+<text x="570" y="616" class="ns" xml:space="preserve">Qwen3-VL on flagged only</text>
+</g>
+<g class="n n-view st-live ln-cv">
+<rect x="975" y="540" width="175" height="83" rx="4" class="nb"/>
+<text x="985" y="560" class="nt">Defect Inspection</text>
+<text x="985" y="578" class="ns" xml:space="preserve">review queue, heatmaps,</text>
+<text x="985" y="593" class="ns" xml:space="preserve">defect description,</text>
+<text x="985" y="608" class="ns" xml:space="preserve">disposition, thresholds</text>
+</g>
+<g class="n n-user st-live ln-cv">
+<rect x="1190" y="520" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="540" class="nt">QA Inspector</text>
+<text x="1200" y="558" class="ns" xml:space="preserve">final disposition</text>
+</g>
+<g class="n n-user st-live ln-cv">
+<rect x="1190" y="588" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="608" class="nt">Quality Engineer</text>
+<text x="1200" y="626" class="ns" xml:space="preserve">tunes thresholds</text>
+</g>
+<g class="n n-platform st-live ln-shared">
+<rect x="40" y="725" width="460" height="83" rx="4" class="nb"/>
+<text x="50" y="745" class="nt">On-prem infrastructure</text>
+<text x="50" y="763" class="ns" xml:space="preserve">no external API calls; data stays inside</text>
+<text x="50" y="778" class="ns" xml:space="preserve">the agency boundary; a human makes</text>
+<text x="50" y="793" class="ns" xml:space="preserve">every final decision · prod: PowerEdge XE</text>
+</g>
+<g class="n n-box st-live ln-shared">
+<rect x="560" y="725" width="360" height="68" rx="4" class="nb"/>
+<text x="570" y="745" class="nt">js/store.js · browser storage</text>
+<text x="570" y="763" class="ns" xml:space="preserve">roles, audit trail, provenance stamps,</text>
+<text x="570" y="778" class="ns" xml:space="preserve">accepted ServiceNow resolutions</text>
+</g>
+<g class="n n-view st-live ln-shared">
+<rect x="975" y="722" width="175" height="53" rx="4" class="nb"/>
+<text x="985" y="742" class="nt">Mission Overview</text>
+<text x="985" y="760" class="ns" xml:space="preserve">KPIs for both use cases</text>
+</g>
+<g class="n n-view st-live ln-shared">
+<rect x="975" y="784" width="175" height="53" rx="4" class="nb"/>
+<text x="985" y="804" class="nt">Governance &amp; Audit</text>
+<text x="985" y="822" class="ns" xml:space="preserve">every AI output + review</text>
+</g>
+<g class="n n-user st-live ln-shared">
+<rect x="1190" y="722" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="742" class="nt">Everyone</text>
+<text x="1200" y="760" class="ns" xml:space="preserve">role-filtered nav</text>
+</g>
+<g class="n n-user st-live ln-shared">
+<rect x="1190" y="784" width="140" height="53" rx="22" class="nb"/>
+<text x="1200" y="804" class="nt">Administrator</text>
+<text x="1200" y="822" class="ns" xml:space="preserve">sees every view</text>
+</g>
+</svg></div>
+  </div>
+
+  <div class="foot"><span>BEP Operations AI · Robert Gordon</span><span>Synthetic data only · no CUI · no PII</span><span>1 / 2</span></div>
+</section>
+
+<!-- ============================== PAGE 2 ============================== -->
+<section class="page">
+  <div>
+    <h2>Live demonstration <span class="sub">The Defect Inspection view on the GB10 (localhost:8080)</span></h2>
+    <div class="shot"><img src="twopager_cv.png" alt="Defect Inspection view: a flagged press sheet with anomaly heatmap, magnified peak region, stage-1 score, stage-2 explanation, human disposition buttons and review queue"></div>
+    <p class="cap"><b>A flagged sheet for review.</b> The stage-1 heatmap shows the anomaly on one note. Below the sheet, the peak region
+      shows at a larger size. Stage 2 identifies the defect type and recommends a disposition. This recommendation has the label
+      <i>Advisory, human decision required</i>. The inspector confirms the defect, overrides it, or sends the sheet to re-inspection.
+      The audit trail records this decision. The review queue on the right also shows sheets that the legacy rules rejected and the AI passed.
+      The inspector can examine these possible false rejects.</p>
+  </div>
+
+  <div>
+    <h2>Software bill of materials <span class="sub">This list shows the main components of the demo. Each version is the fixed version in the repository.</span></h2>
+    <table>
+      <colgroup><col style="width:10%"><col style="width:27%"><col style="width:21%"><col style="width:12%"><col></colgroup>
+      <thead><tr><th>Layer</th><th>Component</th><th>Version / tag</th><th>License</th><th>Role in the demo</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="5">AI models · open weights, local</td></tr>
+        <tr><td>LLM, big tier</td><td>OpenAI gpt-oss-20b</td><td>openai/gpt-oss-20b</td><td>Apache-2.0</td><td>Answers when the evidence is weak; chat, SQL</td></tr>
+        <tr><td>LLM, small tier</td><td>Google Gemma 4 E4B</td><td>ollama gemma4:latest</td><td>Apache-2.0</td><td>Answers when the evidence is strong</td></tr>
+        <tr><td>Embedding</td><td>NVIDIA llama-nemotron-embed-1b-v2</td><td>HF, cached</td><td>NVIDIA Open Model</td><td>Finds similar tickets; gives data to the router</td></tr>
+        <tr><td>Reranker</td><td>NVIDIA llama-nemotron-rerank-1b-v2</td><td>HF, cached</td><td>NVIDIA Open Model</td><td>Puts the fused results in a new order</td></tr>
+        <tr><td>Detector</td><td>RF-DETR-Seg, fine-tuned S / M</td><td>rfdetr 1.11.2</td><td>Apache-2.0</td><td>Finds 8 defect types; fixed SHA-256 weights</td></tr>
+        <tr><td>Anomaly</td><td>PatchCore, wide_resnet50_2 backbone</td><td>anomalib 2.7.0</td><td>Apache-2.0</td><td>Gives the stage-1 score and heatmap</td></tr>
+        <tr class="plan"><td>VLM</td><td>Qwen3-VL-8B-Instruct + LoRA</td><td>TRL / PEFT</td><td>Apache-2.0</td><td>Planned: explains flagged sheets</td></tr>
+        <tr class="grp"><td colspan="5">Serving and runtime · containers</td></tr>
+        <tr><td>LLM serving</td><td>vLLM, OpenAI-compatible server</td><td>vllm-openai:v0.29.0</td><td>Apache-2.0</td><td>Serves gpt-oss-20b with prefix caching</td></tr>
+        <tr><td>LLM serving</td><td>Ollama</td><td>ollama:0.40.0</td><td>MIT</td><td>Serves gemma4; loads it only when necessary</td></tr>
+        <tr><td>RAG API</td><td>FastAPI, Uvicorn, Pydantic</td><td>0.142.4 / 0.54.0 / 2.13.5</td><td>MIT / BSD-3</td><td>Operates itsm-rag-server on :8030</td></tr>
+        <tr><td>Web</td><td>nginx + first-party vanilla-JS UI</td><td>nginx:1.27-alpine</td><td>BSD-2</td><td>Serves the UI on :8080; no third-party JS</td></tr>
+        <tr class="plan"><td>Vision stream</td><td>NVIDIA DeepStream (Triton, TensorRT)</td><td>9.0 sbsa-dgx-spark</td><td>NVIDIA DeepStream</td><td>Planned: line runtime with TensorRT</td></tr>
+        <tr class="plan"><td>Messaging</td><td>Eclipse Mosquitto (MQTT)</td><td>eclipse-mosquitto:2</td><td>EPL-2.0</td><td>Planned: sends detections to the results API</td></tr>
+        <tr class="grp"><td colspan="5">Frameworks and MLOps · Python 3.12</td></tr>
+        <tr><td>ML core</td><td>PyTorch (CUDA 13.0), torchvision</td><td>2.14.1 / 0.29.1</td><td>BSD-3</td><td>Operates the models on the Blackwell GPU</td></tr>
+        <tr><td>NLP</td><td>Transformers, sentence-transf., tokenizers</td><td>5.19.0 / 6.1.0 / 0.23.2</td><td>Apache-2.0</td><td>Loads the Nemotron embed and rerank models</td></tr>
+        <tr><td>Classic ML</td><td>scikit-learn, NumPy, SciPy</td><td>1.9.1 / 2.4.6 / 1.18.1</td><td>BSD-3</td><td>Ticket router, retrieval calculations, metrics</td></tr>
+        <tr><td>Vision libs</td><td>timm, Lightning, OpenCV, SAHI</td><td>1.0.31 / 2.6.6 / 4.14 / 0.14</td><td>Apache-2.0 / MIT</td><td>Backbones, training, image operations, tiles</td></tr>
+        <tr><td>MLOps</td><td>MLflow, FiftyOne</td><td>3.18.0 / 1.22.1</td><td>Apache-2.0</td><td>Records runs, keeps models, shows errors</td></tr>
+        <tr class="grp"><td colspan="5">Data and platform</td></tr>
+        <tr><td>Data</td><td>it-tickets, synthetic_print generators</td><td>in repo</td><td>first-party</td><td>All data is synthetic: no CUI, PII or real currency</td></tr>
+        <tr><td>Host</td><td>Dell Pro Max GB10 (Grace Blackwell, 128 GB)</td><td>arm64 · DGX OS</td><td>n/a</td><td>Operates the full stack; also operates on x86_64</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    <p><b>Deploy.</b> The command <code>docker compose up -d --build</code> starts four containers: webapp, rag, vllm and ollama.
+      The first start downloads the open-weight models into Docker volumes. After the first start, the stack operates <b>offline</b>.
+      It does not call external APIs.</p>
+    <p><b>Supply chain.</b> The file <code>requirements.txt</code> fixes the version of each Python dependency. Each container image has a
+      fixed tag. The file <code>cv_model/artifacts.lock</code> also records the digest of each CV image and weight file. The repository
+      contains the gpt-oss tokenizer vocabulary. Thus, inference does not download files.</p>
+  </div>
+
+  <div class="foot"><span>BEP Operations AI · Robert Gordon</span><span>Synthetic data only · no CUI · no PII</span><span>2 / 2</span></div>
+</section>
+</body>
+</html>
